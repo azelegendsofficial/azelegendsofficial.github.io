@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Berita Terkini</title>
+    <style>
+        /* Reset dan Variable */
+        :root {
+            --primary: #2563eb;
+            --secondary: #1d4ed8;
+            --text: #1e293b;
+            --background: #f8fafc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Loading Screen */
+        .loader-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--background);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            animation: fadeOut 1s ease-in-out 2s forwards;
+        }
+
+        .loader {
+            width: 48px;
+            height: 48px;
+            border: 5px solid var(--primary);
+            border-bottom-color: transparent;
+            border-radius: 50%;
+            animation: rotation 1s linear infinite;
+        }
+
+        @keyframes rotation {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; visibility: visible; }
+            to { opacity: 0; visibility: hidden; }
+        }
+
+        /* Base Styles */
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.6;
+            background: var(--background);
+            color: var(--text);
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out 2.5s forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Header Styles */
+        header {
+            background: var(--primary);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--secondary);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            margin: 0 0.5rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Wave Animation */
+        .wave-container {
+            position: relative;
+            background: var(--primary);
+            height: 150px;
+        }
+
+        .wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23f8fafc' fill-opacity='1' d='M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+            background-size: cover;
+            background-repeat: no-repeat;
+            animation: wave 10s linear infinite;
+        }
+
+        @keyframes wave {
+            0% { background-position-x: 0; }
+            100% { background-position-x: 1440px; }
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* News Grid */
+        .berita-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .berita-item {
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .berita-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .berita-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .berita-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .berita-content {
+            padding: 1.5rem;
+        }
+
+        .berita-content h3 {
+            color: var(--text);
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .berita-content p {
+            color: #64748b;
+            margin-bottom: 1rem;
+        }
+
+        .berita-content small {
+            color: #94a3b8;
+            font-size: 0.875rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            nav {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.5rem;
+            }
+
+            .wave-container {
+                height: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loader-wrapper">
+        <div class="loader"></div>
+    </div>
+
+    <header>
+        <h1>Portal Berita Terkini</h1>
+        <p>Sumber Informasi Tepercaya</p>
+    </header>
+    
+    <nav>
+        <a href="#beranda">Beranda</a>
+        <a href="#nasional">Nasional</a>
+        <a href="#internasional">Internasional</a>
+        <a href="#olahraga">Olahraga</a>
+        <a href="#teknologi">Teknologi</a>
+    </nav>
+
+    <!-- Wave Animation -->
+    <div class="wave-container">
+        <div class="wave"></div>
+    </div>
+    
+    <div class="container">
+        <main>
+            <h2>Berita Terbaru</h2>
+            <div class="berita-grid">
+                <article class="berita-item">
+                    <img src="/api/placeholder/400/200" alt="Gambar Berita 1">
+                    <div class="berita-content">
+                        <h3>Perkembangan Teknologi AI di Indonesia</h3>
+                        <p>Indonesia terus mengembangkan teknologi kecerdasan buatan untuk mendukung transformasi digital di berbagai sektor...</p>
+                        <small>2 jam yang lalu</small>
+                    </div>
+                </article>
+                
+                <article class="berita-item">
+                    <img src="/api/placeholder/400/200" alt="Gambar Berita 2">
+                    <div class="berita-content">
+                        <h3>Tim Nasional Raih Kemenangan Penting</h3>
+                        <p>Tim nasional berhasil meraih kemenangan penting dalam pertandingan kualifikasi yang berlangsung seru...</p>
+                        <small>4 jam yang lalu</small>
+                    </div>
+                </article>
+                
+                <article class="berita-item">
+                    <img src="/api/placeholder/400/200" alt="Gambar Berita 3">
+                    <div class="berita-content">
+                        <h3>Inovasi Energi Terbarukan</h3>
+                        <p>Pemerintah mendorong pengembangan energi terbarukan melalui berbagai program dan kebijakan baru...</p>
+                        <small>6 jam yang lalu</small>
+                    </div>
+                </article>
+            </div>
+        </main>
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 Portal Berita Terkini. Hak Cipta Dilindungi.</p>
+    </footer>
+</body>
+</html>
