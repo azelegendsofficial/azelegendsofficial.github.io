@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server Console</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #1E1E2D;
+            color: #FFFFFF;
+        }
+        .border-panel {
+            border: 2px solid #4B5563;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+        }
+        .coding-font {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #171717; /* Dark background for console */
+            color: #00FF00; /* Console green text */
+            padding: 10px;
+            border-radius: 5px;
+            overflow: auto;
+            max-height: 200px;
+            white-space: pre; /* Preserve spaces and line breaks */
+        }
+        .metrics {
+            margin-bottom: 1rem;
+        }
+        .btn-control {
+            background-color: #50fa7b; /* Button color */
+            color: #282A36;
+            padding: 8px 12px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-right: 8px;
+        }
+        .btn-control:hover {
+            background-color: #4af579; /* Button hover effect */
+        }
+    </style>
+</head>
+<body>
+    <div class="container mx-auto px-6 py-10">
+        <!-- Navigation Bar -->
+        <nav class="mb-6">
+            <div class="flex space-x-4">
+                <a href="#console" class="text-blue-400">Console</a>
+                <a href="#files" class="text-blue-400">Files</a>
+                <a href="#backups" class="text-blue-400">Backups</a>
+                <a href="#settings" class="text-blue-400">Settings</a>
+                <a href="#startup" class="text-blue-400">Startup</a>
+                <a href="#account" class="text-blue-400">Account</a>
+            </div>
+        </nav>
+
+        <!-- Console Section -->
+        <div id="console" class="border-panel">
+            <h2 class="text-lg font-bold">Server Console</h2>
+            <div class="metrics">
+                <p><strong>CPU Usage:</strong> 70%</p>
+                <p><strong>RAM Usage:</strong> 8 GB / 16 GB</p>
+                <p><strong>Hard Disk Space:</strong> 250 GB / 500 GB</p>
+                <p><strong>IP Address:</strong> 192.168.1.1</p>
+            </div>
+            <div class="coding-font" id="console-output">
+                <pre>
+> java -Xms128M -XX:MaxRAMPercentage=95.0 -Dterminal.jline=false -Dterminal.ansi=true -jar server.jar
+> Server started on IP 192.168.1.1
+> Enjoy your game!
+                </pre>
+            </div>
+            <div class="mt-4">
+                <button class="btn-control" onclick="controlServer('start')">Start</button>
+                <button class="btn-control" onclick="controlServer('off')">Off</button>
+                <button class="btn-control" onclick="controlServer('restart')">Restart</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to handle server control actions
+        function controlServer(action) {
+            let consoleOutput = document.getElementById('console-output');
+            const command = action.charAt(0).toUpperCase() + action.slice(1) // Format action
+            consoleOutput.innerHTML += `> ${command} command sent...\n`; // Display command
+            setTimeout(() => {
+                let response = `${command} command executed successfully.`; // Simulate response
+                consoleOutput.innerHTML += `> ${response}\n`; // Display response
+                consoleOutput.scrollTop = consoleOutput.scrollHeight; // Scroll to bottom
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
