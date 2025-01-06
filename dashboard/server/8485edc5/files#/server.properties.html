@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit server.properties</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/lucide.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1d24;
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        .editor-container {
+            padding: 20px;
+        }
+
+        .editor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 0 10px;
+        }
+
+        .file-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .file-name {
+            font-weight: 500;
+        }
+
+        .save-btn {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        .save-btn:hover {
+            background-color: #45a049;
+        }
+
+        .editor-wrapper {
+            background-color: #2a2e35;
+            border-radius: 8px;
+            overflow: hidden;
+            height: calc(100vh - 100px);
+        }
+
+        #editor {
+            width: 100%;
+            height: 100%;
+            background-color: #2a2e35;
+            color: #fff;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            padding: 16px;
+            border: none;
+            resize: none;
+        }
+
+        #editor:focus {
+            outline: none;
+        }
+
+        /* Custom Scrollbar */
+        #editor::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        #editor::-webkit-scrollbar-track {
+            background: #1a1d24;
+        }
+
+        #editor::-webkit-scrollbar-thumb {
+            background: #3f4550;
+            border-radius: 6px;
+            border: 3px solid #1a1d24;
+        }
+
+        #editor::-webkit-scrollbar-thumb:hover {
+            background: #4a4f5a;
+        }
+
+        .icon {
+            width: 16px;
+            height: 16px;
+            color: currentColor;
+        }
+    </style>
+</head>
+<body>
+    <div class="editor-container">
+        <div class="editor-header">
+            <div class="file-info">
+                <span>Editing:</span>
+                <span class="file-name">server.properties</span>
+            </div>
+            <button class="save-btn" onclick="saveFile()">
+                <i data-lucide="save"></i>
+                Save Content
+            </button>
+        </div>
+        <div class="editor-wrapper">
+            <textarea id="editor" spellcheck="false"># Server Properties
+# Generated on 2024-01-05 14:30:00
+
+# Server Basics
+server-name=Game Server #8485edc5
+server-port=25565
+server-ip=
+max-players=20
+gamemode=survival
+difficulty=normal
+hardcore=false
+online-mode=true
+
+# World Settings
+level-name=world
+level-seed=
+level-type=default
+generate-structures=true
+max-world-size=29999984
+view-distance=10
+simulation-distance=10
+
+# Resource Usage
+max-build-height=256
+max-tick-time=60000
+max-memory=4G
+initial-memory=1G
+
+# Player Settings
+spawn-protection=16
+max-players=20
+spawn-animals=true
+spawn-monsters=true
+spawn-npcs=true
+pvp=true
+allow-flight=false
+allow-nether=true
+
+# Network Settings
+network-compression-threshold=256
+prevent-proxy-connections=false
+use-native-transport=true
+enable-status=true
+enable-query=false
+query.port=25565
+
+# Resource Pack
+resource-pack=
+resource-pack-sha1=
+require-resource-pack=false
+
+# Console Settings
+enable-command-block=false
+enable-rcon=false
+rcon.password=
+rcon.port=25575
+broadcast-console-to-ops=true
+enable-jmx-monitoring=false
+
+# Performance Settings
+entity-broadcast-range-percentage=100
+function-permission-level=2
+sync-chunk-writes=true
+enable-jmx=false
+use-aikar-flags=true
+
+# Security
+white-list=false
+enforce-whitelist=false
+broadcast-rcon-to-ops=true
+op-permission-level=4
+allow-cheats=false
+
+# Advanced Settings
+snooper-enabled=true
+level-type=default
+text-filtering-config=
+rate-limit=0</textarea>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        function saveFile() {
+            // Add save functionality here
+            alert('File saved successfully!');
+        }
+
+        // Add tab support
+        const editor = document.getElementById('editor');
+        editor.addEventListener('keydown', function(e) {
+            if (e.key === 'Tab') {
+                e.preventDefault();
+                const start = this.selectionStart;
+                const end = this.selectionEnd;
+                const value = this.value;
+                
+                // Insert tab
+                this.value = value.substring(0, start) + '    ' + value.substring(end);
+                
+                // Put cursor after tab
+                this.selectionStart = this.selectionEnd = start + 4;
+            }
+        });
+    </script>
+</body>
+</html>
