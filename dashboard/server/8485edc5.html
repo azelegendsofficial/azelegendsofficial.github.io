@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Panel Server</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        .border-panel {
+            border: 2px solid #4B5563;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+        }
+        .locked {
+            color: red;
+        }
+        .coding-font {
+            font-family: 'Courier New', Courier, monospace;
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+    <div class="container mx-auto px-6 py-10">
+
+        <!-- Console Section -->
+        <div class="border-panel">
+            <h2 class="text-lg font-bold">Console</h2>
+            <p>RAM: <span>2GB</span></p>
+            <p>CPU: <span>2 Cores</span></p>
+            <p>Hard Disk: <span>20GB</span></p>
+            <p>IP Address: <span>192.168.1.1</span></p>
+        </div>
+
+        <!-- List Servers Section -->
+        <div class="border-panel">
+            <h2 class="text-lg font-bold">List Servers</h2>
+            <table class="min-w-full divide-y divide-gray-700 mt-4">
+                <thead class="bg-gray-800">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Server Name</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Status</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Players Online</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-gray-900 divide-y divide-gray-700">
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap">Survival Server</td>
+                        <td class="px-6 py-4 whitespace-nowrap"><span class="text-green-500">Online</span></td>
+                        <td class="px-6 py-4 whitespace-nowrap">10/20</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <button class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded">Manage</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap">Creative Server</td>
+                        <td class="px-6 py-4 whitespace-nowrap"><span class="text-red-500">Offline</span></td>
+                        <td class="px-6 py-4 whitespace-nowrap">0/10</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <button class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded">Manage</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap">Minigame Server</td>
+                        <td class="px-6 py-4 whitespace-nowrap"><span class="text-green-500">Online</span></td>
+                        <td class="px-6 py-4 whitespace-nowrap">8/15</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <button class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded">Manage</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Files Section -->
+        <div class="border-panel">
+            <h2 class="text-lg font-bold">Files</h2>
+            <div class="mb-4">
+                <label for="file-upload" class="block text-sm font-medium text-gray-300 mb-2">Upload File</label>
+                <input type="file" id="file-upload" class="block w-full text-gray-900 border border-gray-700 rounded-lg bg-gray-800 p-2 focus:border-green-500">
+                <button class="mt-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">Upload</button>
+            </div>
+            <div class="mt-6">
+                <h3 class="font-semibold mb-2">Existing Files</h3>
+                <ul class="list-disc list-inside">
+                    <li class="flex justify-between items-center bg-gray-800 border-b border-gray-700 py-2">
+                        <span>server.jar</span>
+                        <div class="flex space-x-2">
+                            <button class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded">Download</button>
+                            <button class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded">Delete</button>
+                        </div>
+                    </li>
+                    <li class="flex justify-between items-center bg-gray-800 border-b border-gray-700 py-2">
+                        <span>config.yml</span>
+                        <div class="flex space-x-2">
+                            <button class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded">Download</button>
+                            <button class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded">Delete</button>
+                        </div>
+                    </li>
+                    <li class="flex justify-between items-center bg-gray-800 border-b border-gray-700 py-2">
+                        <span>world.zip</span>
+                        <div class="flex space-x-2">
+                            <button class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded">Download</button>
+                            <button class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded">Delete</button>
+                        </div>
+                    </li>
+                </ul>
+                <p class="mt-2 text-gray-400">* Click on "Download" to save a copy of the file or "Delete" to remove the file from the server.</p>
+            </div>
+        </div>
+
+        <!-- Backups Section -->
+        <div class="border-panel">
+            <h2 class="text-lg font-bold">Backups</h2>
+            <p>Manage your backups here.</p>
+            <button class="bg-green-500 hover:bg-green-600 text-white p-2 rounded">Create Backup</button>
+            <p class="mt-2 text-gray-400">* Backups ensure data safety. Schedule them regularly.</p>
+        </div>
+
+        <!-- Settings Section -->
+        <div class="border-panel">
+            <h2 class="text-lg font-bold">Settings</h2>
+            <div class="mt-4">
+                <h3 class="font-semibold">SFTP Details</h3>
+                <p>Server Address: <span class="text-blue-400">sftp://node.aze-store.my.id:2021</span></p>
+            </div>
+            <div class="mt-4">
+                <h3 class="font-semibold">Change Server Details</h3>
+                <p>SERVER NAME: <span>TRIAL SERVER <span class="locked">🔒</span></span></p>
+                <p>Server Description: <span>Expired: 24:01:00</span></p>
+            </div>
+            <div class="mt-4">
+                <h3 class="font-semibold">Debug Information</h3>
+                <p>Node: <span class="border-black bg-gray-800 text-white p-1">NODE 3</span></p>
+                <p>Server ID: <span class="border-black bg-gray-800 text-white p-1">SERVER ID DI SENSOR</span></p>
+            </div>
+        </div>
+
+        <!-- Startup Section -->
+        <div class="border-panel">
+            <h2 class="text-lg font-bold">Startup</h2>
+            <div class="mt-4">
+                <h3 class="font-semibold">Startup Command</h3>
+                <p class="coding-font">java -Xms128M -XX:MaxRAMPercentage=95.0 -Dterminal.jline=false -Dterminal.ansi=true -jar server.jar</p>
+            </div>
+            <div class="mt-4">
+                <h3 class="font-semibold">Docker Image</h3>
+                <select class="bg-gray-800 border border-gray-700 p-2 rounded">
+                    <option>JAVA 21</option>
+                    <option>JAVA 17</option>
+                    <option>JAVA 16</option>
+                    <option>JAVA 8</option>
+                </select>
+                <p class="text-red-400 mt-2">* You must purchase the Starter, Professional, or Ultimate package.</p>
+            </div>
+            <div class="mt-4">
+                <h3 class="font-semibold">Variables</h3>
+                <p>Minecraft Version: <span>1.20.1 <span class="locked">🔒</span></span></p>
+                <p>Server Jar File: <span>server.jar <span class="locked">🔒</span></span></p>
+                <p>Build Number: <span>latest</span></p>
+            </div>
+        </div>
+
+        <!-- Account Section -->
+        <div class="border-panel">
+            <h2 class="text-lg font-bold">Account</h2>
+            <p>Username: <span>yourusername</span></p>
+            <p>Email: <span>youremail@example.com</span></p>
+            <button class="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded">Logout</button>
+        </div>
+    </div>
+</body>
+</html>
