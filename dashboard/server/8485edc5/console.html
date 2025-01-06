@@ -10,8 +10,6 @@
 
     <title>Server Control Console</title>
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-
     <style>
 
         body {
@@ -19,6 +17,8 @@
             background-color: #1E1E2D;
 
             color: #FFFFFF;
+
+            font-family: Arial, sans-serif;
 
         }
 
@@ -54,27 +54,31 @@
 
         }
 
-        .btn-control {
+        .metrics {
+
+            margin-bottom: 1rem;
+
+        }
+
+        #start-button {
 
             background-color: #50fa7b;
 
             color: #282A36;
 
-            padding: 8px 12px;
-
-            border-radius: 5px;
+            padding: 10px 20px;
 
             border: none;
+
+            border-radius: 5px;
 
             cursor: pointer;
 
             transition: background-color 0.3s;
 
-            margin-right: 8px;
-
         }
 
-        .btn-control.disabled {
+        #start-button.disabled {
 
             background-color: #808080;
 
@@ -88,69 +92,25 @@
 
     <div class="container mx-auto px-6 py-10">
 
-        <nav class="mb-6">
-
-            <div class="flex space-x-4">
-
-                <a href="#console" class="text-blue-400">Console</a>
-
-                <a href="#files" class="text-blue-400">Files</a>
-
-                <a href="#backups" class="text-blue-400">Backups</a>
-
-                <a href="#settings" class="text-blue-400">Settings</a>
-
-                <a href="#startup" class="text-blue-400">Startup</a>
-
-                <a href="#account" class="text-blue-400">Account</a>
-
-            </div>
-
-        </nav>
-
-        <div id="console" class="border-panel">
+        <div class="border-panel">
 
             <h2 class="text-lg font-bold">Server Console</h2>
 
             <div class="metrics">
 
-                <div class="option-box">
+                <p><strong>CPU Usage:</strong> 70%</p>
 
-                    <div class="option-title">RAM</div>
+                <p><strong>RAM:</strong> <span id="ram">8 GB / 16 GB</span></p>
 
-                    <input type="text" placeholder="Masukkan jumlah RAM (MB)" />
+                <p><strong>Hard Disk Space:</strong> <span id="harddisk">250 GB / 500 GB</span></p>
 
-                </div>
-
-                <div class="option-box">
-
-                    <div class="option-title">CPU</div>
-
-                    <input type="text" placeholder="Masukkan jumlah CPU" />
-
-                </div>
-
-                <div class="option-box">
-
-                    <div class="option-title">Harddisk</div>
-
-                    <input type="text" placeholder="Masukkan ukuran harddisk (GB)" />
-
-                </div>
+                <p><strong>IP Address:</strong> <span id="ip">192.168.1.1</span></p>
 
             </div>
 
             <div class="coding-font" id="console-output"></div>
 
-            <div class="mt-4">
-
-                <button id="start-button" class="btn-control">Start</button>
-
-                <button class="btn-control" onclick="controlServer('off')">Off</button>
-
-                <button class="btn-control" onclick="controlServer('restart')">Restart</button>
-
-            </div>
+            <button id="start-button">Start</button>
 
         </div>
 
@@ -228,7 +188,13 @@
 
             "[Pterodactyl Daemon]: Exit code: 137",
 
-            "[Pterodactyl Daemon]: Out of memory: true"
+            "[Pterodactyl Daemon]: Out of memory: true",
+
+            "[Pterodactyl Daemon]: Checking server disk space usage, this could take a few seconds...",
+
+            "[Pterodactyl Daemon]: Updating process configuration files...",
+
+            "[Pterodactyl Daemon]: Ensuring file permissions are set correctly, this could take a few seconds..."
 
         ];
 
@@ -252,51 +218,23 @@
 
                     currentMessageIndex++;
 
-                    if (currentMessageIndex === 3) {
+                    consoleOutput.scrollTop = consoleOutput.scrollHeight; // Scroll to bottom
 
-                        setTimeout(() => {
+                    setTimeout(displayMessage, 2000); // Adjust timeout as needed
 
-                            startButton.classList.remove("disabled");
+                } else {
 
-                            startButton.disabled = false;
+                    startButton.classList.remove("disabled");
 
-                        }, 30000);
-
-                    } else if (currentMessageIndex === 15) {
-
-                        setTimeout(displayMessage, 20000);
-
-                    } else {
-
-                        setTimeout(displayMessage, 2000);
-
-                    }
+                    startButton.disabled = false; // Re-enable button
 
                 }
 
             }
 
-            displayMessage();
+            displayMessage(); // Start displaying messages
 
         });
-
-        function controlServer(action) {
-
-            const command = action.charAt(0).toUpperCase() + action.slice(1);
-
-            consoleOutput.innerHTML += `> ${command} command sent...\n`;
-
-            setTimeout(() => {
-
-                let response = `${command} command executed successfully.`;
-
-                consoleOutput.innerHTML += `> ${response}\n`;
-
-                consoleOutput.scrollTop = consoleOutput.scrollHeight;
-
-            }, 1000);
-
-        }
 
     </script>
 
