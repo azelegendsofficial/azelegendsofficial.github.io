@@ -38,19 +38,25 @@
         }
 
         .nav-item {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .nav-link {
             padding: 12px 20px;
             cursor: pointer;
             transition: 0.3s;
             display: flex;
             align-items: center;
             gap: 10px;
+            color: inherit;
         }
 
-        .nav-item:hover {
+        .nav-link:hover {
             background-color: #3f4550;
         }
 
-        .nav-item.active {
+        .nav-item.active .nav-link {
             background-color: #3f4550;
             border-left: 4px solid #4caf50;
         }
@@ -179,7 +185,6 @@
             color: white;
         }
 
-        /* Icon placeholders */
         .icon {
             width: 20px;
             height: 20px;
@@ -196,29 +201,43 @@
             <h2>Server Panel</h2>
         </div>
         <ul class="nav-menu">
-            <a href="/dashboard/server/8485edc5/console" class="nav-item active">
-                <span class="icon"></span> Console
-            </a>
-            <a href="/dashboard/server/8485edc5/files" class="nav-item">
-                <span class="icon"></span> Files
-            <a href="/dashboard/server/8485edc5/backups" class="nav-item">
-                <span class="icon"></span> Backups
-            </a>
-            <a href="/dashboard/server/8485edc5/network" class="nav-item">
-                <span class="icon"></span> Network
-            </a>
-            <a href="/dashboard/server/8485edc5/startup" class="nav-item">
-                <span class="icon"></span> Start Up
-            </a>
-            <a href="/dashboard/server/8485edc5/settings" class="nav-item">
-                <span class="icon"></span> Settings
-            </a>
-            <a href="/dashboard/server/8485edc5/account" class="nav-item">
-                <span class="icon"></span> Account
-            </a>
+            <li class="nav-item active">
+                <a href="/dashboard/server/8485edc5/console" class="nav-link">
+                    <span class="icon"></span> Console
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/dashboard/server/8485edc5/files" class="nav-link">
+                    <span class="icon"></span> Files
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/dashboard/server/8485edc5/backups" class="nav-link">
+                    <span class="icon"></span> Backups
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/dashboard/server/8485edc5/network" class="nav-link">
+                    <span class="icon"></span> Network
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/dashboard/server/8485edc5/startup" class="nav-link">
+                    <span class="icon"></span> Start Up
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/dashboard/server/8485edc5/settings" class="nav-link">
+                    <span class="icon"></span> Settings
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/dashboard/server/8485edc5/account" class="nav-link">
+                    <span class="icon"></span> Account
+                </a>
+            </li>
         </ul>
     </div>
-
 
     <div class="main-content">
         <div class="header">
@@ -321,7 +340,6 @@
             await writeLineWithDelay('OpenJDK Runtime Environment Temurin-21.0.3+9 (build 21.0.3+9-LTS)');
             await writeLineWithDelay('OpenJDK 64-Bit Server VM Temurin-21.0.3+9 (build 21.0.3+9-LTS, mixed mode, sharing)');
             await writeLineWithDelay("container@pterodactyl~ java -Xms128M -XX:MaxRAMPercentage=95.0 -Dterminal.jline=false -Dterminal.ansi=true -jar server.jar");
-            // ... rest of the startup sequence ...
             setInterval(updateStats, 2000); // Start updating stats
         }
 
