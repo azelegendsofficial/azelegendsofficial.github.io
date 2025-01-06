@@ -45,6 +45,25 @@
         <div class="container mx-auto px-6">
             <h2 class="text-4xl font-bold text-center mb-16">Paket All-in-One</h2>
             <div class="grid md:grid-cols-3 gap-8">
+                <!-- Trial Package -->
+                <div class="bg-gray-900 rounded-xl p-8 border border-gray-700 hover:border-green-500 transition-colors">
+                    <h3 class="text-2xl font-bold text-center mb-4">Trial</h3>
+                    <div class="text-center mb-8">
+                        <span class="text-4xl font-bold">Rp 0</span>
+                        <span class="text-gray-400">/sebulan</span>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> 1GB RAM</li>
+                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> 5 Player Slots</li>
+                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Logo Dasar</li>
+                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Setup Dasar</li>
+                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Email Support</li>
+                    </ul>
+                    <a href="#kontak" class="block text-center bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition-colors">
+                        Pilih Paket
+                    </a>
+                </div>
+
                 <!-- Basic Package -->
                 <div class="bg-gray-900 rounded-xl p-8 border border-gray-700 hover:border-green-500 transition-colors">
                     <h3 class="text-2xl font-bold text-center mb-4">Starter</h3>
@@ -114,7 +133,6 @@
     <section class="py-24 bg-gray-800">
         <div class="container mx-auto px-6">
             <h2 class="text-4xl font-bold text-center mb-16">Layanan Tambahan</h2>
-            
             <!-- Domain Services -->
             <div class="mb-20">
                 <h3 class="text-3xl font-bold text-center mb-8">Custom Domain</h3>
@@ -263,6 +281,7 @@
                     <div>
                         <label class="block text-sm font-medium mb-2">Pilih Paket</label>
                         <select class="w-full px-4 py-3 bg-gray-900 rounded-lg border border-gray-700 focus:border-green-500 outline-none transition-colors">
+                            <option value="trial">Trial</option>
                             <option value="starter">Starter</option>
                             <option value="professional">Professional</option>
                             <option value="ultimate">Ultimate</option>
