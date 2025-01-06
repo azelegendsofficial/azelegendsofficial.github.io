@@ -1,496 +1,174 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Server Minecraft Indonesia</title>
+    <title>Minecraft Hosting and Services</title>
     <style>
-        /* Modern Color Scheme */
-        :root {
-            --primary: #00ff9d;
-            --secondary: #1a1f2c;
-            --background: #0f1218;
-            --card-bg: #1e2430;
-            --text: #ffffff;
-            --text-secondary: #a0a0a0;
-            --gradient: linear-gradient(135deg, #00ff9d, #00c3ff);
-        }
-
-        /* Modern Reset */
-        * {
+        body {
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
-
-        /* Loading Animation */
-        .loader-wrapper {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--background);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.5s;
-        }
-
-        .loader {
-            width: 80px;
-            height: 80px;
-            position: relative;
-        }
-
-        .loader:before {
-            content: '';
-            width: 48px;
-            height: 48px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: var(--gradient);
-            animation: loader 1s infinite ease-in-out;
-        }
-
-        @keyframes loader {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-
-        /* Modern Styles */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--background);
-            color: var(--text);
-            line-height: 1.6;
+            background-color: #f4f4f9;
         }
 
         header {
-            background: rgba(26, 31, 44, 0.95);
-            backdrop-filter: blur(10px);
-            position: fixed;
-            width: 100%;
-            z-index: 1000;
-            padding: 1rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
+            background-color: #2d2d2d;
+            color: white;
+            padding: 20px;
+            text-align: center;
         }
 
         nav {
-            max-width: 1200px;
-            margin: 0 auto;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            color: transparent;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .hero {
-            background: linear-gradient(rgba(15, 18, 24, 0.9), rgba(15, 18, 24, 0.9)), url('/api/placeholder/1920/1080');
-            background-size: cover;
-            background-position: center;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
             justify-content: center;
+            background-color: #444;
+            padding: 10px 0;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .hosting-plans {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .plan {
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 10px;
+            width: 300px;
             text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            background: var(--gradient);
-            opacity: 0.1;
-            animation: rotate 20s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 800px;
-            padding: 2rem;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 1s ease forwards;
-            animation-delay: 0.5s;
-        }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hero h1 {
-            font-size: 4em;
-            margin-bottom: 1rem;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            color: transparent;
-        }
-
-        .server-info {
-            background-color: var(--secondary);
-            padding: 5rem 2rem;
-            text-align: center;
-        }
-
-        .stats-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 2rem auto;
-        }
-
-        .stat-card {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 20px;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        .stat-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
+        .plan h3 {
+            margin: 0;
         }
 
-        .clickable {
-            cursor: pointer;
-            position: relative;
+        .plan p {
+            margin: 10px 0;
         }
 
-        .clickable::after {
-            content: '👆 Klik untuk info';
-            position: absolute;
-            bottom: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.8em;
-            color: var(--text-secondary);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .clickable:hover::after {
-            opacity: 1;
-        }
-
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            padding: 5rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .feature-card {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 2rem;
-            text-align: center;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--gradient);
-            opacity: 0;
-            transition: 0.5s;
-        }
-
-        .feature-card:hover::before {
-            opacity: 0.1;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-        }
-
-        .button {
-            display: inline-block;
-            background: var(--gradient);
-            color: var(--background);
-            padding: 1rem 2rem;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateX(-100%);
-            transition: 0.5s;
-        }
-
-        .button:hover::before {
-            transform: translateX(0);
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(15, 18, 24, 0.95);
-            z-index: 1001;
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(5px);
-        }
-
-        .modal-content {
-            background: var(--card-bg);
-            padding: 3rem;
-            border-radius: 20px;
-            max-width: 400px;
-            width: 90%;
-            text-align: center;
-            position: relative;
-            animation: modalFade 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        @keyframes modalFade {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .close-modal {
-            position: absolute;
-            right: 20px;
-            top: 20px;
+        .plan .price {
             font-size: 24px;
-            cursor: pointer;
-            color: var(--text);
-            background: none;
+            color: #2d89ef;
+        }
+
+        .plan button {
+            background-color: #2d89ef;
+            color: white;
             border: none;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
         }
 
-        .close-modal:hover {
-            color: var(--primary);
-            transform: rotate(90deg);
-        }
-
-        .status-online {
-            color: var(--primary);
-        }
-
-        .status-offline {
-            color: #ff4444;
+        .plan button:hover {
+            background-color: #1e6dbb;
         }
 
         footer {
-            background-color: var(--secondary);
-            padding: 3rem 2rem;
             text-align: center;
-            margin-top: 4rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: #2d2d2d;
+            color: white;
+            padding: 10px;
         }
 
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5em;
-            }
-            
-            .nav-links {
-                display: none;
-            }
+        .footer-links {
+            margin-top: 10px;
+        }
+
+        .footer-links a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div class="loader-wrapper">
-        <div class="loader"></div>
-    </div>
-
     <header>
-        <nav>
-            <div class="logo">
-                MCServer
-            </div>
-            <div class="nav-links">
-                <a href="#" class="button">Beranda</a>
-                <a href="#server-info" class="button">Info Server</a>
-                <a href="#features" class="button">Fitur</a>
-            </div>
-        </nav>
+        <h1>Minecraft Hosting & Server Services</h1>
     </header>
 
-    <div class="hero">
-        <div class="hero-content">
-            <h1>Server Minecraft Indonesia</h1>
-            <p>Bergabunglah dengan komunitas gaming terbaik di Indonesia!</p>
-            <a href="#" class="button">Mulai Bermain</a>
-        </div>
-    </div>
+    <nav>
+        <a href="#hosting">Hosting Plans</a>
+        <a href="#logo">Logo Design</a>
+        <a href="#setup">Server Setup</a>
+    </nav>
 
-    <section id="server-info" class="server-info">
-        <h2>Informasi Server</h2>
-        <div class="stats-container">
-            <div class="stat-card clickable" onclick="showModal()">
-                <h3>IP Server</h3>
-                <p>play.server-minecraft.id</p>
+    <div class="container">
+        <section id="hosting" class="section">
+            <h2>Choose Your Hosting Plan</h2>
+            <div class="hosting-plans">
+                <div class="plan">
+                    <h3>Starter Plan</h3>
+                    <p>2 GB RAM</p>
+                    <p>10 Slots</p>
+                    <p class="price">$5/month</p>
+                    <button>Order Now</button>
+                </div>
+                <div class="plan">
+                    <h3>Pro Plan</h3>
+                    <p>4 GB RAM</p>
+                    <p>20 Slots</p>
+                    <p class="price">$10/month</p>
+                    <button>Order Now</button>
+                </div>
+                <div class="plan">
+                    <h3>Ultimate Plan</h3>
+                    <p>8 GB RAM</p>
+                    <p>50 Slots</p>
+                    <p class="price">$20/month</p>
+                    <button>Order Now</button>
+                </div>
             </div>
-            <div class="stat-card">
-                <h3>Versi</h3>
-                <p>1.20.1</p>
-            </div>
-            <div class="stat-card">
-                <h3>Status</h3>
-                <p id="serverStatus">Mengecek...</p>
-            </div>
-            <div class="stat-card">
-                <h3>Pemain Online</h3>
-                <p id="playerCount">Mengecek...</p>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="features" class="features">
-        <div class="feature-card">
-            <h3>Survival Mode</h3>
-            <p>Jelajahi dunia luas dengan mode survival yang menantang. Bangun, bertahan hidup, dan kembangkan wilayahmu.</p>
-        </div>
-        <div class="feature-card">
-            <h3>Creative Mode</h3>
-            <p>Ekspresikan kreativitasmu tanpa batas. Bangun struktur megah dan ciptakan duniamu sendiri.</p>
-        </div>
-        <div class="feature-card">
-            <h3>Mini Games</h3>
-            <p>Nikmati berbagai mini games seru bersama teman-temanmu. Dari PvP hingga parkour!</p>
-        </div>
-    </section>
+        <section id="logo" class="section">
+            <h2>Custom Minecraft Server Logos</h2>
+            <p>We offer professional logo design services to make your server stand out. Contact us to get started!</p>
+            <button>Contact Designer</button>
+        </section>
 
-    <!-- Modal -->
-    <div class="modal" id="registrationModal">
-        <div class="modal-content">
-            <button class="close-modal" onclick="closeModal()">&times;</button>
-            <h2>Pendaftaran Server</h2>
-            <p>Kamu harus mendaftarkan diri untuk bisa masuk kedalam server</p>
-            <a href="https://chat.whatsapp.com/your-group-link" target="_blank" class="button">Daftar Sekarang</a>
-        </div>
+        <section id="setup" class="section">
+            <h2>Server Setup Services</h2>
+            <p>Need help setting up your Minecraft server? Our team is here to assist you with plugins, configurations, and more.</p>
+            <button>Request Setup</button>
+        </section>
     </div>
 
     <footer>
-        <p>&copy; 2025 Server Minecraft Indonesia. Semua hak dilindungi.</p>
+        <p>&copy; 2025 Minecraft Hosting & Services. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Contact Us</a>
+        </div>
     </footer>
-
-    <script>
-        // Loading Screen
-window.addEventListener('load', function() {
-    const loader = document.querySelector('.loader-wrapper');
-    // Reduced timeout to 100ms (from 500ms)
-    setTimeout(() => {
-        loader.style.opacity = '0';
-        setTimeout(() => {
-            loader.style.display = 'none';
-        }, 100); // Reduced second timeout to 100ms
-    }, 100); // Added initial delay of 100ms for smoother transition
-});
-
-        // Modal functions
-        function showModal() {
-            document.getElementById('registrationModal').style.display = 'flex';
-        }
-
-        function closeModal() {
-            document.getElementById('registrationModal').style.display = 'none';
-        }
-
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            const modal = document.getElementById('registrationModal');
-            if (event.target === modal) {
-                closeModal();
-            }
-        }
-
-        // Server status check
-        function checkServerStatus() {
-            const isOnline = Math.random() > 0.1;
-            const playerCount = Math.floor(Math.random() * 100);
-            const maxPlayers = 500;
-
-            const statusElement = document.getElementById('serverStatus');
-            const playerCountElement = document.getElementById('playerCount');
-
-            statusElement.textContent = isOnline ? 'Online' : 'Offline';
-            statusElement.className = isOnline ? 'status-online' : 'status-offline';
-            
-            playerCountElement.textContent = isOnline ? `${playerCount}/${maxPlayers}` : 'Server Offline';
-        }
-
-        // Check status every 30 seconds
-        checkServerStatus();
-        setInterval(checkServerStatus, 30000);
-
-        // Scroll Animation for Header
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if (window.scrollY >
+</body>
+</html>
