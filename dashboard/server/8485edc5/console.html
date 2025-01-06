@@ -1,144 +1,305 @@
 <!DOCTYPE html>
+
 <html lang="id">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Server Control Console</title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+
     <style>
+
         body {
+
             background-color: #1E1E2D;
+
             color: #FFFFFF;
-            font-family: Arial, sans-serif;
+
         }
-        #console-output {
+
+        .border-panel {
+
+            border: 2px solid #4B5563;
+
+            border-radius: 8px;
+
+            padding: 16px;
+
+            margin: 16px 0;
+
+        }
+
+        .coding-font {
+
+            font-family: 'Courier New', Courier, monospace;
+
             background-color: #171717;
+
             color: #00FF00;
+
             padding: 10px;
-            border: 1px solid #4B5563;
+
             border-radius: 5px;
+
+            overflow: auto;
+
             max-height: 300px;
-            overflow-y: auto;
-            white-space: pre-wrap;
-            margin-bottom: 10px;
+
+            white-space: pre;
+
         }
-        #start-button {
-            background-color: #50fa7b; /* Hijau */
+
+        .btn-control {
+
+            background-color: #50fa7b;
+
             color: #282A36;
-            padding: 10px 20px;
+
+            padding: 8px 12px;
+
+            border-radius: 5px;
+
             border: none;
-            border-radius: 5px;
+
             cursor: pointer;
+
             transition: background-color 0.3s;
+
+            margin-right: 8px;
+
         }
-        #start-button.disabled {
-            background-color: #808080; /* Abu-abu */
+
+        .btn-control.disabled {
+
+            background-color: #808080;
+
         }
-        .option-box {
-            border: 1px solid #4B5563;
-            border-radius: 5px;
-            padding: 10px;
-            margin-bottom: 10px;
-        }
-        .option-title {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
+
     </style>
+
 </head>
+
 <body>
 
-    <div class="option-box">
-        <div class="option-title">RAM</div>
-        <input type="text" placeholder="1.27 GiB" />
-    </div>
+    <div class="container mx-auto px-6 py-10">
 
-    <div class="option-box">
-        <div class="option-title">CPU</div>
-        <input type="text" placeholder="28%" />
-    </div>
+        <nav class="mb-6">
 
-    <div class="option-box">
-        <div class="option-title">Harddisk</div>
-        <input type="text" placeholder="2.09 GiB" />
-    </div>
+            <div class="flex space-x-4">
 
-    <div id="console-output"></div>
-    <button id="start-button">Start</button>
+                <a href="#console" class="text-blue-400">Console</a>
+
+                <a href="#files" class="text-blue-400">Files</a>
+
+                <a href="#backups" class="text-blue-400">Backups</a>
+
+                <a href="#settings" class="text-blue-400">Settings</a>
+
+                <a href="#startup" class="text-blue-400">Startup</a>
+
+                <a href="#account" class="text-blue-400">Account</a>
+
+            </div>
+
+        </nav>
+
+        <div id="console" class="border-panel">
+
+            <h2 class="text-lg font-bold">Server Console</h2>
+
+            <div class="metrics">
+
+                <div class="option-box">
+
+                    <div class="option-title">RAM</div>
+
+                    <input type="text" placeholder="Masukkan jumlah RAM (MB)" />
+
+                </div>
+
+                <div class="option-box">
+
+                    <div class="option-title">CPU</div>
+
+                    <input type="text" placeholder="Masukkan jumlah CPU" />
+
+                </div>
+
+                <div class="option-box">
+
+                    <div class="option-title">Harddisk</div>
+
+                    <input type="text" placeholder="Masukkan ukuran harddisk (GB)" />
+
+                </div>
+
+            </div>
+
+            <div class="coding-font" id="console-output"></div>
+
+            <div class="mt-4">
+
+                <button id="start-button" class="btn-control">Start</button>
+
+                <button class="btn-control" onclick="controlServer('off')">Off</button>
+
+                <button class="btn-control" onclick="controlServer('restart')">Restart</button>
+
+            </div>
+
+        </div>
+
+    </div>
 
     <script>
+
         const messages = [
+
             "[Pterodactyl Daemon]: Checking server disk space usage, this could take a few seconds...",
+
             "[Pterodactyl Daemon]: Updating process configuration files...",
+
             "[Pterodactyl Daemon]: Ensuring file permissions are set correctly, this could take a few seconds...",
+
             "container@pterodactyl~ Server marked as starting...",
+
             "[Pterodactyl Daemon]: Pulling Docker container image, this could take a few minutes to complete...",
+
             "[Pterodactyl Daemon]: Finished pulling Docker container image",
+
             "container@pterodactyl~ java -version",
+
             "openjdk version \"21.0.3\" 2024-04-16 LTS",
+
             "OpenJDK Runtime Environment Temurin-21.0.3+9 (build 21.0.3+9-LTS)",
+
             "OpenJDK 64-Bit Server VM Temurin-21.0.3+9 (build 21.0.3+9-LTS, mixed mode, sharing)",
+
             "container@pterodactyl~ java -Xms128M -XX:MaxRAMPercentage=95.0 -Dterminal.jline=false -Dterminal.ansi=true -jar server.jar",
+
             "Starting org.bukkit.craftbukkit.Main",
+
             "*** Warning, you've not updated in a while! ***",
+
             "*** Please download a new build as per instructions from https://papermc.io/downloads/paper ***",
+
             "System Info: Java 21 (OpenJDK 64-Bit Server VM 21.0.3+9-LTS) Host: Linux 5.15.0-113-generic (amd64)",
+
             "Loading libraries, please wait...",
+
             "[10:41:47 INFO]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'",
+
             "[10:41:57 INFO]: Loaded 7 recipes",
+
             "[10:42:00 INFO]: Starting minecraft server version 1.20.1",
+
             "[10:42:00 INFO]: Loading properties",
+
             "[10:42:00 INFO]: This server is running Paper version git-Paper-196 (MC: 1.20.1) (Implementing API version 1.20.1-R0.1-SNAPSHOT) (Git: 773dd72)",
+
             "[10:42:04 INFO]: Server Ping Player Sample Count: 12",
+
             "[10:42:04 INFO]: Using 4 threads for Netty based IO",
+
             "[10:42:05 WARN]: [!] The timings profiler has been enabled but has been scheduled for removal from Paper in the future.",
+
             "[10:42:05 INFO]: [ChunkTaskScheduler] Chunk system is using 1 I/O threads, 1 worker threads, and gen parallelism of 1 threads",
+
             "[10:42:07 INFO]: Default game type: SURVIVAL",
+
             "[10:42:07 INFO]: Generating keypair",
+
             "[10:42:07 INFO]: Starting Minecraft server on 0.0.0.0:19116",
+
             "[10:42:07 INFO]: Using epoll channel type",
+
             "[10:42:08 INFO]: Paper: Using libdeflate (Linux x86_64) compression from Velocity.",
+
             "[10:42:08 INFO]: Paper: Using OpenSSL 3.0.x (Linux x86_64) cipher from Velocity.",
+
             "container@pterodactyl Server marked as offline...",
+
             "[Pterodactyl Daemon]: ---------- Detected server process in a crashed state! ----------",
+
             "[Pterodactyl Daemon]: Exit code: 137",
-            "[Pterodactyl Daemon]: Out of memory: true",
-            "[Pterodactyl Daemon]: Checking server disk space usage, this could take a few seconds...",
-            "[Pterodactyl Daemon]: Updating process configuration files...",
-            "[Pterodactyl Daemon]: Ensuring file permissions are set correctly, this could take a few seconds..."
+
+            "[Pterodactyl Daemon]: Out of memory: true"
+
         ];
 
         const startButton = document.getElementById("start-button");
+
         const consoleOutput = document.getElementById("console-output");
 
         startButton.addEventListener("click", function () {
+
             startButton.classList.add("disabled");
-            startButton.disabled = true; // Nonaktifkan tombol untuk mencegah klik lebih lanjut
-            
+
+            startButton.disabled = true;
+
             let currentMessageIndex = 0;
 
             function displayMessage() {
+
                 if (currentMessageIndex < messages.length) {
+
                     consoleOutput.innerText += messages[currentMessageIndex] + "\n";
+
                     currentMessageIndex++;
 
                     if (currentMessageIndex === 3) {
-                        // Reset warna tombol setelah menampilkan pesan ketiga
+
                         setTimeout(() => {
+
                             startButton.classList.remove("disabled");
-                            startButton.disabled = false; // Aktifkan kembali tombol
-                        }, 30000); // Tunggu 30 detik setelah pesan ketiga
+
+                            startButton.disabled = false;
+
+                        }, 30000);
+
                     } else if (currentMessageIndex === 15) {
-                        // Tunggu 20 detik setelah pesan terakhir sebelum fase berikutnya
+
                         setTimeout(displayMessage, 20000);
+
                     } else {
-                        // Tunggu secara inkremental untuk mensimulasikan proses
-                        setTimeout(displayMessage, 2000); // Sesuaikan timeout sesuai kebutuhan
+
+                        setTimeout(displayMessage, 2000);
+
                     }
+
                 }
+
             }
 
-            displayMessage(); // Mulai menampilkan pesan
+            displayMessage();
+
         });
+
+        function controlServer(action) {
+
+            const command = action.charAt(0).toUpperCase() + action.slice(1);
+
+            consoleOutput.innerHTML += `> ${command} command sent...\n`;
+
+            setTimeout(() => {
+
+                let response = `${command} command executed successfully.`;
+
+                consoleOutput.innerHTML += `> ${response}\n`;
+
+                consoleOutput.scrollTop = consoleOutput.scrollHeight;
+
+            }, 1000);
+
+        }
+
     </script>
+
 </body>
+
 </html>
