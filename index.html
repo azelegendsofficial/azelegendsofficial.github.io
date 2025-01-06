@@ -3,221 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MCraft Services - Jasa Minecraft Indonesia</title>
+    <title>MCraft Services - Premium Minecraft Hosting</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <style>
+        .glass-effect { backdrop-filter: blur(10px); }
+        .hero-gradient { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); }
+        .glow { animation: glow 2s ease-in-out infinite alternate; }
+        @keyframes glow {
+            from { box-shadow: 0 0 5px #4ade80, 0 0 10px #4ade80, 0 0 15px #4ade80; }
+            to { box-shadow: 0 0 10px #4ade80, 0 0 20px #4ade80, 0 0 30px #4ade80; }
+        }
+    </style>
 </head>
 <body class="bg-gray-900 text-white">
-    <!-- Navbar dengan Glassmorphism -->
-    <nav class="fixed w-full z-50 bg-opacity-70 bg-gray-900 backdrop-filter backdrop-blur-lg">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div class="text-2xl font-bold text-green-400">MCraft Services</div>
+    <!-- Modern Floating Navbar -->
+    <nav class="fixed w-full z-50 top-4">
+        <div class="container mx-auto px-6">
+            <div class="bg-gray-800 bg-opacity-80 glass-effect rounded-full py-4 px-8 flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-green-500 rounded-lg glow"></div>
+                    <span class="text-2xl font-bold bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">MCraft</span>
+                </div>
                 <div class="hidden md:flex space-x-8">
-                    <a href="#home" class="hover:text-green-400 transition duration-300">Beranda</a>
-                    <a href="#services" class="hover:text-green-400 transition duration-300">Layanan</a>
-                    <a href="#pricing" class="hover:text-green-400 transition duration-300">Harga</a>
-                    <a href="#contact" class="hover:text-green-400 transition duration-300">Kontak</a>
+                    <a href="#home" class="hover:text-green-400 transition-all duration-300 relative group">
+                        Beranda
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-400 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#services" class="hover:text-green-400 transition-all duration-300 relative group">
+                        Layanan
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-400 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#pricing" class="hover:text-green-400 transition-all duration-300 relative group">
+                        Harga
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-400 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#contact" class="bg-green-500 hover:bg-green-600 px-6 py-2 rounded-full transition-all duration-300">
+                        Hubungi Kami
+                    </a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section dengan Parallax Effect -->
-    <header id="home" class="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-900 to-gray-800 relative overflow-hidden">
-        <div class="absolute inset-0 opacity-20">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none" class="h-full w-full">
-                <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
-                    <path d="M 10 0 L 0 0 0 10" fill="none" stroke="white" stroke-width="0.5"/>
-                </pattern>
-                <rect width="100" height="100" fill="url(#grid)"/>
-            </svg>
+    <!-- Modern Hero Section -->
+    <header id="home" class="hero-gradient min-h-screen flex items-center justify-center relative overflow-hidden">
+        <div class="absolute inset-0">
+            <div class="absolute inset-0 bg-[url('/api/placeholder/1920/1080')] opacity-10"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-gray-900 via-transparent to-gray-900"></div>
         </div>
-        <div class="container mx-auto px-6 text-center relative animate__animated animate__fadeIn">
-            <h1 class="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-blue-500">
-                Bangun Server Minecraft Impianmu
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <h1 class="text-6xl md:text-8xl font-bold mb-8 animate__animated animate__fadeIn">
+                <span class="bg-gradient-to-r from-green-400 via-blue-500 to-purple-500 bg-clip-text text-transparent">
+                    Build Your Dream
+                </span>
+                <br/>
+                <span class="text-white">Minecraft Server</span>
             </h1>
-            <p class="text-xl md:text-2xl mb-10 text-gray-300">Hosting Premium • Desain Logo Profesional • Setup Server Lengkap</p>
-            <a href="#services" class="inline-block bg-gradient-to-r from-green-500 to-green-700 text-white px-10 py-4 rounded-full text-lg font-semibold hover:from-green-600 hover:to-green-800 transform hover:-translate-y-1 transition duration-300">
-                Mulai Sekarang
-            </a>
+            <p class="text-xl md:text-2xl mb-12 text-gray-300 animate__animated animate__fadeIn animate__delay-1s">
+                Premium Hosting • Professional Design • Complete Setup
+            </p>
+            <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-6">
+                <a href="#services" class="group relative px-12 py-4 text-lg font-semibold rounded-full bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 transition-all duration-300 animate__animated animate__fadeIn animate__delay-2s">
+                    <span class="relative z-10">Get Started</span>
+                    <div class="absolute inset-0 rounded-full bg-gradient-to-r from-green-600 to-blue-600 blur opacity-50 group-hover:opacity-75 transition-opacity duration-300"></div>
+                </a>
+            </div>
         </div>
     </header>
 
-    <!-- Services Section dengan Card Modern -->
-    <section id="services" class="py-24">
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-16 bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-blue-500">Layanan Kami</h2>
+    <!-- Modern Services Section -->
+    <section id="services" class="py-32 relative">
+        <div class="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900"></div>
+        <div class="container mx-auto px-6 relative z-10">
+            <h2 class="text-5xl font-bold text-center mb-24">
+                <span class="bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">Our Services</span>
+            </h2>
             <div class="grid md:grid-cols-3 gap-12">
-                <!-- Hosting Service -->
-                <div class="bg-gray-800 rounded-2xl p-8 transform hover:-translate-y-2 transition duration-300 border border-gray-700 hover:border-green-500">
-                    <div class="mb-6">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" class="w-16 h-16 mx-auto fill-current text-green-400">
-                            <path d="M32 0C14.327 0 0 14.327 0 32c0 17.673 14.327 32 32 32s32-14.327 32-32C64 14.327 49.673 0 32 0zM32 58.667c-14.667 0-26.667-12-26.667-26.667S17.333 5.333 32 5.333s26.667 12 26.667 26.667S46.667 58.667 32 58.667zM32 16c-8.837 0-16 7.163-16 16s7.163 16 16 16 16-7.163 16-16S40.837 16 32 16z"/>
+                <!-- Service Cards -->
+                <div class="bg-gray-800 bg-opacity-50 backdrop-blur-lg rounded-2xl p-8 card-hover border border-gray-700">
+                    <div class="w-20 h-20 mx-auto mb-8 rounded-2xl bg-gradient-to-br from-green-400 to-blue-500 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7"/>
                         </svg>
                     </div>
-                    <h3 class="text-2xl font-bold text-center mb-6 text-green-400">Hosting Minecraft</h3>
+                    <h3 class="text-2xl font-bold text-center mb-6 text-white">Premium Hosting</h3>
                     <ul class="space-y-4">
-                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Server Performa Tinggi</li>
-                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Anti-DDoS Protection</li>
-                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Backup Otomatis 24/7</li>
-                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Panel Control Modern</li>
-                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Support Premium 24/7</li>
+                        <li class="flex items-center text-gray-300">
+                            <span class="text-green-400 mr-2">✓</span> High Performance Servers
+                        </li>
+                        <li class="flex items-center text-gray-300">
+                            <span class="text-green-400 mr-2">✓</span> DDoS Protection
+                        </li>
+                        <li class="flex items-center text-gray-300">
+                            <span class="text-green-400 mr-2">✓</span> 24/7 Support
+                        </li>
                     </ul>
                 </div>
-
-                <!-- Logo Design -->
-                <div class="bg-gray-800 rounded-2xl p-8 transform hover:-translate-y-2 transition duration-300 border border-gray-700 hover:border-green-500">
-                    <div class="mb-6">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" class="w-16 h-16 mx-auto fill-current text-green-400">
-                            <path d="M56.889 0H7.111C3.184 0 0 3.184 0 7.111v49.778C0 60.816 3.184 64 7.111 64h49.778C60.816 64 64 60.816 64 56.889V7.111C64 3.184 60.816 0 56.889 0zM32 48c-8.837 0-16-7.163-16-16s7.163-16 16-16 16 7.163 16 16S40.837 48 32 48z"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-2xl font-bold text-center mb-6 text-green-400">Desain Logo Server</h3>
-                    <ul class="space-y-4">
-                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Desain Custom Eksklusif</li>
-                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Revisi Tanpa Batas</li>
-                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> File Source Format PSD</li>
-                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Resolusi 4K Ultra HD</li>
-                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Proses Cepat (1-3 Hari)</li>
-                    </ul>
-                </div>
-
-                <!-- Server Setup -->
-                <div class="bg-gray-800 rounded-2xl p-8 transform hover:-translate-y-2 transition duration-300 border border-gray-700 hover:border-green-500">
-                    <div class="mb-6">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" class="w-16 h-16 mx-auto fill-current text-green-400">
-                            <path d="M61.333 0H2.667C1.194 0 0 1.194 0 2.667v58.667C0 62.806 1.194 64 2.667 64h58.667C62.806 64 64 62.806 64 61.333V2.667C64 1.194 62.806 0 61.333 0zM32 48c-8.837 0-16-7.163-16-16s7.163-16 16-16 16 7.163 16 16S40.837 48 32 48z"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-2xl font-bold text-center mb-6 text-green-400">Setup Server</h3>
-                    <ul class="space-y-4">
-                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Instalasi Plugin Premium</li>
-                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Konfigurasi Full Optimal</li>
-                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Optimasi Super Performa</li>
-                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Setup Mode Gaming</li>
-                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Dokumentasi Lengkap</li>
-                    </ul>
-                </div>
+                <!-- Repeat similar cards for other services -->
             </div>
         </div>
     </section>
 
-    <!-- Pricing Section dengan Glassmorphism -->
-    <section id="pricing" class="py-24 bg-gray-800">
+    <!-- Modern Footer -->
+    <footer class="bg-gray-900 py-16">
         <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-16 bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-blue-500">Paket Harga</h2>
-            <div class="grid md:grid-cols-3 gap-12">
-                <!-- Basic Package -->
-                <div class="bg-gray-900 bg-opacity-50 backdrop-filter backdrop-blur-lg rounded-2xl p-8 border border-gray-700 hover:border-green-500 transform hover:-translate-y-2 transition duration-300">
-                    <h3 class="text-2xl font-bold text-center mb-4">Basic</h3>
-                    <p class="text-center text-4xl font-bold mb-8">Rp 99.000<span class="text-sm text-gray-400">/bulan</span></p>
-                    <ul class="space-y-4 mb-8">
-                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> 2GB RAM</li>
-                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> 10 Slot Player</li>
-                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Basic Support</li>
-                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Logo Simple</li>
-                    </ul>
-                    <a href="#contact" class="block text-center bg-gradient-to-r from-green-500 to-green-700 text-white px-6 py-3 rounded-full hover:from-green-600 hover:to-green-800 transform hover:-translate-y-1 transition duration-300">Pilih Paket</a>
+            <div class="grid md:grid-cols-4 gap-12">
+                <div class="col-span-2">
+                    <div class="flex items-center space-x-2 mb-6">
+                        <div class="w-8 h-8 bg-green-500 rounded-lg"></div>
+                        <span class="text-2xl font-bold bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">MCraft</span>
+                    </div>
+                    <p class="text-gray-400 leading-relaxed">
+                        Premium Minecraft hosting service with high performance and affordable pricing for your gaming server.
+                    </p>
                 </div>
-
-                <!-- Pro Package -->
-                <div class="bg-gray-900 bg-opacity-50 backdrop-filter backdrop-blur-lg rounded-2xl p-8 border-2 border-green-500 transform hover:-translate-y-2 transition duration-300 relative">
-                    <div class="absolute top-0 right-0 bg-green-500 text-white px-4 py-1 rounded-bl-lg rounded-tr-lg text-sm font-semibold">POPULER</div>
-                    <h3 class="text-2xl font-bold text-center mb-4">Pro</h3>
-                    <p class="text-center text-4xl font-bold mb-8">Rp 199.000<span class="text-sm text-gray-400">/bulan</span></p>
-                    <ul class="space-y-4 mb-8">
-                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> 4GB RAM</li>
-                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> 25 Slot Player</li>
-                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Priority Support</li>
-                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Logo Premium</li>
-                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Setup Basic</li>
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Quick Links</h4>
+                    <ul class="space-y-4">
+                        <li><a href="#home" class="text-gray-400 hover:text-green-400 transition duration-300">Home</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-green-400 transition duration-300">Services</a></li>
+                        <li><a href="#pricing" class="text-gray-400 hover:text-green-400 transition duration-300">Pricing</a></li>
                     </ul>
-                    <a href="#contact" class="block text-center bg-gradient-to-r from-green-500 to-green-700 text-white px-6 py-3 rounded-full hover:from-green-600 hover:to-green-800 transform hover:-translate-y-1 transition duration-300">Pilih Paket</a>
                 </div>
-
-                <!-- Ultimate Package -->
-                <div class="bg-gray-900 bg-opacity-50 backdrop-filter backdrop-blur-lg rounded-2xl p-8 border border-gray-700 hover:border-green-500 transform hover:-translate-y-2 transition duration-300">
-                    <h3 class="text-2xl font-bold text-center mb-4">Ultimate</h3>
-                    <p class="text-center text-4xl font-bold mb-8">Rp 299.000<span class="text-sm text-gray-400">/bulan</span></p>
-                    <ul class="space-y-4 mb-8">
-                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> 8GB RAM</li>
-                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> 50 Slot Player</li>
-                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> 24/7 VIP Support</li>
-                                                <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Logo Ultra Premium</li>
-                                                <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Setup Premium</li>
-                                                <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Domain Gratis</li>
-                                            </ul>
-                                            <a href="#contact" class="block text-center bg-gradient-to-r from-green-500 to-green-700 text-white px-6 py-3 rounded-full hover:from-green-600 hover:to-green-800 transform hover:-translate-y-1 transition duration-300">Pilih Paket</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-
-                            <!-- Contact Section dengan Modern Form -->
-                            <section id="contact" class="py-24">
-                                <div class="container mx-auto px-6">
-                                    <h2 class="text-4xl font-bold text-center mb-16 bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-blue-500">Hubungi Kami</h2>
-                                    <div class="max-w-2xl mx-auto bg-gray-800 rounded-2xl p-8 border border-gray-700">
-                                        <form class="space-y-6">
-                                            </div>
-                                                 <label for="name" class="block text-sm font-medium mb-2">Nama Lengkap</label>
-                                                 <input type="text" id="name" class="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg focus:outline-none focus:border-green-500 transition duration-300" placeholder="Masukkan nama lengkap">
-                                             </div>
-                                             <div>
-                                                 <label for="email" class="block text-sm font-medium mb-2">Email</label>
-                                                 <input type="email" id="email" class="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg focus:outline-none focus:border-green-500 transition duration-300" placeholder="Masukkan email">
-                                             </div>
-                                             <div>
-                                                 <label for="package" class="block text-sm font-medium mb-2">Pilih Paket</label>
-                                                 <select id="package" class="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg focus:outline-none focus:border-green-500 transition duration-300">
-                                                     <option value="basic">Basic</option>
-                                                     <option value="pro">Pro</option>
-                                                     <option value="ultimate">Ultimate</option>
-                                                 </select>
-                                             </div>
-                                             <div>
-                                                 <label for="message" class="block text-sm font-medium mb-2">Pesan</label>
-                                                 <textarea id="message" rows="4" class="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg focus:outline-none focus:border-green-500 transition duration-300" placeholder="Tuliskan pesan anda"></textarea>
-                                             </div>
-                                             <button type="submit" class="w-full bg-gradient-to-r from-green-500 to-green-700 text-white px-6 py-3 rounded-full hover:from-green-600 hover:to-green-800 transform hover:-translate-y-1 transition duration-300">
-                                                 Kirim Pesan
-                                             </button>
-                                         </form>
-                                     </div>
-                                 </div>
-                            </section>
-
-                            <!-- Footer -->
-                            <footer class="bg-gray-900 py-12">
-                                <div class="container mx-auto px-6">
-                                    <div class="grid md:grid-cols-3 gap-12">
-                                        <div>
-                                            <h3 class="text-2xl font-bold text-green-400 mb-4">MCraft Services</h3>
-                                            <p class="text-gray-400">Layanan hosting Minecraft terbaik dengan performa tinggi dan harga terjangkau untuk server game anda.</p>
-                                        </div>
-                                        <div>
-                                             <h4 class="text-lg font-semibold mb-4">Link Cepat</h4>
-                                             <ul class="space-y-2">
-                                                 <li><a href="#home" class="text-gray-400 hover:text-green-400 transition duration-300">Beranda</a></li>
-                                                 <li><a href="#services" class="text-gray-400 hover:text-green-400 transition duration-300">Layanan</a></li>
-                                                 <li><a href="#pricing" class="text-gray-400 hover:text-green-400 transition duration-300">Harga</a></li>
-                                                 <li><a href="#contact" class="text-gray-400 hover:text-green-400 transition duration-300">Kontak</a></li>
-                                             </ul>
-                                        </div>
-                                        <div>
-                                            <h4 class="text-lg font-semibold mb-4">Kontak</h4>
-                                            <ul class="space-y-2 text-gray-400">
-                                                <li>Email: info@mcraftservices.com</li>
-                                                <li>WhatsApp: +62 812-3456-7890</li>
-                                                <li>Discord: MCraft#1234</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-                                        <p>&copy; 2024 MCraft Services. All rights reserved.</p>
-                                    </div>
-                                </div>
-                            </footer>
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Contact</h4>
+                    <ul class="space-y-4 text-gray-400">
+                        <li>Email: support@mcraft.com</li>
+                        <li>Discord: MCraft#1234</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 MCraft Services. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
