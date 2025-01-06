@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Startup Configuration</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xterm/3.14.5/xterm.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/xterm/3.14.5/xterm.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1d24;
+            color: #fff;
+            display: flex;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 250px;
+            background-color: #2a2e35;
+            height: 100vh;
+            padding: 20px 0;
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+
+        .sidebar-header {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid #3f4550;
+        }
+
+        .nav-menu {
+            list-style: none;
+            padding: 20px 0;
+        }
+
+        .nav-item {
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #a0a0a0;
+            text-decoration: none;
+        }
+
+        .nav-item:hover {
+            background-color: #3f4550;
+            color: #fff;
+        }
+
+        .nav-item.active {
+            background-color: #3f4550;
+            color: #fff;
+            border-left: 4px solid #4caf50;
+        }
+
+        .icon {
+            width: 20px;
+            height: 20px;
+            background-color: currentColor;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            margin-left: 250px;
+            flex: 1;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        /* Startup Specific Styles */
+        .startup-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            color: #fff;
+        }
+
+        .section {
+            background-color: #2a2e35;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .section-header {
+            padding: 15px 20px;
+            background-color: #1f2227;
+            border-bottom: 1px solid #3f4550;
+            font-weight: 600;
+        }
+
+        .section-content {
+            padding: 20px;
+        }
+
+        .variable-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #a0a0a0;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            background-color: #1a1d24;
+            border: 1px solid #3f4550;
+            border-radius: 4px;
+            color: white;
+            font-family: monospace;
+        }
+
+        .startup-command {
+            background-color: #1a1d24;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-break: break-all;
+            color: #a0a0a0;
+            margin-top: 20px;
+            line-height: 1.5;
+        }
+
+        .variable-tag {
+            color: #4caf50;
+        }
+
+        .docker-config {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: 0.3s;
+            background-color: #4caf50;
+            color: white;
+            margin-top: 20px;
+        }
+
+        .info-text {
+            color: #a0a0a0;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+
+        .memory-warning {
+            color: #ff9800;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2>Server Panel</h2>
+        </div>
+        <ul class="nav-menu">
+            <a href="/dashboard/server/8485edc5/console" class="nav-item">
+                <span class="icon"></span> Console
+            </a>
+            <a href="/dashboard/server/8485edc5/files" class="nav-item">
+                <span class="icon"></span> Files
+            <a href="/dashboard/server/8485edc5/backups" class="nav-item">
+                <span class="icon"></span> Backups
+            </a>
+            <a href="/dashboard/server/8485edc5/network" class="nav-item">
+                <span class="icon"></span> Network
+            </a>
+            <a href="/dashboard/server/8485edc5/startup" class="nav-item active">
+                <span class="icon"></span> Start Up
+            </a>
+            <a href="/dashboard/server/8485edc5/settings" class="nav-item">
+                <span class="icon"></span> Settings
+            </a>
+            <a href="/dashboard/server/8485edc5/account" class="nav-item">
+                <span class="icon"></span> Account
+            </a>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="startup-container">
+            <h2 class="page-title">Startup Configuration</h2>
+
+            <!-- Startup Command Section -->
+            <div class="section">
+                <div class="section-header">
+                    Startup Command
+                </div>
+                <div class="section-content">
+                    <div class="startup-command">
+java -Xms<span class="variable-tag">{{SERVER_MEMORY}}</span>M -Xmx<span class="variable-tag">{{SERVER_MEMORY}}</span>M -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true -jar <span class="variable-tag">{{SERVER_JARFILE}}</span> nogui</div>
+                    <p class="info-text">This is the startup command that will be used to start your server. Variables in green can be modified using the fields below.</p>
+                </div>
+            </div>
+
+            <!-- Variables Section -->
+            <div class="section">
+                <div class="section-header">
+                    Variables
+                </div>
+                <div class="section-content">
+                    <div class="variable-grid">
+                        <div class="form-group">
+                            <label>Server Memory</label>
+                            <input type="number" value="1024" id="server-memory">
+                            <p class="memory-warning">Memory must be between 256-32768 MB</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Server Jarfile</label>
+                            <input type="text" value="server.jar" id="server-jarfile">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Docker Configuration -->
+            <div class="section">
+                <div class="section-header">
+                    Docker Configuration
+                </div>
+                <div class="section-content">
+                    <div class="docker-config">
+                        <div class="form-group">
+                            <label>CPU Limit</label>
+                            <input type="number" value="0" id="cpu-limit">
+                            <p class="info-text">% of CPU to limit (0 = unlimited)</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Image</label>
+                            <input type="text" value="ghcr.io/pterodactyl/yolks:java_17" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Startup Time</label>
+                            <input type="number" value="5" id="startup-time">
+                            <p class="info-text">Time to wait for server startup (seconds)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn" onclick="saveConfiguration()">Save Configuration</button>
+        </div>
+    </div>
+
+    <script>
+        // Handle Navigation
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                // Remove active class from all items
+                document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+                // Add active class to clicked item
+                this.classList.add('active');
+            });
+        });
+
+        // Configuration Functions
+        function saveConfiguration() {
+            const config = {
+                serverMemory: document.getElementById('server-memory').value,
+                serverJarfile: document.getElementById('server-jarfile').value,
+                cpuLimit: document.getElementById('cpu-limit').value,
+                startupTime: document.getElementById('startup-time').value
+            };
+
+            if (config.serverMemory < 256 || config.serverMemory > 32768) {
+                alert('Server memory must be between 256 and 32768 MB');
+                return;
+            }
+
+            const startupCommand = document.querySelector('.startup-command');
+            startupCommand.innerHTML = startupCommand.innerHTML
+                .replace(/{{SERVER_MEMORY}}/g, config.serverMemory)
+                .replace(/{{SERVER_JARFILE}}/g, config.serverJarfile);
+
+            alert('Configuration saved successfully!');
+        }
+
+        // Input Validation
+        document.getElementById('server-memory').addEventListener('input', function(e) {
+            const value = parseInt(e.target.value);
+            if (value < 256) e.target.value = 256;
+            if (value > 32768) e.target.value = 32768;
+        });
+
+        document.getElementById('cpu-limit').addEventListener('input', function(e) {
+            const value = parseInt(e.target.value);
+            if (value < 0) e.target.value = 0;
+            if (value > 100) e.target.value = 100;
+        });
+    </script>
+</body>
+</html>
