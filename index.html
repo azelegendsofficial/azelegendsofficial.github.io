@@ -1,322 +1,216 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MCraft Services - Premium Minecraft Solutions</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <title>Brian Hosting - Dashboard</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.js"></script>
     <style>
-        .glass { backdrop-filter: blur(12px); }
-        .hero-pattern { background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232563eb' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: black;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        nav {
+            background-color: black;
+            border-bottom: 1px solid #1f2937;
+            padding: 1rem;
+        }
+
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1rem;
+        }
+
+        .nav-brand {
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-link {
+            color: #9ca3af;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.375rem;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: white;
+            background-color: #1f2937;
+        }
+
+        .nav-link.active {
+            color: white;
+            background-color: #1f2937;
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, #a855f7, #ec4899);
+            border-radius: 2px;
+        }
+
+        main {
+            flex: 1;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 3rem 1rem;
+            width: 100%;
+        }
+
+        .welcome-box {
+            background-color: #111827;
+            border: 1px solid #1f2937;
+            border-radius: 0.75rem;
+            padding: 2.5rem;
+        }
+
+        .welcome-title {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #a855f7, #ec4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .welcome-description {
+            color: #9ca3af;
+            font-size: 1.125rem;
+            line-height: 1.75;
+            max-width: 48rem;
+            margin-bottom: 2rem;
+        }
+
+        .join-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: #6366f1bf;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            border: 2px solid #6366f1bf;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .join-button:hover {
+            background-color: #6366f1;
+            border-color: #6366f1;
+            transform: translateX(4px);
+        }
+
+        footer {
+            background-color: #111827;
+            border-top: 1px solid #1f2937;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            color: #9ca3af;
+        }
+
+        .footer-links {
+            margin-top: 1rem;
+        }
+
+        .footer-links a {
+            color: #9ca3af;
+            text-decoration: none;
+            margin: 0 0.5rem;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
     </style>
 </head>
-<body class="bg-gray-900 text-white">
-    <!-- Navigation -->
-    <nav class="fixed w-full z-50 bg-gray-900 bg-opacity-80 glass">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div class="text-2xl font-bold text-green-400">MCraft Services</div>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#beranda" class="hover:text-green-400 transition-colors">Beranda</a>
-                    <a href="#paket" class="hover:text-green-400 transition-colors">Paket</a>
-                    <a href="#kontak" class="hover:text-green-400 transition-colors">Kontak</a>
-                </div>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="nav-brand">Brian Hosting</div>
+            <div class="nav-links">
+                <a href="#" class="nav-link active">
+                    <i data-lucide="home"></i>
+                    Dashboard
+                </a>
+                <a href="#" class="nav-link">
+                    <i data-lucide="filter"></i>
+                    Unbound
+                </a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="beranda" class="min-h-screen flex items-center justify-center hero-pattern">
-        <div class="container mx-auto px-6 text-center">
-            <h1 class="text-5xl md:text-7xl font-bold mb-8">
-                <span class="bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
-                    Solusi Lengkap Server Minecraft
-                </span>
+    <main>
+        <div class="welcome-box">
+            <h1 class="welcome-title">
+                Welcome to <span class="gradient-text">Brian Hosting</span>
             </h1>
-            <p class="text-xl text-gray-300 mb-12">Hosting • Logo • Setup • Support 24/7</p>
-            <a href="#paket" class="bg-gradient-to-r from-green-500 to-blue-500 text-white px-8 py-4 rounded-full text-lg font-semibold hover:opacity-90 transition-opacity">
-                Lihat Paket
+            <p class="welcome-description">
+                Brian Hosting is a software platform that allows you to deploy your applications in the cloud. 
+                You can manage your servers, deploy applications, and monitor your server's performance. 
+                Get started by creating a new server or deploying an application.
+            </p>
+            <a href="#" class="join-button">
+                Join Unbound
+                <i data-lucide="arrow-right"></i>
             </a>
         </div>
-    </section>
+    </main>
 
-    <!-- Packages Section -->
-    <section id="paket" class="py-24 bg-gray-800">
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-16">Paket All-in-One</h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Trial Package -->
-                <div class="bg-gray-900 rounded-xl p-8 border border-gray-700 hover:border-green-500 transition-colors">
-                    <h3 class="text-2xl font-bold text-center mb-4">Trial</h3>
-                    <div class="text-center mb-8">
-                        <span class="text-4xl font-bold">Rp 0</span>
-                        <span class="text-gray-400">/sebulan</span>
-                    </div>
-                    <ul class="space-y-4 mb-8">
-                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> 1GB RAM</li>
-                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> 5 Player Slots</li>
-                    </ul>
-                    <a href="/dashboard/server/8485edc5" class="block text-center bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition-colors">
-                        Pilih Paket
-                    </a>
-                </div>
-
-                <!-- Basic Package -->
-                <div class="bg-gray-900 rounded-xl p-8 border border-gray-700 hover:border-green-500 transition-colors">
-                    <h3 class="text-2xl font-bold text-center mb-4">Starter</h3>
-                    <div class="text-center mb-8">
-                        <span class="text-4xl font-bold">Rp 149.000</span>
-                        <span class="text-gray-400">/bulan</span>
-                    </div>
-                    <ul class="space-y-4 mb-8">
-                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> 2GB RAM</li>
-                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> 10 Player Slots</li>
-                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Basic Logo</li>
-                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Basic Setup</li>
-                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Email Support</li>
-                    </ul>
-                    <a href="#kontak" class="block text-center bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition-colors">
-                        Pilih Paket
-                    </a>
-                </div>
-
-                <!-- Pro Package -->
-                <div class="bg-gray-900 rounded-xl p-8 border-2 border-green-500 transform scale-105">
-                    <div class="absolute top-0 right-0 bg-green-500 text-white px-4 py-1 rounded-bl-lg rounded-tr-lg text-sm font-semibold">
-                        POPULER
-                    </div>
-                    <h3 class="text-2xl font-bold text-center mb-4">Professional</h3>
-                    <div class="text-center mb-8">
-                        <span class="text-4xl font-bold">Rp 249.000</span>
-                        <span class="text-gray-400">/bulan</span>
-                    </div>
-                    <ul class="space-y-4 mb-8">
-                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> 4GB RAM</li>
-                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> 25 Player Slots</li>
-                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Custom Logo Design</li>
-                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Full Server Setup</li>
-                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> 24/7 Support</li>
-                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Domain Gratis</li>
-                    </ul>
-                    <a href="#kontak" class="block text-center bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition-colors">
-                        Pilih Paket
-                    </a>
-                </div>
-
-                <!-- Ultimate Package -->
-                <div class="bg-gray-900 rounded-xl p-8 border border-gray-700 hover:border-green-500 transition-colors">
-                    <h3 class="text-2xl font-bold text-center mb-4">Ultimate</h3>
-                    <div class="text-center mb-8">
-                        <span class="text-4xl font-bold">Rp 399.000</span>
-                        <span class="text-gray-400">/bulan</span>
-                    </div>
-                    <ul class="space-y-4 mb-8">
-                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> 8GB RAM</li>
-                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> 50 Player Slots</li>
-                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Premium Logo Design</li>
-                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Premium Setup</li>
-                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Priority Support</li>
-                        <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Domain + SSL Gratis</li>
-                    </ul>
-                    <a href="#kontak" class="block text-center bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition-colors">
-                        Pilih Paket
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Additional Services Section -->
-    <section class="py-24 bg-gray-800">
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-16">Layanan Tambahan</h2>
-            <!-- Domain Services -->
-            <div class="mb-20">
-                <h3 class="text-3xl font-bold text-center mb-8">Custom Domain</h3>
-                <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                    <div class="bg-gray-900 rounded-xl p-8 border border-gray-700">
-                        <h4 class="text-xl font-bold mb-4">Domain .com</h4>
-                        <p class="text-3xl font-bold mb-2">Rp 199.000<span class="text-sm text-gray-400">/tahun</span></p>
-                        <ul class="space-y-2 mt-4">
-                            <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> SSL Gratis</li>
-                            <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Setup DNS</li>
-                        </ul>
-                    </div>
-                    <div class="bg-gray-900 rounded-xl p-8 border border-gray-700">
-                        <h4 class="text-xl font-bold mb-4">Domain .id</h4>
-                        <p class="text-3xl font-bold mb-2">Rp 299.000<span class="text-sm text-gray-400">/tahun</span></p>
-                        <ul class="space-y-2 mt-4">
-                            <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> SSL Gratis</li>
-                            <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Setup DNS</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Logo Design Services -->
-            <div class="mb-20">
-                <h3 class="text-3xl font-bold text-center mb-8">Logo Server Design</h3>
-                <div class="grid md:grid-cols-3 gap-8">
-                    <div class="bg-gray-900 rounded-xl p-8 border border-gray-700">
-                        <h4 class="text-xl font-bold mb-4">Basic Design</h4>
-                        <p class="text-3xl font-bold mb-2">Rp 99.000</p>
-                        <ul class="space-y-2 mt-4">
-                            <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> 2 Revisi</li>
-                            <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> File PNG & JPG</li>
-                        </ul>
-                    </div>
-                    <div class="bg-gray-900 rounded-xl p-8 border border-gray-700">
-                        <h4 class="text-xl font-bold mb-4">Premium Design</h4>
-                        <p class="text-3xl font-bold mb-2">Rp 199.000</p>
-                        <ul class="space-y-2 mt-4">
-                            <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> 5 Revisi</li>
-                            <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> File PNG, JPG & AI</li>
-                            <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Source File</li>
-                        </ul>
-                    </div>
-                    <div class="bg-gray-900 rounded-xl p-8 border border-gray-700">
-                        <h4 class="text-xl font-bold mb-4">Ultimate Design</h4>
-                        <p class="text-3xl font-bold mb-2">Rp 299.000</p>
-                        <ul class="space-y-2 mt-4">
-                            <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Unlimited Revisi</li>
-                            <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> All File Formats</li>
-                            <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Banner & Thumbnail</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Server Setup Services -->
-            <div>
-                <h3 class="text-3xl font-bold text-center mb-8">Server Setup Service</h3>
-                <div class="grid md:grid-cols-3 gap-8">
-                    <!-- Economy Server -->
-                    <div class="bg-gray-900 rounded-xl p-8 border border-gray-700">
-                        <h4 class="text-xl font-bold mb-4">Economy Server</h4>
-                        <p class="text-3xl font-bold mb-2">Rp 499.000</p>
-                        <ul class="space-y-2 mt-4">
-                            <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Plugin Setup</li>
-                            <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Economy System</li>
-                            <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Shop System</li>
-                            <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Basic Protection</li>
-                        </ul>
-                    </div>
-                    <!-- RPG Server -->
-                    <div class="bg-gray-900 rounded-xl p-8 border border-gray-700">
-                        <h4 class="text-xl font-bold mb-4">RPG Server</h4>
-                        <p class="text-3xl font-bold mb-2">Rp 699.000</p>
-                        <ul class="space-y-2 mt-4">
-                            <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Custom Classes</li>
-                            <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Quest System</li>
-                            <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Custom Mobs</li>
-                            <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Level System</li>
-                        </ul>
-                    </div>
-                    <!-- Brutal Legends -->
-                    <div class="bg-gray-900 rounded-xl p-8 border border-gray-700">
-                        <h4 class="text-xl font-bold mb-4">Brutal Legends</h4>
-                        <p class="text-3xl font-bold mb-2">Rp 799.000</p>
-                        <ul class="space-y-2 mt-4">
-                            <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Custom PvP System</li>
-                            <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Clan System</li>
-                            <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Custom Items</li>
-                            <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Arena System</li>
-                        </ul>
-                    </div>
-                    <!-- Brutal Hardcore -->
-                    <div class="bg-gray-900 rounded-xl p-8 border border-gray-700">
-                        <h4 class="text-xl font-bold mb-4">Brutal Hardcore</h4>
-                        <p class="text-3xl font-bold mb-2">Rp 899.000</p>
-                        <ul class="space-y-2 mt-4">
-                            <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Perma-Death System</li>
-                            <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Custom Difficulty</li>
-                            <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Achievement System</li>
-                            <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Custom World Gen</li>
-                        </ul>
-                    </div>
-                    <!-- Sky Wars -->
-                    <div class="bg-gray-900 rounded-xl p-8 border border-gray-700">
-                        <h4 class="text-xl font-bold mb-4">Sky Wars</h4>
-                        <p class="text-3xl font-bold mb-2">Rp 599.000</p>
-                        <ul class="space-y-2 mt-4">
-                            <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Multiple Maps</li>
-                            <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Kit System</li>
-                            <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Voting System</li>
-                            <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Leaderboard</li>
-                        </ul>
-                    </div>
-                    <!-- Bed Wars -->
-                    <div class="bg-gray-900 rounded-xl p-8 border border-gray-700">
-                        <h4 class="text-xl font-bold mb-4">Bed Wars</h4>
-                        <p class="text-3xl font-bold mb-2">Rp 649.000</p>
-                        <ul class="space-y-2 mt-4">
-                            <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Team System</li>
-                            <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Shop System</li>
-                            <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Multiple Maps</li>
-                            <li class="flex items-center"><span class="text-green-400 mr-2">✓</span> Stats System</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="kontak" class="py-24">
-        <div class="container mx-auto px-6">
-            <div class="max-w-2xl mx-auto bg-gray-800 rounded-xl p-8">
-                <h2 class="text-3xl font-bold text-center mb-8">Hubungi Kami</h2>
-                <form class="space-y-6">
-                    <div>
-                        <label class="block text-sm font-medium mb-2">Nama Lengkap</label>
-                        <input type="text" class="w-full px-4 py-3 bg-gray-900 rounded-lg border border-gray-700 focus:border-green-500 outline-none transition-colors" placeholder="Masukkan nama lengkap">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-2">Email</label>
-                        <input type="email" class="w-full px-4 py-3 bg-gray-900 rounded-lg border border-gray-700 focus:border-green-500 outline-none transition-colors" placeholder="Masukkan email">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-2">Pilih Paket</label>
-                        <select class="w-full px-4 py-3 bg-gray-900 rounded-lg border border-gray-700 focus:border-green-500 outline-none transition-colors">
-                            <option value="trial">Trial</option>
-                            <option value="starter">Starter</option>
-                            <option value="professional">Professional</option>
-                            <option value="ultimate">Ultimate</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-2">Pesan</label>
-                        <textarea rows="4" class="w-full px-4 py-3 bg-gray-900 rounded-lg border border-gray-700 focus:border-green-500 outline-none transition-colors" placeholder="Tuliskan pesan anda"></textarea>
-                    </div>
-                    <button type="submit" class="w-full bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition-colors">
-                        Kirim Pesan
-                    </button>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900 py-12">
-        <div class="container mx-auto px-6">
-            <div class="grid md:grid-cols-3 gap-12">
-                <div class="col-span-2">
-                    <div class="text-2xl font-bold text-green-400 mb-4">MCraft Services</div>
-                    <p class="text-gray-400">Solusi lengkap untuk server Minecraft anda. Hosting premium, design logo profesional, dan setup server yang optimal.</p>
-                </div>
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Kontak</h4>
-                    <div class="text-gray-400">
-                        <p>Email: info@mcraft.id</p>
-                        <p>WhatsApp: +62 812-3456-7890</p>
-                        <p>Discord: MCraft#1234</p>
-                    </div>
-                </div>
-            </div>
-            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-                <p>&copy; 2024 MCraft Services. All rights reserved.</p>
+    <footer>
+        <div class="footer-content">
+            <div>© 2025 BrianHosting. All rights reserved.</div>
+            <div class="footer-links">
+                <a href="#">Terms of Service</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Contact Us</a>
             </div>
         </div>
     </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>
