@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrianHost - Management Panel</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.js"></script>
+    <style>
+        .manage-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            z-index: 2000;
+            overflow-y: auto;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 2001;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-right: 2rem;
+        }
+
+        .nav-icons {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .nav-icon {
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 0.375rem;
+            transition: background-color 0.3s;
+        }
+
+        .nav-icon:hover {
+            background-color: #f3f4f6;
+        }
+
+        /* Search Modal */
+        .search-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 600px;
+            background: white;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 2100;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+            margin-top: 1rem;
+        }
+
+        .search-results {
+            margin-top: 1rem;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .search-result {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.375rem;
+            margin-top: 0.5rem;
+            background: white;
+        }
+
+        /* Server List */
+        .server-list {
+            padding: 2rem;
+        }
+
+        .server-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.75rem;
+            margin-bottom: 1rem;
+            transition: transform 0.2s;
+        }
+
+        .server-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .server-info h3 {
+            margin: 0;
+            font-size: 1.25rem;
+        }
+
+        .server-desc {
+            color: #6b7280;
+            margin-top: 0.5rem;
+        }
+
+        .server-metrics {
+            display: flex;
+            gap: 2rem;
+            color: #374151;
+        }
+
+        /* Account Modal */
+        .account-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 500px;
+            background: white;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 2100;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .account-section {
+            margin-bottom: 2rem;
+        }
+
+        .account-section h3 {
+            margin-bottom: 1rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            border: none;
+            color: white;
+            background: #6366f1;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background: #4f46e5;
+        }
+
+        /* Login Modal */
+        .login-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-form {
+            width: 90%;
+            max-width: 400px;
+            padding: 2rem;
+            background: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            padding: 1rem;
+            border-radius: 0.375rem;
+            color: white;
+            z-index: 4000;
+            display: none;
+        }
+
+        .notification.success {
+            background: #059669;
+        }
+
+        .notification.error {
+            background: #dc2626;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2099;
+        }
+    </style>
+</head>
+<body>
+    <div id="manageModal" class="manage-modal">
+        <nav class="navbar">
+            <div class="logo">Brian Host</div>
+            <div class="nav-icons">
+                <div class="nav-icon" onclick="toggleSearch()">
+                    <i data-lucide="search"></i>
+                </div>
+                <div class="nav-icon" onclick="showDashboard()">
+                    <i data-lucide="layout-dashboard"></i>
+                </div>
+                <div class="nav-icon" onclick="toggleAccount()">
+                    <i data-lucide="user"></i>
+                </div>
+                <div class="nav-icon" onclick="showLogin()">
+                    <i data-lucide="log-out"></i>
+                </div>
+            </div>
+        </nav>
+
+        <div class="server-list" id="serverList">
+            <!-- Server cards will be populated here -->
+        </div>
+    </div>
+
+    <div id="modalOverlay" class="modal-overlay"></div>
+
+    <!-- Search Modal -->
+    <div id="searchModal" class="search-modal">
+        <h2>Search Servers</h2>
+        <input type="text" class="search-input" placeholder="Search term..." oninput="searchServers(this.value)">
+        <div class="search-results" id="searchResults"></div>
+    </div>
+
+    <!-- Account Modal -->
+    <div id="accountModal" class="account-modal">
+        <div class="account-section">
+            <h3>Update Password</h3>
+            <input type="password" class="form-input" placeholder="Current Password" id="currentPassword">
+            <input type="password" class="form-input" placeholder="New Password" id="newPassword">
+            <input type="password" class="form-input" placeholder="Confirm New Password" id="confirmPassword">
+            <button class="btn" onclick="updatePassword()">Update Password</button>
+        </div>
+
+        <div class="account-section">
+            <h3>Update Email Address</h3>
+            <input type="email" class="form-input" value="brianhost@gmail.co.id" readonly>
+            <input type="password" class="form-input" placeholder="Confirm Password">
+            <button class="btn" onclick="updateEmail()">Update Email</button>
+        </div>
+
+        <div class="account-section">
+            <h3>Two-Step Verification</h3>
+            <p>You do not currently have two-step verification enabled on your account. Click the button below to begin configuring it.</p>
+            <button class="btn" onclick="showTwoStep()">Enable Two-Step</button>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="login-modal">
+        <div class="login-form">
+            <h2>Login to Continue</h2>
+            <input type="text" class="form-input" placeholder="Username or Email">
+            <input type="password" class="form-input" placeholder="Password">
+            <button class="btn" onclick="login()">Login</button>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification"></div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Sample server data
+        let sampleServers = [
+            { id: 1, name: "Production Server", ip: "192.168.1.100" },
+            { id: 2, name: "Development Server", ip: "192.168.1.101" },
+            { id: 3, name: "Testing Server", ip: "192.168.1.102" }
+        ];
+
+        // Show notification
+        function showNotification(message, type) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = `notification ${type}`;
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+
+        // Toggle modal overlay
+        function toggleOverlay(show) {
+            document.getElementById('modalOverlay').style.display = show ? 'block' : 'none';
+        }
+
+        // Toggle search modal
+        function toggleSearch() {
+            const modal = document.getElementById('searchModal');
+            const display = modal.style.display === 'block' ? 'none' : 'block';
+            modal.style.display = display;
+            toggleOverlay(display === 'block');
+            if (display === 'block') {
+                searchServers('');  // Show all servers initially
+            }
+        }
+
+        // Search servers
+        function searchServers(term) {
+            const results = document.getElementById('searchResults');
+            results.innerHTML = '';
+
+            sampleServers.forEach((server, index) => {
+                if (!term || server.name.toLowerCase().includes(term.toLowerCase())) {
+                    results.innerHTML += `
+                        <div class="search-result">
+                            <div>
+                                <div>${server.name}</div>
+                                <div>IP: ${server.ip}</div>
+                            </div>
+                            <div>Node ${index + 1}</div>
+                        </div>
+                    `;
+                }
+            });
+        }
+
+        // Show dashboard
+        function showDashboard() {
+            const serverList = document.getElementById('serverList');
+            serverList.innerHTML = '';
+
+            sampleServers.forEach(server => {
+                serverList.innerHTML += `
+                    <div class="server-card">
+                        <div class="server-info">
+                            <h3>${server.name}</h3>
+                            <div class="server-desc">BrianHost Beta</div>
+                        </div>
+                        <div class="server-metrics">
+                            <div>IP: ${server.ip}</div>
+                            <div>RAM: 8 GiB</div>
+                            <div>CPU: 870%</div>
+                            <div>Disk: 27 GiB</div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // Toggle account modal
+        function toggleAccount() {
+            const modal = document.getElementById('accountModal');
+            const display = modal.style.display === 'block' ? 'none' : 'block';
+            modal.style.display = display;
+            toggleOverlay(display === 'block');
+        }
+
+        // Update password
+        function updatePassword() {
+            const current = document.getElementById('currentPassword').value;
+            const newPass = document.getElementById('newPassword').value;
+            const confirm = document.getElementById('confirmPassword').value;
+
+            if (current && newPass && confirm && newPass === confirm) {
+                showNotification('Password updated successfully', 'success');
+                toggleAccount();
+            } else {
+                showNotification('Invalid password information', 'error');
+            }
+        }
+
+        // Update email
+        function updateEmail() {
+            showNotification('You cannot change the Email Address', 'error');
+        }
+
+        // Show login modal
+        function showLogin() {
+            document.getElementById('loginModal').style.display = 'flex';
+            document.getElementById('manageModal').style.display = 'none';
+        }
+
+        // Login
+        function login() {
+            document.getElementById('loginModal').style.display = 'none';
+            document.getElementById('manageModal').style.display = 'block';
+            showDashboard();  // Show dashboard after login
+        }
+
+        // Show manage modal
+        function showManageModal() {
+            document.getElementById('manageModal').style.display = 'block';
+            showDashboard();  // Initialize dashboard with sample data
+        }
+
+        // Initialize the page
+        window.onload = function() {
+            showManageModal();
+        };
+
+        // Update original manage server function
+        window.manageServer = function(serverId) {
+            showManageModal();
+        };
+
+        // Close modals when clicking overlay
+        document.getElementById('modalOverlay').onclick = function() {
+            document.getElementById('searchModal').style.display = 'none';
+            document.getElementById('accountModal').style.display = 'none';
+            toggleOverlay(false);
+        };
+    </script>
+</body>
+</html>
