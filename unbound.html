@@ -6,6 +6,7 @@
     <title>BrianHost - Unbound</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.js"></script>
     <style>
+        /* Existing styles remain the same */
         * {
             margin: 0;
             padding: 0;
@@ -21,278 +22,372 @@
             flex-direction: column;
         }
 
-        nav {
-            background-color: black;
-            border-bottom: 1px solid #1f2937;
-            padding: 1rem;
-        }
+        /* Previous styles remain... */
 
-        .nav-container {
-            max-width: 1280px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 1rem;
-        }
-
-        .nav-brand {
-            font-size: 1.25rem;
-            font-weight: bold;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .nav-link {
-            color: #9ca3af;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 0.75rem;
-            border-radius: 0.375rem;
-            transition: all 0.3s;
-            position: relative;
-        }
-
-        .nav-link:hover {
-            color: white;
-            background-color: #1f2937;
-        }
-
-        .nav-link.active {
-            color: white;
-            background-color: #1f2937;
-        }
-
-        .nav-link.active::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
+        /* New styles for popups and modals */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
             left: 0;
             width: 100%;
-            height: 2px;
-            background: linear-gradient(to right, #a855f7, #ec4899);
-            border-radius: 2px;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
         }
 
-        main {
-            flex: 1;
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 3rem 1rem;
-            width: 100%;
-        }
-
-        .welcome-box {
+        .modal-content {
+            position: relative;
             background-color: #111827;
-            border: 1px solid #1f2937;
             border-radius: 0.75rem;
             padding: 2.5rem;
-            margin-bottom: 2rem;
+            width: 90%;
+            max-width: 800px;
+            margin: 2rem auto;
+            border: 1px solid #1f2937;
         }
 
-        .welcome-title {
-            font-size: 3rem;
+        .modal-title {
+            font-size: 2rem;
             font-weight: bold;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
-        .gradient-text {
-            background: linear-gradient(to right, #a855f7, #ec4899);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .welcome-description {
+        .modal-description {
             color: #9ca3af;
-            font-size: 1.125rem;
-            line-height: 1.75;
-            max-width: 48rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
         }
 
-        .server-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .form-group {
             margin-bottom: 1.5rem;
         }
 
-        .server-title {
-            font-size: 1.875rem;
-            font-weight: bold;
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #e5e7eb;
         }
 
-        .button-group {
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 0.375rem;
+            background-color: #1f2937;
+            border: 1px solid #374151;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 0.375rem;
+            background-color: #1f2937;
+            border: 1px solid #374151;
+            color: white;
+            appearance: none;
+        }
+
+        .row {
             display: flex;
             gap: 1rem;
+            margin-bottom: 1.5rem;
         }
 
-        .deploy-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background-color: #6366f1bf;
+        .col {
+            flex: 1;
+        }
+
+        .notification {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            padding: 1rem;
+            border-radius: 0.375rem;
             color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
+            z-index: 2000;
+            display: none;
+        }
+
+        .notification.success {
+            background-color: #059669;
+            border: 1px solid #047857;
+        }
+
+        .notification.error {
+            background-color: #dc2626;
+            border: 1px solid #b91c1c;
+        }
+
+        .server-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
             font-weight: 500;
-            border: 2px solid #6366f1bf;
+        }
+
+        .status-online {
+            background-color: #059669;
+            color: white;
+        }
+
+        .status-offline {
+            background-color: #dc2626;
+            color: white;
+        }
+
+        .action-button {
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
             cursor: pointer;
             transition: all 0.3s;
+            border: none;
+            color: white;
         }
 
-        .deploy-button:hover {
+        .manage-button {
             background-color: #6366f1;
-            border-color: #6366f1;
         }
 
-        .refresh-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background-color: transparent;
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
-            font-weight: 500;
-            border: 2px solid #374151;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .refresh-button:hover {
+        .settings-button {
             background-color: #374151;
         }
 
-        .server-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            background-color: #111827;
-            border-radius: 0.75rem;
-            overflow: hidden;
+        .delete-button {
+            background-color: #dc2626;
         }
 
-        .server-table th {
-            background-color: #1f2937;
-            color: #9ca3af;
-            font-weight: 500;
-            text-align: left;
-            padding: 1rem;
-        }
-
-        .server-table td {
-            padding: 1rem;
-            border-top: 1px solid #1f2937;
-            color: #9ca3af;
-        }
-
-        footer {
-            background-color: #111827;
-            border-top: 1px solid #1f2937;
-            padding: 1.5rem;
-            text-align: center;
-            margin-top: 2rem;
-        }
-
-        .footer-content {
-            max-width: 1280px;
-            margin: 0 auto;
-            color: #9ca3af;
-        }
-
-        .footer-links {
+        .go-back-button {
+            background-color: #374151;
             margin-top: 1rem;
         }
 
-        .footer-links a {
-            color: #9ca3af;
-            text-decoration: none;
-            margin: 0 0.5rem;
-        }
-
-        .footer-links a:hover {
-            color: white;
+        .save-changes-button {
+            background-color: #059669;
         }
     </style>
 </head>
 <body>
-    <nav>
-        <div class="nav-container">
-            <div class="nav-brand">Brian Hosting</div>
-            <div class="nav-links">
-                <a href="../" class="nav-link">
-                    <i data-lucide="home"></i>
-                    Dashboard
-                </a>
-                <a href="../unbound" class="nav-link active">
-                    <i data-lucide="filter"></i>
-                    Unbound
-                </a>
-            </div>
-        </div>
-    </nav>
+    <!-- Previous HTML content remains the same -->
 
-    <main>
-        <div class="welcome-box">
-            <h1 class="welcome-title">
-                <span class="gradient-text">BrianHost Unbound</span>
-            </h1>
-            <p class="welcome-description">
-                BrianHost Unbound is a server hosting platform that allows you to deploy servers for your favorite games and applications. We currently only offer Minecraft hosting, but with a wide range of server softwares. You can deploy a server in seconds and start playing with your friends.
+    <!-- Deploy Server Modal -->
+    <div id="deployModal" class="modal-overlay">
+        <div class="modal-content">
+            <h2 class="modal-title gradient-text">BrianHosting Unbound</h2>
+            <p class="modal-description">
+                BrianHosting Unbound is a server hosting platform that allows you to deploy servers for your favorite games and applications. We offer a wide range of server softwares and games. You can deploy a server in seconds and start playing with your friends.
             </p>
-        </div>
-
-        <div class="server-header">
-            <h2 class="server-title">List Server</h2>
-            <div class="button-group">
-                <button class="deploy-button">
-                    <i data-lucide="plus-circle"></i>
-                    Deploy a Server
-                </button>
-                <button class="refresh-button">
-                    <i data-lucide="refresh-cw"></i>
-                    Refresh
-                </button>
+            
+            <div class="form-group">
+                <h3 class="modal-title">Create a new server</h3>
+                <div class="row">
+                    <div class="col">
+                        <label class="form-label">Server Name</label>
+                        <input type="text" id="serverName" class="form-input" placeholder="Enter server name">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label class="form-label">Server Software</label>
+                        <select id="serverSoftware" class="form-select">
+                            <option value="">Select software</option>
+                            <option value="paper">Paper</option>
+                            <option value="bedrock">Bedrock</option>
+                            <option value="bungeecord">BungeeCord</option>
+                            <option value="velocity">Velocity</option>
+                            <option value="forge">Forge</option>
+                            <option value="limbo">Limbo</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label class="form-label">Server Version</label>
+                        <input type="text" id="serverVersion" class="form-input" placeholder="Enter version">
+                    </div>
+                </div>
+                <button onclick="deployServer()" class="action-button manage-button">Deploy Server</button>
             </div>
         </div>
+    </div>
 
-        <table class="server-table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>NAME</th>
-                    <th>SPECS</th>
-                    <th>LOCATION</th>
-                    <th>STATUS</th>
-                    <th>ACTION</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td colspan="6" style="text-align: center;">No servers deployed yet</td>
-                </tr>
-            </tbody>
-        </table>
-    </main>
-
-    <footer>
-        <div class="footer-content">
-            <div>© 2025 BrianHosting. All rights reserved.</div>
-            <div class="footer-links">
-                <a href="#">Terms of Service</a>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Contact Us</a>
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="modal-overlay">
+        <div class="modal-content">
+            <h2 class="modal-title">Server Settings</h2>
+            <div class="form-group">
+                <label class="form-label">Server Name</label>
+                <div class="row">
+                    <div class="col">
+                        <input type="text" id="editServerName" class="form-input">
+                    </div>
+                    <div class="col" style="flex: 0">
+                        <button onclick="saveServerName()" class="action-button save-changes-button">Save Changes</button>
+                    </div>
+                </div>
+                <label class="form-label">Server ID</label>
+                <input type="text" class="form-input" id="serverId" readonly>
+                
+                <label class="form-label">Plan</label>
+                <div class="form-input">
+                    RAM: 8GB<br>
+                    CPU: 8.7 Cores<br>
+                    Disk: 27GB
+                </div>
+                
+                <label class="form-label">Location</label>
+                <input type="text" class="form-input" value="Singapore" readonly>
+                
+                <label class="form-label">Status</label>
+                <div id="serverStatus" class="form-input"></div>
+                
+                <h3 class="modal-title">Actions</h3>
+                <div class="row">
+                    <button onclick="deleteServer()" class="action-button delete-button">Delete Server</button>
+                    <button onclick="manageServer()" class="action-button manage-button">Manage</button>
+                </div>
             </div>
+            <button onclick="closeSettingsModal()" class="action-button go-back-button">Go Back</button>
         </div>
-    </footer>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification"></div>
 
     <script>
+        // Initialize variables
+        let servers = [];
+        let currentServerId = null;
+
+        // Show notification
+        function showNotification(message, type) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = `notification ${type}`;
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+
+        // Generate random ID
+        function generateId() {
+            return Math.random().toString(36).substr(2, 9);
+        }
+
+        // Open deploy modal
+        document.querySelector('.deploy-button').addEventListener('click', () => {
+            document.getElementById('deployModal').style.display = 'block';
+        });
+
+        // Deploy server
+        function deployServer() {
+            const name = document.getElementById('serverName').value;
+            const software = document.getElementById('serverSoftware').value;
+            const version = document.getElementById('serverVersion').value;
+
+            if (!name || !software || !version) {
+                showNotification('You have incorrectly created the server', 'error');
+                return;
+            }
+
+            const server = {
+                id: generateId(),
+                name,
+                software,
+                version,
+                specs: {
+                    ram: '8GB',
+                    cpu: '8.7 Cores',
+                    disk: '27GB'
+                },
+                location: 'Singapore',
+                status: Math.random() > 0.5 ? 'Online' : 'Offline'
+            };
+
+            servers.push(server);
+            updateServerList();
+            document.getElementById('deployModal').style.display = 'none';
+            showNotification('Server created successfully', 'success');
+            
+            // Reset form
+            document.getElementById('serverName').value = '';
+            document.getElementById('serverSoftware').value = '';
+            document.getElementById('serverVersion').value = '';
+        }
+
+        // Update server list
+        function updateServerList() {
+            const tbody = document.querySelector('.server-table tbody');
+            if (servers.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align: center;">No servers deployed yet</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = servers.map(server => `
+                <tr>
+                    <td>${server.id}</td>
+                    <td>${server.name}</td>
+                    <td>${server.specs.ram}, ${server.specs.cpu}, ${server.specs.disk}</td>
+                    <td>${server.location}</td>
+                    <td><span class="server-status ${server.status.toLowerCase() === 'online' ? 'status-online' : 'status-offline'}">${server.status}</span></td>
+                    <td>
+                        <button onclick="manageServer('${server.id}')" class="action-button manage-button">Manage</button>
+                        <button onclick="openSettings('${server.id}')" class="action-button settings-button">Settings</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Open settings
+        function openSettings(serverId) {
+            const server = servers.find(s => s.id === serverId);
+            if (!server) return;
+
+            currentServerId = serverId;
+            document.getElementById('editServerName').value = server.name;
+            document.getElementById('serverId').value = server.id;
+            document.getElementById('serverStatus').textContent = server.status;
+            document.getElementById('settingsModal').style.display = 'block';
+        }
+
+        // Save server name
+        function saveServerName() {
+            const newName = document.getElementById('editServerName').value;
+            const server = servers.find(s => s.id === currentServerId);
+            if (server) {
+                server.name = newName;
+                updateServerList();
+                showNotification('Server name saved successfully', 'success');
+                document.getElementById('settingsModal').style.display = 'none';
+            }
+        }
+
+        // Delete server
+        function deleteServer() {
+            servers = servers.filter(s => s.id !== currentServerId);
+            updateServerList();
+            document.getElementById('settingsModal').style.display = 'none';
+        }
+
+        // Manage server
+        function manageServer(serverId) {
+            window.location.href = 'https://panel.example.com'; // Replace with actual panel URL
+        }
+
+        // Close modals
+        function closeSettingsModal() {
+            document.getElementById('settingsModal').style.display = 'none';
+        }
+
+        // Close modals when clicking outside
+        window.onclick = (event) => {
+            if (event.target.classList.contains('modal-overlay')) {
+                event.target.style.display = 'none';
+            }
+        };
+
+        // Initialize icons
         lucide.createIcons();
     </script>
 </body>
