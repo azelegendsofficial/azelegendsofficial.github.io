@@ -6,7 +6,6 @@
     <title>BrianHost - Unbound</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.js"></script>
     <style>
-        /* Existing styles remain the same */
         * {
             margin: 0;
             padding: 0;
@@ -15,16 +14,63 @@
 
         body {
             font-family: system-ui, -apple-system, sans-serif;
-            background-color: black;
-            color: white;
+            background-color: #f3f4f6;
+            color: #1f2937;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
 
-        /* Previous styles remain... */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
 
-        /* New styles for popups and modals */
+        .header {
+            background-color: white;
+            padding: 1rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .gradient-text {
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .server-table {
+            width: 100%;
+            background-color: white;
+            border-radius: 0.75rem;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .server-table th,
+        .server-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .server-table th {
+            background-color: #f9fafb;
+            font-weight: 600;
+        }
+
+        /* Modal styles */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -38,27 +84,29 @@
 
         .modal-content {
             position: relative;
-            background-color: #111827;
+            background-color: white;
             border-radius: 0.75rem;
             padding: 2.5rem;
             width: 90%;
             max-width: 800px;
             margin: 2rem auto;
-            border: 1px solid #1f2937;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .modal-title {
             font-size: 2rem;
             font-weight: bold;
             margin-bottom: 1rem;
+            color: #1f2937;
         }
 
         .modal-description {
-            color: #9ca3af;
+            color: #6b7280;
             margin-bottom: 2rem;
             line-height: 1.6;
         }
 
+        /* Form styles */
         .form-group {
             margin-bottom: 1.5rem;
         }
@@ -66,27 +114,19 @@
         .form-label {
             display: block;
             margin-bottom: 0.5rem;
-            color: #e5e7eb;
+            color: #374151;
+            font-weight: 500;
         }
 
-        .form-input {
-            width: 100%;
-            padding: 0.75rem;
-            border-radius: 0.375rem;
-            background-color: #1f2937;
-            border: 1px solid #374151;
-            color: white;
-            margin-bottom: 1rem;
-        }
-
+        .form-input,
         .form-select {
             width: 100%;
             padding: 0.75rem;
             border-radius: 0.375rem;
-            background-color: #1f2937;
-            border: 1px solid #374151;
-            color: white;
-            appearance: none;
+            border: 1px solid #d1d5db;
+            background-color: white;
+            color: #1f2937;
+            margin-bottom: 1rem;
         }
 
         .row {
@@ -99,27 +139,51 @@
             flex: 1;
         }
 
-        .notification {
-            position: fixed;
-            top: 1rem;
-            right: 1rem;
-            padding: 1rem;
+        /* Button styles */
+        .action-button {
+            padding: 0.5rem 1rem;
             border-radius: 0.375rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
             color: white;
-            z-index: 2000;
-            display: none;
         }
 
-        .notification.success {
-            background-color: #059669;
-            border: 1px solid #047857;
+        .manage-button {
+            background-color: #6366f1;
         }
 
-        .notification.error {
+        .manage-button:hover {
+            background-color: #4f46e5;
+        }
+
+        .settings-button {
+            background-color: #374151;
+        }
+
+        .settings-button:hover {
+            background-color: #1f2937;
+        }
+
+        .delete-button {
             background-color: #dc2626;
-            border: 1px solid #b91c1c;
         }
 
+        .delete-button:hover {
+            background-color: #b91c1c;
+        }
+
+        .deploy-button {
+            background-color: #059669;
+            margin-left: auto;
+        }
+
+        .deploy-button:hover {
+            background-color: #047857;
+        }
+
+        /* Status indicators */
         .server-status {
             padding: 0.25rem 0.75rem;
             border-radius: 9999px;
@@ -137,51 +201,64 @@
             color: white;
         }
 
-        .action-button {
-            padding: 0.5rem 1rem;
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            padding: 1rem;
             border-radius: 0.375rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: none;
             color: white;
+            z-index: 2000;
+            display: none;
         }
 
-        .manage-button {
-            background-color: #6366f1;
-        }
-
-        .settings-button {
-            background-color: #374151;
-        }
-
-        .delete-button {
-            background-color: #dc2626;
-        }
-
-        .go-back-button {
-            background-color: #374151;
-            margin-top: 1rem;
-        }
-
-        .save-changes-button {
+        .notification.success {
             background-color: #059669;
+        }
+
+        .notification.error {
+            background-color: #dc2626;
         }
     </style>
 </head>
 <body>
-    <!-- Previous HTML content remains the same -->
+    <div class="header">
+        <div class="header-content">
+            <h1 class="gradient-text">BrianHost - Unbound</h1>
+            <button class="action-button deploy-button">Deploy New Server</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <table class="server-table">
+            <thead>
+                <tr>
+                    <th>Server ID</th>
+                    <th>Name</th>
+                    <th>Specifications</th>
+                    <th>Location</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="6" style="text-align: center;">No servers deployed yet</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
     <!-- Deploy Server Modal -->
     <div id="deployModal" class="modal-overlay">
         <div class="modal-content">
-            <h2 class="modal-title gradient-text">BrianHosting Unbound</h2>
+            <h2 class="modal-title gradient-text">Deploy New Server</h2>
             <p class="modal-description">
-                BrianHosting Unbound is a server hosting platform that allows you to deploy servers for your favorite games and applications. We offer a wide range of server softwares and games. You can deploy a server in seconds and start playing with your friends.
+                Deploy a new server with your preferred configuration. Choose from our selection of server software and customize according to your needs.
             </p>
             
             <div class="form-group">
-                <h3 class="modal-title">Create a new server</h3>
                 <div class="row">
                     <div class="col">
                         <label class="form-label">Server Name</label>
@@ -222,7 +299,7 @@
                         <input type="text" id="editServerName" class="form-input">
                     </div>
                     <div class="col" style="flex: 0">
-                        <button onclick="saveServerName()" class="action-button save-changes-button">Save Changes</button>
+                        <button onclick="saveServerName()" class="action-button manage-button">Save Changes</button>
                     </div>
                 </div>
                 <label class="form-label">Server ID</label>
@@ -247,7 +324,6 @@
                     <button onclick="manageServer()" class="action-button manage-button">Manage</button>
                 </div>
             </div>
-            <button onclick="closeSettingsModal()" class="action-button go-back-button">Go Back</button>
         </div>
     </div>
 
@@ -255,11 +331,10 @@
     <div id="notification" class="notification"></div>
 
     <script>
-        // Initialize variables
+        // Original JavaScript code remains the same
         let servers = [];
         let currentServerId = null;
 
-        // Show notification
         function showNotification(message, type) {
             const notification = document.getElementById('notification');
             notification.textContent = message;
@@ -270,24 +345,21 @@
             }, 3000);
         }
 
-        // Generate random ID
         function generateId() {
             return Math.random().toString(36).substr(2, 9);
         }
 
-        // Open deploy modal
         document.querySelector('.deploy-button').addEventListener('click', () => {
             document.getElementById('deployModal').style.display = 'block';
         });
 
-        // Deploy server
         function deployServer() {
             const name = document.getElementById('serverName').value;
             const software = document.getElementById('serverSoftware').value;
             const version = document.getElementById('serverVersion').value;
 
             if (!name || !software || !version) {
-                showNotification('You have incorrectly created the server', 'error');
+                showNotification('Please fill in all required fields', 'error');
                 return;
             }
 
@@ -310,13 +382,11 @@
             document.getElementById('deployModal').style.display = 'none';
             showNotification('Server created successfully', 'success');
             
-            // Reset form
             document.getElementById('serverName').value = '';
             document.getElementById('serverSoftware').value = '';
             document.getElementById('serverVersion').value = '';
         }
 
-        // Update server list
         function updateServerList() {
             const tbody = document.querySelector('.server-table tbody');
             if (servers.length === 0) {
@@ -339,7 +409,6 @@
             `).join('');
         }
 
-        // Open settings
         function openSettings(serverId) {
             const server = servers.find(s => s.id === serverId);
             if (!server) return;
@@ -351,7 +420,6 @@
             document.getElementById('settingsModal').style.display = 'block';
         }
 
-        // Save server name
         function saveServerName() {
             const newName = document.getElementById('editServerName').value;
             const server = servers.find(s => s.id === currentServerId);
@@ -363,31 +431,23 @@
             }
         }
 
-        // Delete server
         function deleteServer() {
             servers = servers.filter(s => s.id !== currentServerId);
             updateServerList();
             document.getElementById('settingsModal').style.display = 'none';
+            showNotification('Server deleted successfully', 'success');
         }
 
-        // Manage server
         function manageServer(serverId) {
-            window.location.href = 'https://panel.example.com'; // Replace with actual panel URL
+            window.location.href = 'https://panel.example.com';
         }
 
-        // Close modals
-        function closeSettingsModal() {
-            document.getElementById('settingsModal').style.display = 'none';
-        }
-
-        // Close modals when clicking outside
         window.onclick = (event) => {
             if (event.target.classList.contains('modal-overlay')) {
                 event.target.style.display = 'none';
             }
         };
 
-        // Initialize icons
         lucide.createIcons();
     </script>
 </body>
