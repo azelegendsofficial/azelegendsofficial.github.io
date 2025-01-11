@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Marketplace Panel</title>
+    <title>MineCraft Server</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
     <style>
-        /* Tema Modern (Default) */
         :root {
             --primary: #00ff9d;
             --secondary: #1e2124;
@@ -20,8 +19,7 @@
             --glow-effect: 0 0 10px var(--primary);
         }
 
-        /* Tema Basic */
-        [data-theme="basic"] {
+        [data-theme="simple"] {
             --primary: #666666;
             --secondary: #333333;
             --accent: #444444;
@@ -37,7 +35,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
@@ -45,10 +43,8 @@
             color: var(--text);
             display: flex;
             min-height: 100vh;
-            transition: all 0.3s ease;
         }
 
-        /* Sidebar Styles dengan Efek Glow */
         .sidebar {
             width: var(--sidebar-width);
             background-color: var(--accent);
@@ -57,6 +53,21 @@
             height: 100vh;
             overflow-y: auto;
             box-shadow: var(--glow-effect);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding: 0.5rem;
+        }
+
+        .logo span {
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin-left: 1rem;
+            text-shadow: var(--glow-effect);
         }
 
         .nav-link {
@@ -77,293 +88,282 @@
             box-shadow: var(--glow-effect);
         }
 
-        /* Product Card Styles */
-        .product-card {
-            background-color: var(--accent);
-            border-radius: 0.5rem;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            transition: transform 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        main {
+            margin-left: var(--sidebar-width);
+            padding: 2rem;
+            flex: 1;
         }
 
-        .product-card:hover {
-            transform: translateY(-5px);
+        .welcome-section {
+            background-color: var(--accent);
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .welcome-section:hover {
             box-shadow: var(--glow-effect);
         }
 
-        .product-price {
-            display: flex;
-            justify-content: space-between;
+        .welcome-title {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            text-shadow: var(--glow-effect);
+        }
+
+        .welcome-text {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .server-info {
+            background-color: var(--secondary);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
             margin-top: 1rem;
         }
 
-        .price-tag {
-            padding: 0.5rem 1rem;
-            border-radius: 0.25rem;
-            font-weight: bold;
-        }
-
-        .real-price {
-            background-color: var(--success);
-            color: var(--secondary);
-        }
-
-        .coin-price {
-            background-color: var(--warning);
-            color: var(--secondary);
-        }
-
-        /* Staff Card Styles */
-        .staff-card {
-            background-color: var(--accent);
-            border-radius: 0.5rem;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
+        .info-item {
             display: flex;
             align-items: center;
             gap: 1rem;
         }
 
-        .staff-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            border: 2px solid var(--primary);
-            box-shadow: var(--glow-effect);
+        .info-item i {
+            color: var(--primary);
+            font-size: 1.5rem;
         }
 
-        /* Network Speed Widget */
-        .network-widget {
-            background-color: var(--accent);
-            padding: 1.5rem;
-            border-radius: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .speed-meter {
-            height: 8px;
-            background-color: var(--secondary);
-            border-radius: 4px;
+        .hero {
+            height: calc(100vh - 4rem);
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+                        url('/api/placeholder/1920/1080') center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            border-radius: 1rem;
             overflow: hidden;
-            margin-top: 0.5rem;
         }
 
-        .speed-fill {
-            height: 100%;
-            background-color: var(--primary);
-            box-shadow: var(--glow-effect);
-            transition: width 0.3s ease;
-        }
-
-        /* Theme Switcher */
-        .theme-switcher {
-            background-color: var(--accent);
-            padding: 1.5rem;
-            border-radius: 0.5rem;
+        .hero h1 {
+            font-size: 4rem;
             margin-bottom: 1rem;
+            color: var(--primary);
+            text-shadow: var(--glow-effect);
         }
 
-        .theme-btn {
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 0.25rem;
-            margin: 0.5rem;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s ease;
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 2rem;
+            color: var(--text-secondary);
         }
 
-        .theme-btn.modern {
+        .btn {
             background-color: var(--primary);
             color: var(--secondary);
-        }
-
-        .theme-btn.basic {
-            background-color: #666666;
-            color: white;
-        }
-
-        /* Coin System Section */
-        .coin-system {
-            background-color: var(--accent);
-            padding: 1.5rem;
-            border-radius: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .coin-balance {
-            font-size: 2rem;
-            font-weight: bold;
-            color: var(--warning);
-            text-shadow: var(--glow-effect);
-            margin-bottom: 1rem;
-        }
-
-        .coin-options {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-        }
-
-        .coin-option {
-            background-color: var(--secondary);
-            padding: 1rem;
-            border-radius: 0.5rem;
-            text-align: center;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
             cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: var(--glow-effect);
             transition: all 0.3s ease;
         }
 
-        .coin-option:hover {
-            box-shadow: var(--glow-effect);
+        .btn:hover {
             transform: translateY(-2px);
+            box-shadow: 0 0 20px var(--primary);
         }
 
-        /* Product List */
-        .product-grid {
+        .features {
+            padding: 4rem 0;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
+            gap: 2rem;
         }
 
+        .feature-card {
+            background-color: var(--accent);
+            padding: 2rem;
+            border-radius: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--glow-effect);
+        }
+
+        .feature-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            text-shadow: var(--glow-effect);
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+        }
+
+        .footer {
+            background-color: var(--accent);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 2rem;
+            border-radius: 1rem;
+        }
+
+        .theme-button {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: var(--primary);
+            color: var(--secondary);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--glow-effect);
+            z-index: 1000;
+        }
     </style>
 </head>
 <body>
-    <!-- Sidebar -->
     <aside class="sidebar">
-        <div class="logo" style="margin-bottom: 2rem;">
+        <div class="logo">
             <img src="/api/placeholder/40/40" alt="Logo">
-            <span style="color: var(--primary); font-weight: bold; margin-left: 1rem;">DigiMarket</span>
+            <span>MCServer</span>
         </div>
         <nav>
             <a href="#" class="nav-link active">
-                <i class="fas fa-store"></i>
-                <span>Products</span>
+                <i class="fas fa-home"></i>
+                <span>Welcome</span>
             </a>
             <a href="#" class="nav-link">
-                <i class="fas fa-coins"></i>
-                <span>Coin System</span>
+                <i class="fas fa-gamepad"></i>
+                <span>Games</span>
             </a>
             <a href="#" class="nav-link">
                 <i class="fas fa-users"></i>
-                <span>Staff List</span>
+                <span>Community</span>
             </a>
             <a href="#" class="nav-link">
-                <i class="fas fa-signal"></i>
-                <span>Network Speed</span>
+                <i class="fas fa-server"></i>
+                <span>Servers</span>
             </a>
             <a href="#" class="nav-link">
-                <i class="fas fa-paint-brush"></i>
-                <span>Themes</span>
+                <i class="fas fa-cog"></i>
+                <span>Settings</span>
             </a>
         </nav>
     </aside>
 
-    <!-- Main Content -->
-    <main style="margin-left: var(--sidebar-width); padding: 2rem; flex: 1;">
-        <!-- Products Section -->
-        <section class="products">
-            <h2 style="margin-bottom: 2rem;">Featured Products</h2>
-            <div class="product-grid">
-                <!-- Product Card -->
-                <div class="product-card">
-                    <img src="/api/placeholder/300/200" alt="Product" style="width: 100%; border-radius: 0.375rem; margin-bottom: 1rem;">
-                    <h3>Premium Anti-Lag Plugin</h3>
-                    <p>Optimize your server performance</p>
-                    <div class="product-price">
-                        <span class="price-tag real-price">Rp 299.000</span>
-                        <span class="price-tag coin-price">500 Coins</span>
+    <main>
+        <section class="welcome-section">
+            <h2 class="welcome-title">Welcome to DiamondCraft</h2>
+            <p class="welcome-text">
+                Selamat datang di DiamondCraft, server Minecraft Indonesia yang menghadirkan pengalaman bermain yang unik dan menyenangkan. Kami berkomitmen untuk menciptakan komunitas yang positif dan ramah bagi semua pemain.
+            </p>
+            <div class="server-info">
+                <h3 style="color: var(--primary); margin-bottom: 1rem;">Tentang Server Kami</h3>
+                <p class="welcome-text">
+                    DiamondCraft adalah server Minecraft premium yang didedikasikan untuk memberikan pengalaman bermain terbaik bagi para pemain. Dengan infrastruktur yang kuat dan tim staff yang berpengalaman, kami menjamin kenyamanan dan keamanan dalam bermain.
+                </p>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <i class="fas fa-server"></i>
+                        <div>
+                            <h4>High Performance</h4>
+                            <p>Server dengan spesifikasi tinggi</p>
+                        </div>
                     </div>
-                </div>
-                
-                <!-- More product cards... -->
-            </div>
-        </section>
-
-        <!-- Coin System Section -->
-        <section class="coin-system">
-            <h2 style="margin-bottom: 1rem;">Coin System</h2>
-            <div class="coin-balance">
-                <i class="fas fa-coins"></i> 1,500 Coins
-            </div>
-            <div class="coin-options">
-                <div class="coin-option">
-                    <h3>Daily Bonus</h3>
-                    <p>Claim 50 coins</p>
-                    <button class="theme-btn modern">Claim</button>
-                </div>
-                <div class="coin-option">
-                    <h3>Top Up</h3>
-                    <p>1000 coins = Rp 50.000</p>
-                    <button class="theme-btn modern">Buy</button>
-                </div>
-                <div class="coin-option">
-                    <h3>Share & Earn</h3>
-                    <p>Get 100 coins</p>
-                    <button class="theme-btn modern">Share</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Staff Section -->
-        <section style="margin-top: 2rem;">
-            <h2 style="margin-bottom: 1rem;">Our Staff</h2>
-            <div class="staff-card">
-                <img src="/api/placeholder/60/60" alt="Staff" class="staff-avatar">
-                <div>
-                    <h3>John Doe</h3>
-                    <p>Plugin Developer</p>
-                    <div style="color: var(--success);">
-                        <i class="fas fa-circle"></i> Online
+                    <div class="info-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <div>
+                            <h4>Anti-Cheat</h4>
+                            <p>Sistem keamanan terbaik</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-users"></i>
+                        <div>
+                            <h4>Komunitas Aktif</h4>
+                            <p>1000+ pemain aktif setiap hari</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-headset"></i>
+                        <div>
+                            <h4>24/7 Support</h4>
+                            <p>Staff siap membantu 24 jam</p>
+                        </div>
                     </div>
                 </div>
             </div>
-            <!-- More staff cards... -->
         </section>
 
-        <!-- Network Speed -->
-        <section class="network-widget">
-            <h2 style="margin-bottom: 1rem;">Network Status</h2>
-            <div>
-                <p>Download Speed: 100 Mbps</p>
-                <div class="speed-meter">
-                    <div class="speed-fill" style="width: 85%"></div>
-                </div>
+        <section class="hero">
+            <h1>DiamondCraft Network</h1>
+            <p>Create, Survive, and Thrive Together!</p>
+            <div style="display: flex; gap: 1rem;">
+                <a href="#" class="btn">Play Now</a>
+                <a href="#" class="btn">Join Discord</a>
             </div>
-            <div style="margin-top: 1rem;">
-                <p>Upload Speed: 50 Mbps</p>
-                <div class="speed-meter">
-                    <div class="speed-fill" style="width: 65%"></div>
-                </div>
+            <p style="margin-top: 2rem;">Server IP: play.diamondcraft.net</p>
+        </section>
+
+        <section class="features">
+            <div class="feature-card">
+                <h3>Survival</h3>
+                <p>Jelajahi dunia survival yang luas dengan ekonomi yang dinamis dan sistem proteksi wilayah.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Minigames</h3>
+                <p>Nikmati berbagai minigame seru seperti Bedwars, Skywars, dan masih banyak lagi!</p>
+            </div>
+            <div class="feature-card">
+                <h3>Community Events</h3>
+                <p>Ikuti event mingguan dengan hadiah menarik dan kesempatan mendapatkan special ranks.</p>
             </div>
         </section>
 
-        <!-- Theme Settings -->
-        <section class="theme-switcher">
-            <h2 style="margin-bottom: 1rem;">Theme Settings</h2>
-            <button class="theme-btn modern">
-                <i class="fas fa-moon"></i> Modern Theme
-            </button>
-            <button class="theme-btn basic">
-                <i class="fas fa-sun"></i> Basic Theme
-            </button>
-        </section>
+        <footer class="footer">
+            <p>&copy; 2025 DiamondCraft Network. All rights reserved.</p>
+        </footer>
     </main>
 
+    <div class="theme-button" onclick="toggleTheme()">
+        <i class="fas fa-paint-brush"></i>
+    </div>
+
     <script>
-        // Theme Switcher Functionality
-        const themeButtons = document.querySelectorAll('.theme-btn');
-        themeButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                if (button.classList.contains('modern')) {
-                    document.body.setAttribute('data-theme', 'modern');
-                } else {
-                    document.body.setAttribute('data-theme', 'basic');
-                }
-            });
-        });
+        function toggleTheme() {
+            const body = document.body;
+            if (body.getAttribute('data-theme') === 'simple') {
+                body.removeAttribute('data-theme');
+            } else {
+                body.setAttribute('data-theme', 'simple');
+            }
+        }
     </script>
 </body>
 </html>
