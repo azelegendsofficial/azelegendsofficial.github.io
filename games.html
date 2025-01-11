@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Games - SpaceNetwork Server</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+    <style>
+        :root {
+            --primary: #00ff9d;
+            --secondary: #1e2124;
+            --accent: #2f3136;
+            --text: #ffffff;
+            --text-secondary: #99aab5;
+            --success: #57f287;
+            --danger: #ed4245;
+            --warning: #fee75c;
+            --sidebar-width: 240px;
+            --glow-effect: 0 0 10px var(--primary);
+        }
+
+        [data-theme="simple"] {
+            --primary: #666666;
+            --secondary: #333333;
+            --accent: #444444;
+            --text: #ffffff;
+            --text-secondary: #cccccc;
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+            --glow-effect: none;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--secondary);
+            color: var(--text);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--accent);
+            padding: 1.5rem;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            box-shadow: var(--glow-effect);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding: 0.5rem;
+        }
+
+        .logo span {
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin-left: 1rem;
+            text-shadow: var(--glow-effect);
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem 1rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 0.375rem;
+            transition: all 0.3s ease;
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background-color: var(--primary);
+            color: var(--secondary);
+            box-shadow: var(--glow-effect);
+        }
+
+        main {
+            margin-left: var(--sidebar-width);
+            padding: 2rem;
+            flex: 1;
+        }
+
+        .welcome-section {
+            background-color: var(--accent);
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .welcome-section:hover {
+            box-shadow: var(--glow-effect);
+        }
+
+        .welcome-title {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            text-shadow: var(--glow-effect);
+        }
+
+        .welcome-text {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .game-card {
+            background-color: var(--accent);
+            padding: 2rem;
+            border-radius: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--glow-effect);
+        }
+
+        .game-card h3 {
+            color: var(--primary);
+            margin: 1rem 0;
+            text-shadow: var(--glow-effect);
+        }
+
+        .game-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .game-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .game-stats {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--secondary);
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            color: var(--primary);
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .play-button {
+            background-color: var(--primary);
+            color: var(--secondary);
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 1.5rem;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .play-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--glow-effect);
+        }
+
+        .footer {
+            background-color: var(--accent);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 2rem;
+            border-radius: 1rem;
+        }
+
+        .theme-button {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: var(--primary);
+            color: var(--secondary);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--glow-effect);
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="logo">
+            <img src="/api/placeholder/40/40" alt="Logo">
+            <span>Space Network</span>
+        </div>
+        <nav>
+            <a href="../" class="nav-link">
+                <i class="fas fa-home"></i>
+                <span>Welcome</span>
+            </a>
+            <a href="../games" class="nav-link active">
+                <i class="fas fa-gamepad"></i>
+                <span>Games</span>
+            </a>
+            <a href="../community" class="nav-link">
+                <i class="fas fa-users"></i>
+                <span>Community</span>
+            </a>
+            <a href="../servers" class="nav-link">
+                <i class="fas fa-server"></i>
+                <span>Servers</span>
+            </a>
+            <a href="../settings" class="nav-link">
+                <i class="fas fa-cog"></i>
+                <span>Settings</span>
+            </a>
+        </nav>
+    </aside>
+
+    <main>
+        <section class="welcome-section">
+            <h2 class="welcome-title">Our Games</h2>
+            <p class="welcome-text">
+                Selamat datang di koleksi game SpaceNetwork! Jelajahi 6 mode permainan unik kami yang dirancang untuk memberikan pengalaman bermain terbaik. Setiap mode memiliki fitur khusus dan tantangan uniknya sendiri.
+            </p>
+            
+            <div class="game-grid">
+                <!-- Survival Legends -->
+                <div class="game-card">
+                    <div>
+                        <i class="fas fa-crown game-icon"></i>
+                        <h3>Survival Legends</h3>
+                        <p>
+                            Mode survival hardcore dengan twist legendaris! Bangun kerajaanmu, temukan item legendaris, dan jadilah pemain terkuat di server. Fitur khusus include custom enchants, legendary items, dan boss battles epik.
+                        </p>
+                    </div>
+                    <div>
+                        <div class="game-stats">
+                            <div class="stat-item">
+                                <div class="stat-value">250+</div>
+                                <div class="stat-label">Active Players</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">4.8★</div>
+                                <div class="stat-label">Rating</div>
+                            </div>
+                        </div>
+                        <a href="#" class="play-button">Play Now</a>
+                    </div>
+                </div>
+
+                <!-- Survival Economy -->
+                <div class="game-card">
+                    <div>
+                        <i class="fas fa-coins game-icon"></i>
+                        <h3>Survival Economy</h3>
+                        <p>
+                            Bangun imperium ekonomimu dalam mode survival yang fokus pada perdagangan dan ekonomi. Buat toko, trading dengan pemain lain, dan kuasai pasar dengan strategi ekonomi terbaikmu.
+                        </p>
+                    </div>
+                    <div>
+                        <div class="game-stats">
+                            <div class="stat-item">
+                                <div class="stat-value">300+</div>
+                                <div class="stat-label">Active Players</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">4.9★</div>
+                                <div class="stat-label">Rating</div>
+                            </div>
+                        </div>
+                        <a href="#" class="play-button">Play Now</a>
+                    </div>
+                </div>
+
+                <!-- Skyblock -->
+                <div class="game-card">
+                    <div>
+                        <i class="fas fa-cloud game-icon"></i>
+                        <h3>Skyblock</h3>
+                        <p>
+                            Mulai petualanganmu di pulau mengambang! Kembangkan pulaumu dari nol, unlock berbagai upgrade, dan buat otomasi untuk resource farming. Tersedia berbagai challenges dan achievements khusus.
+                        </p>
+                    </div>
+                    <div>
+                        <div class="game-stats">
+                            <div class="stat-item">
+                                <div class="stat-value">200+</div>
+                                <div class="stat-label">Active Players</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">4.7★</div>
+                                <div class="stat-label">Rating</div>
+                            </div>
+                        </div>
+                        <a href="#" class="play-button">Play Now</a>
+                    </div>
+                </div>
+
+                <!-- Bedwars -->
+                <div class="game-card">
+                    <div>
+                        <i class="fas fa-bed game-icon"></i>
+                        <h3>Bedwars</h3>
+                        <p>
+                            Pertahankan tempat tidurmu dan hancurkan tempat tidur tim lawan! Mode PvP intensif dengan berbagai peta unik, upgrade senjata dan armor, serta sistem ranking kompetitif.
+                        </p>
+                    </div>
+                    <div>
+                        <div class="game-stats">
+                            <div class="stat-item">
+                                <div class="stat-value">150+</div>
+                                <div class="stat-label">Active Players</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">4.6★</div>
+                                <div class="stat-label">Rating</div>
+                            </div>
+                        </div>
+                        <a href="#" class="play-button">Play Now</a>
+                    </div>
+                </div>
+
+                <!-- One Block -->
+                <div class="game-card">
+                    <div>
+                        <i class="fas fa-cube game-icon"></i>
+                        <h3>One Block</h3>
+                        <p>
+                            Mulai dari satu block dan bangun duniamu! Setiap block yang kamu hancurkan akan spawn block baru dengan berbagai fase progressi. Unlock berbagai biome dan resource langka.
+                        </p>
+                    </div>
+                    <div>
+                        <div class="game-stats">
+                            <div class="stat-item">
+                                <div class="stat-value">180+</div>
+                                <div class="stat-label">Active Players</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">4.8★</div>
+                                <div class="stat-label">Rating</div>
+                            </div>
+                        </div>
+                        <a href="#" class="play-button">Play Now</a>
+                    </div>
+                </div>
+
+                <!-- Life Steal -->
+                <div class="game-card">
+                    <div>
+                        <i class="fas fa-heart game-icon"></i>
+                        <h3>Life Steal</h3>
+                        <p>
+                            Mode survival hardcore dengan twist! Setiap kali kamu mengalahkan pemain lain, kamu mendapatkan satu heart permanennya. Tapi hati-hati, jika heartmu habis, kamu akan di-ban dari server!
+                        </p>
+                    </div>
+                    <div>
+                        <div class="game-stats">
+                            <div class="stat-item">
+                                <div class="stat-value">120+</div>
+                                <div class="stat-label">Active Players</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">4.7★</div>
+                                <div class="stat-label">Rating</div>
+                            </div>
+                        </div>
+                        <a href="#" class="play-button">Play Now</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>&copy; 2025 Space Network. All rights reserved.</p>
+        </footer>
+    </main>
+
+    <div class="theme-button" onclick="toggleTheme()">
+        <i class="fas fa-paint-brush"></i>
