@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server Announcement</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fbc2eb, #a1c4fd);
+            background-size: 400% 400%;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            animation: gradientBG 15s ease infinite;
+            padding: 20px;
+        }
+
+        .announcement {
+            width: 100%;
+            max-width: 600px;
+            padding: 30px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            text-align: center;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .announcement h1 {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .announcement p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .announcement a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .announcement a:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px);
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="announcement">
+        <h1>📢 Server Announcement</h1>
+        <p>
+            Hello Space Network players! 🎮<br>
+            We have some exciting updates and maintenance planned for the server:
+        </p>
+        <ul style="text-align: left; margin: 20px auto; max-width: 500px; line-height: 1.8;">
+            <li><b>🛠️ Maintenance Schedule:</b> The server will be down for maintenance on <b>January 20th, 2025</b>, from <b>2:00 AM to 6:00 AM (UTC)</b>.</li>
+            <li><b>✨ New Features:</b> We're introducing <b>custom skins</b>, <b>new maps</b>, and <b>exclusive events</b> for all players!</li>
+            <li><b>📢 Upcoming Event:</b> Join our <b>Space Battle Royale</b> tournament on <b>January 25th, 2025</b>. Prizes include exclusive in-game items!</li>
+        </ul>
+        <p>
+            Stay tuned for more updates, and thank you for being part of the Space Network community. 🚀
+        </p>
+        <a href="#">Learn More</a>
+    </div>
+</body>
+</html>
