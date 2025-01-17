@@ -1,1 +1,107 @@
-<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>System Information</title> <style> body { font-family: 'Roboto', sans-serif; margin: 0; padding: 20px; background-color: #f8f9fa; color: #212529; display: flex; justify-content: center; align-items: center; min-height: 100vh; } .container { max-width: 600px; width: 100%; } .header { text-align: center; margin-bottom: 30px; } .header h1 { font-size: 2rem; color: #343a40; margin: 0; } .header img { width: 60px; margin-bottom: 10px; } .box { background-color: #ffffff; border: 1px solid #e0e0e0; border-radius: 10px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: transform 0.2s, box-shadow 0.2s; } .box:hover { transform: translateY(-5px); box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); } .box .label { font-weight: 600; color: #495057; } .box p { margin: 0 0 10px; font-size: 1rem; } .category { font-size: 1.2rem; font-weight: 700; color: #6c757d; margin-bottom: 10px; border-bottom: 2px solid #e0e0e0; padding-bottom: 5px; } </style> </head> <body> <div class="container"> <div class="header"> <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="System Icon"> <h1>SYSTEM INFORMATION</h1> </div> <div class="box"> <p class="category">Node Information</p> <p><span class="label">NODE:</span> NYC-01-F</p> <p><span class="label">SERVER ID:</span> 16ee389</p> </div> <div class="box"> <p class="category">Region and Versions</p> <p><span class="label">REGION:</span> Indonesia</p> <p><span class="label">DASHBOARD VERSION:</span> v1.2</p> <p><span class="label">CANVA VERSION:</span> 2.4</p> </div> <div class="box"> <p class="category">System Operation</p> <p><span class="label">OS:</span> Ubuntu</p> <p><span class="label">VERSION:</span> LTS 24.04.1</p> <p><span class="label">RUN:</span> Ubuntu Server</p> </div> </div> </body> </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Informasi</title>
+    <style>
+      body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f8f9fa;
+    color: #212529;
+}
+
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+header img {
+    width: 80px;
+    margin-bottom: 20px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.kategori {
+    background-color: #f7f7f7;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+}
+
+.kategori h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #6c757d;
+    margin-bottom: 20px;
+}
+
+.box {
+    background-color: #ffffff;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+}
+
+.label {
+    font-weight: 600;
+    color: #495057;
+}
+
+.box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="Ikon Sistem">
+            <h1>INFORMASI SISTEM</h1>
+        </header>
+        <main>
+            <section class="kategori">
+                <h2>Informasi Node</h2>
+                <div class="box">
+                    <p><span class="label">NODE:</span> NYC-01-F</p>
+                    <p><span class="label">ID SERVER:</span> 16ee389</p>
+                </div>
+            </section>
+            <section class="kategori">
+                <h2>Regional dan Versi</h2>
+                <div class="box">
+                    <p><span class="label">WILAYAH:</span> Indonesia</p>
+                    <p><span class="label">VERSI DASHBOARD:</span> v1.2</p>
+                    <p><span class="label">VERSI CANVA:</span> 2.4</p>
+                </div>
+            </section>
+            <section class="kategori">
+                <h2>Operasi Sistem</h2>
+                <div class="box">
+                    <p><span class="label">SISTEM OPERASI:</span> Ubuntu</p>
+                    <p><span class="label">VERSI:</span> LTS 24.04.1</p>
+                    <p><span class="label">RUN:</span> Ubuntu Server</p>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
