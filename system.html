@@ -3,105 +3,171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistem Informasi</title>
+    <title>System Information</title>
     <style>
-      body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 20px;
-    background-color: #f8f9fa;
-    color: #212529;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-.container {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 20px;
-    background-color: #ffffff;
-    border: 1px solid #e0e0e0;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: #f3f4f6;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
 
-header {
-    text-align: center;
-    margin-bottom: 40px;
-}
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
 
-header img {
-    width: 80px;
-    margin-bottom: 20px;
-}
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
 
-main {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-}
+        .header h1 {
+            font-size: 2.5rem;
+            color: #111827;
+            font-weight: 700;
+            margin: 15px 0;
+            letter-spacing: -0.5px;
+        }
 
-.kategori {
-    background-color: #f7f7f7;
-    padding: 20px;
-    border: 1px solid #e0e0e0;
-    border-radius: 10px;
-}
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+        }
 
-.kategori h2 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #6c757d;
-    margin-bottom: 20px;
-}
+        .box {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
 
-.box {
-    background-color: #ffffff;
-    padding: 20px;
-    border: 1px solid #e0e0e0;
-    border-radius: 10px;
-}
+        .box:hover {
+            transform: translateY(-5px);
+        }
 
-.label {
-    font-weight: 600;
-    color: #495057;
-}
+        /* Category-specific styles */
+        .node-info {
+            border-top: 5px solid #3b82f6;
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.1);
+        }
 
-.box:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-}
+        .region-info {
+            border-top: 5px solid #10b981;
+            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.1);
+        }
+
+        .system-info {
+            border-top: 5px solid #8b5cf6;
+            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.1);
+        }
+
+        .category {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .node-info .category { color: #3b82f6; }
+        .region-info .category { color: #10b981; }
+        .system-info .category { color: #8b5cf6; }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            padding: 8px;
+            background: #f8fafc;
+            border-radius: 8px;
+        }
+
+        .label {
+            font-weight: 600;
+            color: #64748b;
+            min-width: 140px;
+        }
+
+        .value {
+            color: #0f172a;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <header>
-            <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="Ikon Sistem">
-            <h1>INFORMASI SISTEM</h1>
-        </header>
-        <main>
-            <section class="kategori">
-                <h2>Informasi Node</h2>
-                <div class="box">
-                    <p><span class="label">NODE:</span> NYC-01-F</p>
-                    <p><span class="label">ID SERVER:</span> 16ee389</p>
+        <div class="header">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+                <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+                <line x1="6" y1="6" x2="6" y2="6"></line>
+                <line x1="6" y1="18" x2="6" y2="18"></line>
+            </svg>
+            <h1>System Information</h1>
+        </div>
+
+        <div class="grid">
+            <div class="box node-info">
+                <p class="category">Node Information</p>
+                <div class="info-item">
+                    <span class="label">NODE</span>
+                    <span class="value">NYC-01-F</span>
                 </div>
-            </section>
-            <section class="kategori">
-                <h2>Regional dan Versi</h2>
-                <div class="box">
-                    <p><span class="label">WILAYAH:</span> Indonesia</p>
-                    <p><span class="label">VERSI DASHBOARD:</span> v1.2</p>
-                    <p><span class="label">VERSI CANVA:</span> 2.4</p>
+                <div class="info-item">
+                    <span class="label">SERVER ID</span>
+                    <span class="value">16ee389</span>
                 </div>
-            </section>
-            <section class="kategori">
-                <h2>Operasi Sistem</h2>
-                <div class="box">
-                    <p><span class="label">SISTEM OPERASI:</span> Ubuntu</p>
-                    <p><span class="label">VERSI:</span> LTS 24.04.1</p>
-                    <p><span class="label">RUN:</span> Ubuntu Server</p>
+            </div>
+
+            <div class="box region-info">
+                <p class="category">Region and Versions</p>
+                <div class="info-item">
+                    <span class="label">REGION</span>
+                    <span class="value">Indonesia</span>
                 </div>
-            </section>
-        </main>
+                <div class="info-item">
+                    <span class="label">DASHBOARD</span>
+                    <span class="value">v1.2</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">CANVA</span>
+                    <span class="value">2.4</span>
+                </div>
+            </div>
+
+            <div class="box system-info">
+                <p class="category">System Operation</p>
+                <div class="info-item">
+                    <span class="label">OS</span>
+                    <span class="value">Ubuntu</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">VERSION</span>
+                    <span class="value">LTS 24.04.1</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">RUN</span>
+                    <span class="value">Ubuntu Server</span>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
