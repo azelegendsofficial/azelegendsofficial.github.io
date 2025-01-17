@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Software Uninstallation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #fdf8f6 0%, #f7e9e7 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #2c3e50;
+        }
+
+        .uninstaller {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1),
+                        0 1px 8px rgba(0, 0, 0, 0.05);
+            width: 450px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .uninstaller h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #991b1b;
+        }
+
+        .progress-container {
+            position: relative;
+            margin: 2rem 0;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #dc2626, #ef4444);
+            border-radius: 20px;
+            transition: width 0.5s linear;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.3) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            animation: shimmer 1.5s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .status-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .size-info {
+            color: #64748b;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .size-info::before {
+            content: '🗑️';
+            font-size: 1.1rem;
+        }
+
+        .percentage {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #dc2626;
+            text-align: right;
+        }
+
+        #status {
+            color: #64748b;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        .countdown {
+            display: none;
+            color: #dc2626;
+            margin-top: 1rem;
+            text-align: center;
+            font-weight: 500;
+            padding: 1rem;
+            background: #fef2f2;
+            border-radius: 12px;
+        }
+
+        .restart-btn {
+            display: none;
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            background: linear-gradient(90deg, #dc2626, #ef4444);
+            color: white;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 1rem;
+        }
+
+        .restart-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+        }
+
+        .black-screen {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .brand-text {
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #dc2626, #f43f5e);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            opacity: 0;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            filter: drop-shadow(0 0 20px rgba(220, 38, 38, 0.5));
+        }
+
+        .sub-text {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-top: 0.5rem;
+        }
+
+        @keyframes fadeIn {
+            from { 
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to { 
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeOut {
+            from { 
+                opacity: 1;
+                transform: scale(1);
+            }
+            to { 
+                opacity: 0;
+                transform: scale(1.1);
+            }
+        }
+
+        .loading-icon {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #64748b;
+            border-top-color: transparent;
+            border-radius: 50%;
+            margin-right: 8px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="uninstaller">
+        <h2>Uninstalling Software</h2>
+        <div class="status-container">
+            <div class="size-info">6.00 GB</div>
+            <div class="percentage" id="percentage">0%</div>
+        </div>
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress" id="progress"></div>
+            </div>
+        </div>
+        <div id="status"><span class="loading-icon"></span>Preparing uninstallation...</div>
+        <div class="countdown" id="countdown"></div>
+        <button class="restart-btn" id="restartBtn">Restart System</button>
+    </div>
+
+    <div class="black-screen" id="blackScreen">
+        <div class="brand-text">SPACE VEX</div>
+        <div class="sub-text">has been deleted</div>
+    </div>
+
+    <script>
+        const UNINSTALL_TIME = 180; // 3 minutes in seconds
+        const UPDATE_INTERVAL = 1; // Update every 1 second
+        const TOTAL_UPDATES = UNINSTALL_TIME / UPDATE_INTERVAL;
+        
+        let currentProgress = 0;
+        let uninstallTimer;
+
+        function updateProgress() {
+            currentProgress++;
+            const percentage = Math.min((currentProgress / TOTAL_UPDATES) * 100, 100);
+            
+            const progress = document.getElementById('progress');
+            const percentageText = document.getElementById('percentage');
+            const status = document.getElementById('status');
+            
+            progress.style.width = percentage + '%';
+            percentageText.textContent = Math.round(percentage) + '%';
+            
+            // Update status text based on progress
+            if (percentage < 25) {
+                status.innerHTML = '<span class="loading-icon"></span>Removing files...';
+            } else if (percentage < 50) {
+                status.innerHTML = '<span class="loading-icon"></span>Cleaning registry...';
+            } else if (percentage < 75) {
+                status.innerHTML = '<span class="loading-icon"></span>Removing components...';
+            } else {
+                status.innerHTML = '<span class="loading-icon"></span>Cleaning up system...';
+            }
+
+            if (currentProgress >= TOTAL_UPDATES) {
+                clearInterval(uninstallTimer);
+                startCountdown();
+            }
+        }
+
+        function startCountdown() {
+            const countdown = document.getElementById('countdown');
+            countdown.style.display = 'block';
+            let seconds = 59;
+            
+            const countInterval = setInterval(() => {
+                countdown.textContent = `Finalizing uninstallation... ${seconds}s remaining`;
+                seconds--;
+                
+                if (seconds < 0) {
+                    clearInterval(countInterval);
+                    document.querySelector('.uninstaller').innerHTML = `
+                        <h2>Uninstallation Complete</h2>
+                        <div style="text-align: center; margin: 2rem 0;">
+                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                <polyline points="22 4 12 14.01 9 11.01"/>
+                            </svg>
+                        </div>
+                        <p style="text-align: center; color: #64748b; margin-bottom: 2rem;">
+                            Software has been successfully uninstalled. Please restart your system to complete the process.
+                        </p>
+                        <button class="restart-btn" id="restartBtn" style="display: block;">Restart System</button>
+                    `;
+                }
+            }, 1000);
+        }
+
+        // Start uninstallation process
+        setTimeout(() => {
+            uninstallTimer = setInterval(updateProgress, UPDATE_INTERVAL * 1000);
+        }, 1000);
+
+        // Restart button functionality
+        document.addEventListener('click', (e) => {
+            if (e.target.id === 'restartBtn') {
+                const blackScreen = document.getElementById('blackScreen');
+                const brandText = document.querySelector('.brand-text');
+                
+                blackScreen.style.display = 'flex';
+                
+                // Fade in animation
+                setTimeout(() => {
+                    brandText.style.animation = 'fadeIn 2s cubic-bezier(0.4, 0, 0.2, 1) forwards';
+                }, 500);
+
+                // Fade out animation
+                setTimeout(() => {
+                    brandText.style.animation = 'fadeOut 2s cubic-bezier(0.4, 0, 0.2, 1) forwards';
+                }, 4500);
+
+                // Redirect after animations
+                setTimeout(() => {
+                    window.location.href = 'https://example.com';
+                }, 7000);
+            }
+        });
+    </script>
+</body>
+</html>
