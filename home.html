@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Server</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Minecraft&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: url('/api/placeholder/1920/1080') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            line-height: 1.6;
+        }
+
+        .overlay {
+            background: rgba(0, 0, 0, 0.7);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .welcome-section {
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .welcome-section h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-family: 'Minecraft', sans-serif;
+            color: #54ff9f;
+            text-shadow: 2px 2px #000;
+        }
+
+        .server-ip {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem auto;
+            max-width: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .ip-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #54ff9f;
+        }
+
+        .copy-btn {
+            background: #54ff9f;
+            color: #000;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background: #3dd67d;
+            transform: translateY(-2px);
+        }
+
+        .minigames {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        .game-card {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .game-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+
+        .game-card h3 {
+            color: #54ff9f;
+            margin-bottom: 0.5rem;
+        }
+
+        .social-media {
+            text-align: center;
+            padding: 2rem 0;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            margin-top: 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 2rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #54ff9f;
+        }
+
+        @media (max-width: 768px) {
+            .welcome-section h1 {
+                font-size: 2.5rem;
+            }
+            
+            .server-ip {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .social-links {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay">
+        <div class="container">
+            <div class="welcome-section">
+                <h1>Welcome to MineCraft Server</h1>
+                <p>Join our amazing community and experience the best gameplay!</p>
+                
+                <div class="server-ip">
+                    <span class="ip-text">play.minecraft-server.net</span>
+                    <button class="copy-btn" onclick="copyIP()">Copy IP</button>
+                </div>
+            </div>
+
+            <div class="minigames">
+                <div class="game-card">
+                    <img src="/api/placeholder/300/200" alt="Survival">
+                    <h3>Survival</h3>
+                    <p>Test your survival skills in our challenging world!</p>
+                </div>
+                <div class="game-card">
+                    <img src="/api/placeholder/300/200" alt="SkyBlock">
+                    <h3>SkyBlock</h3>
+                    <p>Start from a floating island and build your empire!</p>
+                </div>
+                <div class="game-card">
+                    <img src="/api/placeholder/300/200" alt="BedWars">
+                    <h3>BedWars</h3>
+                    <p>Protect your bed and destroy others in epic battles!</p>
+                </div>
+            </div>
+
+            <div class="social-media">
+                <h2>Follow Us</h2>
+                <div class="social-links">
+                    <a href="#" title="Blog"><i class="fas fa-blog"></i></a>
+                    <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                    <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function copyIP() {
+            const ip = "play.minecraft-server.net";
+            navigator.clipboard.writeText(ip).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = 'Copied!';
+                setTimeout(() => {
+                    btn.textContent = 'Copy IP';
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>
