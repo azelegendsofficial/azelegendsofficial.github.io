@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Information</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            color: #212529;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 500px;
+            width: 100%;
+        }
+        .box {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        }
+        .box .label {
+            font-weight: 600;
+            color: #495057;
+        }
+        .box p {
+            margin: 0 0 10px;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box">
+            <p><span class="label">NODE:</span> NYC-01-F</p>
+            <p><span class="label">SERVER ID:</span> 16ee389</p>
+        </div>
+
+        <div class="box">
+            <p><span class="label">REGION:</span> Indonesia</p>
+            <p><span class="label">DASHBOARD VERSION:</span> v1.2</p>
+            <p><span class="label">CANVA VERSION:</span> 2.4</p>
+        </div>
+
+        <div class="box">
+            <p>Additional text goes here.</p>
+        </div>
+    </div>
+</body>
+</html>
