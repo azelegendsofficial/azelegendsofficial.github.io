@@ -20,6 +20,18 @@
             max-width: 500px;
             width: 100%;
         }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 1.8rem;
+            color: #343a40;
+        }
+        .header img {
+            width: 50px;
+            margin-bottom: 10px;
+        }
         .box {
             background-color: #ffffff;
             border: 1px solid #e0e0e0;
@@ -45,6 +57,11 @@
 </head>
 <body>
     <div class="container">
+        <div class="header">
+            <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="System Icon">
+            <h1>SYSTEM INFORMATION</h1>
+        </div>
+
         <div class="box">
             <p><span class="label">NODE:</span> NYC-01-F</p>
             <p><span class="label">SERVER ID:</span> 16ee389</p>
@@ -57,7 +74,10 @@
         </div>
 
         <div class="box">
-            <p>Additional text goes here.</p>
+            <p><span class="label">SYSTEM OPERATION:</span></p>
+            <p><span class="label">OS:</span> Ubuntu</p>
+            <p><span class="label">VERSION:</span> LTS 24.04.1</p>
+            <p><span class="label">RUN:</span> Ubuntu Server</p>
         </div>
     </div>
 </body>
