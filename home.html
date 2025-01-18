@@ -3,209 +3,237 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minecraft Server</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+    <title>Space Network - Minecraft Server</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/lucide.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Minecraft&display=swap');
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: url('/api/placeholder/1920/1080') no-repeat center center fixed;
-            background-size: cover;
-            color: white;
+            background-color: #0a0a0a;
+            color: #ffffff;
             line-height: 1.6;
         }
 
-        .overlay {
-            background: rgba(0, 0, 0, 0.7);
-            min-height: 100vh;
-            padding: 2rem;
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+                        url('/api/placeholder/1920/1080') center/cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
         }
 
-        .container {
-            max-width: 1200px;
+        .welcome {
+            font-size: 4.5rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .join-section {
+            margin: 2rem 0;
+            font-size: 1.5rem;
+        }
+
+        .copy-btn {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+            border: none;
+            padding: 1.5rem 3rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 1rem 0;
+            font-size: 1.4rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .copy-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.5);
+        }
+
+        .content {
+            padding: 5rem 10%;
+            background: #0a0a0a;
+        }
+
+        .about {
+            text-align: center;
+            margin: 4rem 0;
+            font-size: 1.2rem;
+            max-width: 800px;
             margin: 0 auto;
-            padding: 20px;
         }
 
-        .welcome-section {
+        .about h2 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            color: #4CAF50;
+        }
+
+        .server-list {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin: 4rem 0;
+        }
+
+        .server-card {
+            background: rgba(26, 26, 26, 0.9);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 2px solid #4CAF50;
+            min-width: 300px;
+            transition: all 0.3s ease;
+        }
+
+        .server-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.3);
+        }
+
+        .server-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #4CAF50;
+        }
+
+        .creator {
             text-align: center;
             padding: 4rem 0;
         }
 
-        .welcome-section h1 {
-            font-size: 3.5rem;
+        .creator-title {
+            font-size: 2.5rem;
             margin-bottom: 1rem;
-            font-family: 'Minecraft', sans-serif;
-            color: #54ff9f;
-            text-shadow: 2px 2px #000;
+            color: #ffffff;
         }
 
-        .server-ip {
-            background: rgba(0, 0, 0, 0.8);
-            padding: 1.5rem;
-            border-radius: 10px;
-            margin: 2rem auto;
-            max-width: 500px;
+        .logo {
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(76, 175, 80, 0.3);
             display: flex;
             align-items: center;
-            justify-content: space-between;
-        }
-
-        .ip-text {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #54ff9f;
-        }
-
-        .copy-btn {
-            background: #54ff9f;
-            color: #000;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-
-        .copy-btn:hover {
-            background: #3dd67d;
-            transform: translateY(-2px);
-        }
-
-        .minigames {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            padding: 2rem 0;
-        }
-
-        .game-card {
-            background: rgba(0, 0, 0, 0.8);
-            padding: 1.5rem;
-            border-radius: 10px;
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-
-        .game-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .game-card img {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 5px;
-            margin-bottom: 1rem;
-        }
-
-        .game-card h3 {
-            color: #54ff9f;
-            margin-bottom: 0.5rem;
-        }
-
-        .social-media {
-            text-align: center;
-            padding: 2rem 0;
-            background: rgba(0, 0, 0, 0.8);
-            border-radius: 10px;
-            margin-top: 2rem;
-        }
-
-        .social-links {
-            display: flex;
             justify-content: center;
-            gap: 2rem;
-            margin-top: 1rem;
+            gap: 15px;
         }
 
-        .social-links a {
-            color: white;
-            font-size: 2rem;
-            transition: color 0.3s ease;
+        .logo img {
+            height: 60px;
+            width: auto;
+            object-fit: contain;
+            animation: float 3s ease-in-out infinite;
+            margin-right: -5px; /* Mendekatkan logo dengan text AL */
         }
 
-        .social-links a:hover {
-            color: #54ff9f;
+        footer {
+            background: #080808;
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(76, 175, 80, 0.3);
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+            }
+            to {
+                text-shadow: 0 0 30px rgba(76, 175, 80, 0.8);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
         }
 
         @media (max-width: 768px) {
-            .welcome-section h1 {
-                font-size: 2.5rem;
+            .welcome {
+                font-size: 3rem;
             }
-            
-            .server-ip {
-                flex-direction: column;
-                gap: 1rem;
+            .copy-btn {
+                font-size: 1.2rem;
+                padding: 1.2rem 2.5rem;
             }
-            
-            .social-links {
-                gap: 1rem;
+            .content {
+                padding: 3rem 5%;
             }
         }
     </style>
 </head>
 <body>
-    <div class="overlay">
-        <div class="container">
-            <div class="welcome-section">
-                <h1>Welcome to MineCraft Server</h1>
-                <p>Join our amazing community and experience the best gameplay!</p>
-                
-                <div class="server-ip">
-                    <span class="ip-text">play.minecraft-server.net</span>
-                    <button class="copy-btn" onclick="copyIP()">Copy IP</button>
-                </div>
-            </div>
+    <section class="hero">
+        <h1 class="welcome">Welcome to Space Network</h1>
+        <div class="join-section">
+            <h2>Join Our Server</h2>
+            <button class="copy-btn" onclick="copyIP()">example.my.id</button>
+        </div>
+    </section>
 
-            <div class="minigames">
-                <div class="game-card">
-                    <img src="/api/placeholder/300/200" alt="Survival">
-                    <h3>Survival</h3>
-                    <p>Test your survival skills in our challenging world!</p>
-                </div>
-                <div class="game-card">
-                    <img src="/api/placeholder/300/200" alt="SkyBlock">
-                    <h3>SkyBlock</h3>
-                    <p>Start from a floating island and build your empire!</p>
-                </div>
-                <div class="game-card">
-                    <img src="/api/placeholder/300/200" alt="BedWars">
-                    <h3>BedWars</h3>
-                    <p>Protect your bed and destroy others in epic battles!</p>
-                </div>
-            </div>
+    <div class="content">
+        <div class="about">
+            <h2>What is Space Network?</h2>
+            <p>Space Network is a premium Minecraft server network offering unique gameplay experiences across multiple regions. Our servers are optimized for the best performance and lowest latency possible, ensuring smooth gameplay for all players.</p>
+        </div>
 
-            <div class="social-media">
-                <h2>Follow Us</h2>
-                <div class="social-links">
-                    <a href="#" title="Blog"><i class="fas fa-blog"></i></a>
-                    <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" title="TikTok"><i class="fab fa-tiktok"></i></a>
-                    <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
-                </div>
+        <div class="server-list">
+            <div class="server-card">
+                <h3>Space Network ID</h3>
+                <p>Region: Singapore (SG)</p>
+                <p>Status: ONLINE</p>
+                <p>Ping: 5-100ms</p>
+            </div>
+            
+            <div class="server-card">
+                <h3>Space Network USA</h3>
+                <p>Region: United States (USA)</p>
+                <p>Status: ONLINE</p>
+                <p>Ping: 50-150ms</p>
+            </div>
+        </div>
+
+        <div class="creator">
+            <h2 class="creator-title">Server Created By</h2>
+            <div class="logo">
+                <img src="logo.png" alt="Store Logo">AL STORE
             </div>
         </div>
     </div>
 
+    <footer>
+        <p>&copy; 2025 Space Network. All rights reserved.</p>
+        <p>Powered by AL STORE</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/lucide.min.js"></script>
     <script>
         function copyIP() {
-            const ip = "play.minecraft-server.net";
-            navigator.clipboard.writeText(ip).then(() => {
-                const btn = document.querySelector('.copy-btn');
-                btn.textContent = 'Copied!';
-                setTimeout(() => {
-                    btn.textContent = 'Copy IP';
-                }, 2000);
-            });
+            navigator.clipboard.writeText('example.my.id');
+            alert('Server IP copied to clipboard!');
         }
     </script>
 </body>
