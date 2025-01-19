@@ -22,7 +22,7 @@
         .hero {
             height: 100vh;
             background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
-                        url('/api/placeholder/1920/1080') center/cover;
+                        url('files/images/banner') center/cover;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -190,7 +190,7 @@
         <h1 class="welcome">Welcome to Space Network</h1>
         <div class="join-section">
             <h2>Join Our Server</h2>
-            <button class="copy-btn" onclick="copyIP()">example.my.id</button>
+            <button class="copy-btn" onclick="copyIP()">104.194.11.189:20396</button>
         </div>
     </section>
 
@@ -232,7 +232,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/lucide.min.js"></script>
     <script>
         function copyIP() {
-            navigator.clipboard.writeText('example.my.id');
+            navigator.clipboard.writeText('104.194.11.189:20396');
             alert('Server IP copied to clipboard!');
         }
     </script>
