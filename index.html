@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KalWi - Minecraft Server</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Minecraft&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            padding: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 100;
+        }
+        
+        .logo {
+            font-family: 'Minecraft', sans-serif;
+            font-size: 32px;
+            font-weight: bold;
+            color: #ffffff;
+            text-decoration: none;
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-link:hover {
+            color: #3498db;
+        }
+        
+        .nav-link.active {
+            color: #3498db;
+            position: relative;
+        }
+        
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #3498db;
+        }
+        
+        .btn-primary {
+            background-color: #3498db;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('/api/placeholder/1200/800') no-repeat center center;
+            background-size: cover;
+            filter: brightness(0.3);
+            z-index: -1;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+            z-index: 1;
+        }
+        
+        .hero-title {
+            font-family: 'Minecraft', sans-serif;
+            font-size: 72px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-description {
+            font-size: 18px;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-btn-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .btn-secondary {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            padding: 10px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            backdrop-filter: blur(5px);
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Features Section */
+        .section {
+            padding: 100px 0;
+        }
+        
+        .section-title {
+            font-family: 'Minecraft', sans-serif;
+            font-size: 36px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .section-description {
+            font-size: 18px;
+            margin-bottom: 50px;
+            text-align: center;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #3498db;
+        }
+        
+        .feature-title {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        
+        .feature-description {
+            font-size: 16px;
+            color: #cccccc;
+        }
+        
+        /* Performance Section */
+        .performance {
+            background-color: rgba(52, 152, 219, 0.1);
+            padding: 100px 0;
+            border-radius: 20px;
+            margin: 100px 20px;
+        }
+        
+        .performance-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .performance-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .performance-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .performance-value {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #3498db;
+        }
+        
+        .performance-label {
+            font-size: 18px;
+            color: #cccccc;
+        }
+        
+        /* About Section */
+        .about {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .about-image {
+            width: 100%;
+            height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .about-content h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            font-family: 'Minecraft', sans-serif;
+        }
+        
+        .about-content p {
+            font-size: 16px;
+            color: #cccccc;
+            margin-bottom: 20px;
+        }
+        
+        .about-content .btn-primary {
+            margin-top: 20px;
+            display: inline-block;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #0a0a0a;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #cccccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #3498db;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            text-align: center;
+            color: #888888;
+            font-size: 14px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-link {
+            color: #cccccc;
+            font-size: 20px;
+            transition: color 0.3s;
+        }
+        
+        .social-link:hover {
+            color: #3498db;
+        }
+
+        /* IP Section */
+        .ip-section {
+            background-color: rgba(52, 152, 219, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .ip-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 5px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .ip-address {
+            font-size: 18px;
+            font-weight: 600;
+            color: #3498db;
+            margin-right: 10px;
+        }
+        
+        .copy-button {
+            background-color: #3498db;
+            color: #ffffff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .copy-button:hover {
+            background-color: #2980b9;
+        }
+        
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate {
+            animation: fadeIn 1s ease-out;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 48px;
+            }
+            
+            .about {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-image {
+                height: 300px;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 36px;
+            }
+            
+            .hero-description {
+                font-size: 16px;
+            }
+            
+            .hero-btn-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .section-title {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="#" class="logo">Ivonia Smp</a>
+            <nav class="nav-menu">
+                <a href="#" class="nav-link active">Home</a>
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#performance" class="nav-link">Performance</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#" class="btn-primary">Vote Now</a>
+            </nav>
+        </header>
+    </div>
+    
+    <section class="hero">
+        <div class="hero-content animate">
+            <h1 class="hero-title">Ivonia Smp</h1>
+            <p class="hero-description">Selamat datang di server Minecraft KalWi! Temukan semua petualangan dan keseruan dalam dunia Minecraft bersama komunitas terbaik!</p>
+            <div class="hero-btn-group">
+                <a href="ivoniasmp.vercel.app/main/join-server.html" class="btn-primary">Join Server</a>
+                <a href="https://dc.gg/ivoniasmp" class="btn-secondary">Join Discord</a>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section" id="features">
+        <div class="container">
+            <h2 class="section-title animate">Fitur Server</h2>
+            <p class="section-description animate">Kami menawarkan berbagai fitur menarik untuk memperkaya pengalaman bermain Minecraft Anda.</p>
+            
+            <div class="features">
+                <div class="feature-card animate">
+                    <div class="feature-icon">🏰</div>
+                    <h3 class="feature-title">Dunia Luas</h3>
+                    <p class="feature-description">Jelajahi dunia Minecraft yang luas dengan berbagai bioma dan struktur yang menakjubkan.</p>
+                </div>
+                
+                <div class="feature-card animate">
+                    <div class="feature-icon">⚔️</div>
+                    <h3 class="feature-title">PvP Arena</h3>
+                    <p class="feature-description">Tunjukkan kemampuan bertarung Anda di arena PvP yang dirancang khusus.</p>
+                </div>
+                
+                <div class="feature-card animate">
+                    <div class="feature-icon">🏆</div>
+                    <h3 class="feature-title">Event Mingguan</h3>
+                    <p class="feature-description">Ikuti event mingguan kami untuk mendapatkan hadiah dan keseruan bersama komunitas.</p>
+                </div>
+            </div>
+            
+            <div class="ip-section animate">
+                <h3>Bergabung dengan server kami sekarang!</h3>
+                <div class="ip-box">
+                    <span class="ip-address">Coming Soon</span>
+                    <button
