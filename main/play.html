@@ -3,111 +3,331 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Server List</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Minecraft Server List</title>
     <style>
-        /* Tambahan CSS untuk border */
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
+        body {
             font-family: Arial, sans-serif;
-        }
-        
-        .server-box {
-            border: 2px solid #3498db;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 20px;
-            background-color: #f8f9fa;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        
-        .server-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-            border-bottom: 1px solid #e0e0e0;
-            padding-bottom: 8px;
-        }
-        
-        .server-name {
+            background-color: #f5f5f5;
             margin: 0;
-            color: #2c3e50;
-            font-size: 20px;
+            padding: 0;
         }
-        
-        .player-count {
-            background-color: #34495e;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-size: 14px;
-            border: 1px solid #2c3e50;
-        }
-        
-        .server-motd {
-            margin-bottom: 15px;
-            color: #555;
-            font-style: italic;
-            padding: 8px;
+        .navbar {
             background-color: #fff;
-            border-left: 3px solid #3498db;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-        
-        .copy-button {
-            background-color: #3498db;
+        .navbar a {
+            margin-right: 20px;
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+        .auth-buttons {
+            margin-left: auto;
+        }
+        .auth-buttons a {
+            margin-left: 10px;
+        }
+        .filter-bar {
+            background-color: #f0ad4e;
+            padding: 10px 20px;
+            display: flex;
+        }
+        .filter-button {
+            padding: 10px 15px;
+            background-color: #e09a3c;
+            border: none;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        .version-tabs {
+            display: flex;
+            margin-top: 10px;
+        }
+        .tab {
+            padding: 15px 30px;
+            text-align: center;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .tab.java {
+            background-color: #b08159;
+            color: white;
+        }
+        .tab.bedrock {
+            background-color: #8bc34a;
+            color: white;
+        }
+        .tab.crossplay {
+            background-color: #2196f3;
+            color: white;
+        }
+        .server-list {
+            margin: 20px;
+        }
+        .server-item {
+            display: flex;
+            background-color: #fff;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .server-number {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .featured-tag {
+            background-color: #f0ad4e;
+            color: white;
+            padding: 2px 5px;
+            font-size: 12px;
+            border-radius: 3px;
+        }
+        .server-banner {
+            width: 468px;
+            height: 60px;
+            background-image: url('/api/placeholder/468/60');
+            background-size: cover;
+            background-position: center;
+            border: 1px solid #eee;
+        }
+        .server-info {
+            flex-grow: 1;
+            padding: 10px 20px;
+        }
+        .server-name {
+            font-size: 22px;
+            margin: 0 0 5px 0;
+        }
+        .server-players {
+            color: #777;
+            margin: 0 0 10px 0;
+            display: flex;
+            align-items: center;
+        }
+        .server-tags {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        .server-tag {
+            padding: 5px 15px;
+            border-radius: 15px;
+            margin-right: 10px;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        .tag-skyblock {
+            background-color: #e3f2fd;
+            color: #2196f3;
+        }
+        .tag-survival {
+            background-color: #dcedc8;
+            color: #689f38;
+        }
+        .tag-towny {
+            background-color: #ffe0b2;
+            color: #ff9800;
+        }
+        .tag-lifesteal {
+            background-color: #ffcdd2;
+            color: #e53935;
+        }
+        .tag-factions {
+            background-color: #e1bee7;
+            color: #8e24aa;
+        }
+        .version-icon {
+            margin-right: 5px;
+            display: inline-block;
+            width: 20px;
+            text-align: center;
+        }
+        .join-button {
+            padding: 15px 30px;
+            background-color: #4caf50;
             color: white;
             border: none;
-            padding: 8px 15px;
-            border-radius: 4px;
-            cursor: pointer;
+            border-radius: 5px;
             font-weight: bold;
-            transition: background-color 0.3s;
-            border: 1px solid #2980b9;
+            cursor: pointer;
+            margin: 35px 20px;
+            white-space: nowrap;
+        }
+        .server-url {
+            text-align: right;
+            padding: 10px 20px;
+            color: #4caf50;
+            font-weight: bold;
         }
         
-        .copy-button:hover {
-            background-color: #2980b9;
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 5px;
+            width: 500px;
+            text-align: center;
+        }
+        .ip-copied {
+            color: #e53935;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .server-modal-name {
+            font-size: 24px;
+            margin: 5px 0 20px 0;
+        }
+        .join-message {
+            margin: 20px 0;
+            line-height: 1.5;
+        }
+        .address-field {
+            display: flex;
+            flex-direction: column;
+            margin: 15px 0;
+            text-align: left;
+        }
+        .address-field label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .address-input {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .address-group {
+            display: flex;
+        }
+        .address-group input:first-child {
+            flex-grow: 1;
+            margin-right: 10px;
+        }
+        .keep-browsing {
+            background-color: white;
+            border: 1px solid #ddd;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 20px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Server List</h1>
-        
-        <div class="server-box">
-            <div class="server-header">
-                <h2 class="server-name">Survival Server</h2>
-                <span class="player-count">Players: <span id="player-count">24</span>/100</span>
-            </div>
-            <div class="server-motd">Welcome to our Survival Server! Enjoy your adventure!</div>
-            <button class="copy-button" onclick="copyIP('survival.example.com')">Copy IP</button>
+    <div class="navbar">
+        <a href="#">🔍 Minecraft Server List</a>
+        <a href="#">🎮 Discord</a>
+        <a href="#">📝 Blog</a>
+        <a href="#">🏆 Featured</a>
+        <div class="auth-buttons">
+            <a href="#">👤 Login</a>
+            <a href="#">📋 Create Account</a>
         </div>
     </div>
-
-    <script>
-        // Function to copy server IP to clipboard
-        function copyIP(ip) {
-            navigator.clipboard.writeText(ip).then(function() {
-                alert('Server IP copied: ' + ip);
-            }, function() {
-                alert('Failed to copy IP. Please try again.');
-            });
-        }
-        
-        // Simulate realtime player count update (in a real implementation, this would fetch data from your server)
-        function updatePlayerCount() {
-            // Generate random fluctuations in player count to simulate realtime changes
-            document.getElementById('player-count').textContent = Math.floor(Math.random() * 20) + 15;
+    
+    <div class="filter-bar">
+        <button class="filter-button">≡ Filter by Gamemode</button>
+    </div>
+    
+    <div class="version-tabs">
+        <div class="tab java">⛏️ Java</div>
+        <div class="tab bedrock">🎮 Bedrock</div>
+        <div class="tab crossplay">💎 Crossplay</div>
+    </div>
+    
+    <div class="server-list">
+        <div class="server-item">
+            <div class="server-number">
+                1.
+                <div class="featured-tag">FEATURED</div>
+            </div>
+            <div class="server-banner">
+                <!-- Banner image here -->
+            </div>
+            <div class="server-info">
+                <h2 class="server-name">BlockHero</h2>
+                <p class="server-players">👥 89 players online</p>
+                <div>
+                    <span class="version-icon">⛏️</span> Java
+                    <span class="version-icon">🎮</span> Bedrock
+                </div>
+                <div class="server-tags">
+                    <span class="server-tag tag-skyblock">Skyblock</span>
+                    <span class="server-tag tag-survival">Survival</span>
+                    <span class="server-tag tag-towny">Towny</span>
+                    <span class="server-tag tag-lifesteal">Lifesteal</span>
+                    <span class="server-tag tag-factions">Factions</span>
+                </div>
+            </div>
+            <button class="join-button" id="joinButton">Join Now!</button>
+            <div class="server-url">mbs.blockhero.net</div>
+        </div>
+    </div>
+    
+    <!-- Modal -->
+    <div class="modal" id="serverModal">
+        <div class="modal-content">
+            <div class="ip-copied">✓ IP Copied</div>
+            <h2 class="server-modal-name">BlockHero</h2>
+            <p class="join-message">You're ready to join this server! If the IP isn't already in your clipboard, you can copy it below</p>
             
-            // Update every 10 seconds
-            setTimeout(updatePlayerCount, 10000);
-        }
+            <div class="address-field">
+                <label>Java Address</label>
+                <input type="text" class="address-input" value="mbs.blockhero.net" readonly>
+            </div>
+            
+            <div class="address-field">
+                <label>Bedrock Address / Port</label>
+                <div class="address-group">
+                    <input type="text" class="address-input" value="mbs.blockhero.net" readonly>
+                    <input type="text" class="address-input" value="19132" readonly style="width: 100px;">
+                </div>
+            </div>
+            
+            <button class="keep-browsing" id="keepBrowsing">Keep Browsing</button>
+        </div>
+    </div>
+    
+    <script>
+        document.getElementById('joinButton').addEventListener('click', function() {
+            // Show the modal
+            document.getElementById('serverModal').style.display = 'flex';
+            
+            // Copy server address to clipboard
+            navigator.clipboard.writeText('mbs.blockhero.net').catch(err => {
+                console.error('Could not copy text: ', err);
+            });
+        });
         
-        // Start the player count update simulation
-        updatePlayerCount();
+        document.getElementById('keepBrowsing').addEventListener('click', function() {
+            document.getElementById('serverModal').style.display = 'none';
+        });
     </script>
 </body>
 </html>
