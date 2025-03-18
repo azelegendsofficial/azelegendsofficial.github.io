@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IvoniaSmp - Minecraft Server</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>IvoniaSmp - Minecraft Server Community</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Minecraft&display=swap');
@@ -999,7 +999,7 @@ header.scrolled {
         font-size: 28px;
     }
 }
-</style>
+    </style>
 </head>
 <body>
     <!-- Header -->
@@ -1056,8 +1056,9 @@ header.scrolled {
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- Features Section -->
+    <!-- Features Section -->
     <section class="section" id="features">
         <div class="container">
             <div class="section-header" data-aos="fade-up">
@@ -1565,6 +1566,15 @@ header.scrolled {
                 duration: 800,
                 easing: 'ease-in-out',
                 once: true
+            });
+            
+            // Mobile Menu
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const navMenu = document.getElementById('nav-menu');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                mobileMenuBtn.classList.toggle('active');
             });
             
             // Form Submission
