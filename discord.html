@@ -115,22 +115,46 @@
         <div class="spinner"></div>
     </div>
 
-    <div class="navbar">
-        <a href="#" class="logo">Ivonia<span>Network</span></a>
-        <div class="nav-links">
-            <a href="#">Home</a>
-            <a href="#">Announcements</a>
-            <a href="#">Discord</a>
-            <a href="#">Contact</a>
-            <a href="#" class="shop-btn">Shop</a>
+    <!-- Navbar -->
+    <nav>
+        <div class="container navbar">
+            <a href="#" class="logo">Ivonia<span>Network</span></a>
+            <div class="nav-links">
+                <a href="#">Home</a>
+                <a href="#announcements">Announcements</a>
+                <a href="#discord">Discord</a>
+                <a href="#contact">Contact</a>
+                <a href="#shop" class="shop-btn">Shop</a>
+            </div>
+            <button class="mobile-menu-btn">☰</button>
         </div>
-    </div>
-
-    <div class="main-content">
-        <h1>Welcome to <span>Ivonia Network</span></h1>
-        <p>Join thousands of players in our unique Minecraft experience with multiple gamemodes. From Survival to PvP, we have something for everyone!</p>
-    </div>
-
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Welcome to <span style="color: var(--primary);">Ivonia Network</span></h1>
+            <p>Join thousands of players in our unique Minecraft experience with multiple gamemodes. From Survival to PvP, we have something for everyone!</p>
+            <div class="hero-btns">
+                <a href="#" class="btn btn-primary">Play Now ▶</a>
+                <a href="#games" class="btn btn-outline">Explore Games</a>
+            </div>
+            <div class="server-stats">
+                <div class="stat">
+                    <h3>2,500+</h3>
+                    <p>ONLINE PLAYERS</p>
+                </div>
+                <div class="stat">
+                    <h3>4</h3>
+                    <p>UNIQUE GAMEMODES</p>
+                </div>
+                <div class="stat">
+                    <h3>120K+</h3>
+                    <p>REGISTERED PLAYERS</p>
+                </div>
+            </div>
+        </div>
+    </section>
     <script>
         // Set timeout for redirect (5 seconds)
         setTimeout(function() {
