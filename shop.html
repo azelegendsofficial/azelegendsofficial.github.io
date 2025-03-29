@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop | Ivonia Network</title>
+    <style>
+        :root {
+            --primary: #8c43ff;
+            --primary-dark: #6a32c7;
+            --secondary: #ff5e7d;
+            --dark: #141721;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --success: #00e676;
+            --vip: #55FF55;
+            --vip-plus: #55FFAA;
+            --mvp: #55AAFF;
+            --mvp-plus: #55FFFF;
+            --dominator: #FF5555;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navbar */
+        nav {
+            background-color: rgba(20, 23, 33, 0.8);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.6rem;
+            color: var(--light);
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 1rem;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links .shop-btn {
+            background-color: var(--primary);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-links .shop-btn:hover {
+            background-color: var(--primary-dark);
+            color: white;
+        }
+        
+        /* Shop Header */
+        .shop-header {
+            padding-top: 150px;
+            padding-bottom: 80px;
+            text-align: center;
+            background: linear-gradient(rgba(20, 23, 33, 0.7), rgba(20, 23, 33, 0.9)), url('/api/placeholder/1920/1080') no-repeat center center;
+            background-size: cover;
+            position: relative;
+        }
+        
+        .shop-header::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: radial-gradient(circle, rgba(140, 67, 255, 0.2) 0%, rgba(20, 23, 33, 0) 70%);
+        }
+        
+        .shop-header-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .shop-header h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+        
+        .shop-header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            color: #ccc;
+        }
+        
+        /* Ranks Section */
+        .ranks-section {
+            padding: 80px 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .section-header p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .ranks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .rank-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .rank-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .rank-header {
+            padding: 30px 20px;
+            color: white;
+        }
+        
+        .vip-header {
+            background: linear-gradient(135deg, var(--vip) 0%, rgba(85, 255, 85, 0.2) 100%);
+        }
+        
+        .vip-plus-header {
+            background: linear-gradient(135deg, var(--vip-plus) 0%, rgba(85, 255, 170, 0.2) 100%);
+        }
+        
+        .mvp-header {
+            background: linear-gradient(135deg, var(--mvp) 0%, rgba(85, 170, 255, 0.2) 100%);
+        }
+        
+        .mvp-plus-header {
+            background: linear-gradient(135deg, var(--mvp-plus) 0%, rgba(85, 255, 255, 0.2) 100%);
+        }
+        
+        .dominator-header {
+            background: linear-gradient(135deg, var(--dominator) 0%, rgba(255, 85, 85, 0.2) 100%);
+        }
+        
+        .rank-name {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+        
+        .rank-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .rank-duration {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+        
+        .rank-content {
+            padding: 30px;
+        }
+        
+        .rank-features {
+            list-style: none;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+        
+        .rank-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+        }
+        
+        .rank-features li::before {
+            content: '✓';
+            margin-right: 10px;
+            color: var(--success);
+            font-weight: bold;
+        }
+        
+        .buy-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .vip-btn {
+            background-color: var(--vip);
+            color: #333;
+        }
+        
+        .vip-btn:hover {
+            background-color: rgba(85, 255, 85, 0.8);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(85, 255, 85, 0.2);
+        }
+        
+        .vip-plus-btn {
+            background-color: var(--vip-plus);
+            color: #333;
+        }
+        
+        .vip-plus-btn:hover {
+            background-color: rgba(85, 255, 170, 0.8);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(85, 255, 170, 0.2);
+        }
+        
+        .mvp-btn {
+            background-color: var(--mvp);
+            color: #333;
+        }
+        
+        .mvp-btn:hover {
+            background-color: rgba(85, 170, 255, 0.8);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(85, 170, 255, 0.2);
+        }
+        
+        .mvp-plus-btn {
+            background-color: var(--mvp-plus);
+            color: #333;
+        }
+        
+        .mvp-plus-btn:hover {
+            background-color: rgba(85, 255, 255, 0.8);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(85, 255, 255, 0.2);
+        }
+        
+        .dominator-btn {
+            background-color: var(--dominator);
+            color: white;
+        }
+        
+        .dominator-btn:hover {
+            background-color: rgba(255, 85, 85, 0.8);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 85, 85, 0.2);
+        }
+        
+        /* Payment Section */
+        .payment-section {
+            padding: 80px 0;
+            background-color: rgba(20, 23, 33, 0.5);
+        }
+        
+        .payment-methods {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        
+        .payment-method {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            width: 120px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s;
+        }
+        
+        .payment-method:hover {
+            transform: translateY(-5px);
+        }
+        
+        /* Footer */
+        footer {
+            padding: 60px 0 20px;
+            background-color: #0d0f15;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-brand h3 {
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+        }
+        
+        .footer-brand h3 span {
+            color: var(--primary);
+        }
+        
+        .footer-brand p {
+            color: #ccc;
+            margin-bottom: 20px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            color: var(--light);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .social-link:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .footer-links h4 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-links h4::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 30px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .footer-bottom p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+            padding: 80px 0;
+        }
+        
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 20px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-question:hover {
+            color: var(--primary);
+        }
+        
+        .faq-answer {
+            padding: 0 20px 20px;
+            color: #ccc;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .shop-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+        
+        /* Mobile menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Add shadow to rank cards for better visibility */
+        .rank-card {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Badge for recommended and best value */
+        .rank-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: var(--secondary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav>
+        <div class="container navbar">
+            <a href="/" class="logo">Ivonia<span>Network</span></a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/#announcements">Announcements</a>
+                <a href="/discord.html">Discord</a>
+                <a href="/#contact">Contact</a>
+                <a href="/shop.html" class="shop-btn">Shop</a>
+            </div>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+    
+    <!-- Shop Header -->
+    <header class="shop-header">
+        <div class="container shop-header-content">
+            <h1>Ivonia Network <span style="color: var(--primary);">Shop</span></h1>
+            <p>Support the server and enhance your gameplay experience with our range of ranks, each offering unique perks and benefits!</p>
+        </div>
+    </header>
+    
+    <!-- Ranks Section -->
+    <section class="ranks-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Premium <span style="color: var(--primary);">Ranks</span></h2>
+                <p>Choose a rank that fits your style and elevate your gaming experience with exclusive perks and features</p>
+            </div>
+            
+            <div class="ranks-grid">
+                <!-- VIP Rank -->
+                <div class="rank-card">
+                    <div class="rank-header vip-header">
+                        <div class="rank-name" style="color: var(--vip);">VIP</div>
+                        <div class="rank-price">$9.99</div>
+                        <div class="rank-duration">30 days</div>
+                    </div>
+                    <div class="rank-content">
+                        <ul class="rank-features">
+                            <li>Premium chat prefix</li>
+                            <li>5 extra homes</li>
+                            <li>Access to /fly in lobby</li>
+                            <li>Exclusive VIP cosmetics</li>
+                            <li>Join full servers</li>
+                            <li>10% shop discount</li>
+                        </ul>
+                        <a href="#" class="buy-btn vip-btn">Purchase VIP</a>
+                    </div>
+                </div>
+                
+                <!-- VIP+ Rank -->
+                <div class="rank-card">
+                    <div class="rank-header vip-plus-header">
+                        <div class="rank-name" style="color: var(--vip-plus);">VIP+</div>
+                        <div class="rank-price">$19.99</div>
+                        <div class="rank-duration">30 days</div>
+                    </div>
+                    <div class="rank-content">
+                        <ul class="rank-features">
+                            <li>All VIP perks included</li>
+                            <li>Premium+ chat prefix</li>
+                            <li>10 extra homes</li>
+                            <li>Access to /fly in Survival</li>
+                            <li>Exclusive VIP+ cosmetics</li>
+                            <li>15% shop discount</li>
+                            <li>Priority server queue</li>
+                        </ul>
+                        <a href="#" class="buy-btn vip-plus-btn">Purchase VIP+</a>
+                    </div>
+                </div>
+                
+                <!-- MVP Rank -->
+                <div class="rank-card">
+                    <div class="rank-badge">POPULAR</div>
+                    <div class="rank-header mvp-header">
+                        <div class="rank-name" style="color: var(--mvp);">MVP</div>
+                        <div class="rank-price">$29.99</div>
+                        <div class="rank-duration">30 days</div>
+                    </div>
+                    <div class="rank-content">
+                        <ul class="rank-features">
+                            <li>All VIP+ perks included</li>
+                            <li>MVP chat prefix</li>
+                            <li>15 extra homes</li>
+                            <li>/nick command access</li>
+                            <li>Access to particle effects</li>
+                            <li>Exclusive MVP cosmetics</li>
+                            <li>20% shop discount</li>
+                            <li>Access to private islands</li>
+                        </ul>
+                        <a href="#" class="buy-btn mvp-btn">Purchase MVP</a>
+                    </div>
+                </div>
+                
+                <!-- MVP+ Rank -->
+                <div class="rank-card">
+                    <div class="rank-badge">BEST VALUE</div>
+                    <div class="rank-header mvp-plus-header">
+                        <div class="rank-name" style="color: var(--mvp-plus);">MVP+</div>
+                        <div class="rank-price">$49.99</div>
+                        <div class="rank-duration">30 days</div>
+                    </div>
+                    <div class="rank-content">
+                        <ul class="rank-features">
+                            <li>All MVP perks included</li>
+                            <li>MVP+ chat prefix</li>
+                            <li>20 extra homes</li>
+                            <li>Access to all cosmetics</li>
+                            <li>Custom nickname colors</li>
+                            <li>25% shop discount</li>
+                            <li>Access to /disguise</li>
+                            <li>Ability to create clans</li>
+                            <li>Access to exclusive events</li>
+                        </ul>
+                        <a href="#" class="buy-btn mvp-plus-btn">Purchase MVP+</a>
+                    </div>
+                </div>
+                
+                <!-- Dominator Rank -->
+                <div class="rank-card">
+                    <div class="rank-header dominator-header">
+                        <div class="rank-name" style="color: var(--dominator);">Dominator</div>
+                        <div class="rank-price">$99.99</div>
+                        <div class="rank-duration">30 days</div>
+                    </div>
+                    <div class="rank-content">
+                        <ul class="rank-features">
+                            <li>All MVP+ perks included</li>
+                            <li>Dominator chat prefix</li>
+                            <li>Unlimited homes</li>
+                            <li>Custom join messages</li>
+                            <li>Access to all future cosmetics</li>
+                            <li>35% shop discount</li>
+                            <li>Special Discord role</li>
+                            <li>One-on-one support</li>
+                            <li>Create custom events</li>
+                            <li>Private game server access</li>
+                        </ul>
+                        <a href="#" class="buy-btn dominator-btn">Purchase Dominator</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Payment Section -->
+    <section class="payment-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Payment <span style="color: var(--primary);">Methods</span></h2>
+                <p>We accept a wide range of payment methods for your convenience</p>
+            </div>
+            <div class="payment-methods">
+                <div class="payment-method">
+                    <img src="/api/placeholder/80/40" alt="PayPal">
+                </div>
+                <div class="payment-method">
+                    <img src="/api/placeholder/80/40" alt="Credit Card">
+                </div>
+                <div class="payment-method">
+                    <img src="/api/placeholder/80/40" alt="Google Pay">
+                </div>
+                <div class="payment-method">
+                    <img src="/api/placeholder/80/40" alt="Apple Pay">
+                </div>
+                <div class="payment-method">
+                    <img src="/api/placeholder/80/40" alt="Bitcoin">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Frequently Asked <span style="color: var(--primary);">Questions</span></h2>
+                <p>Find answers to common questions about purchases and ranks</p>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How long do ranks last?
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        All ranks are valid for 30 days from the purchase date. You'll receive a notification in-game when your rank is about to expire, giving you the option to renew.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How do I activate my rank after purchase?
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Your rank will be automatically activated within 5 minutes of a successful purchase. If your rank isn't activated after 10 minutes, please contact our support team via Discord.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Can I upgrade my rank?
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Yes! You can upgrade your rank at any time. When upgrading, you'll only pay the difference between your current rank and the new rank, and your remaining time will transfer to the new rank.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Are refunds available?
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        We do not offer refunds for rank purchases. Please make sure you read all the rank features carefully before making a purchase.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Do ranks work on all servers?
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Yes, your rank and its benefits apply across all Ivonia Network servers and game modes, though some specific perks may vary depending on the game mode.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Ivonia<span>Network</span></h3>
+                    <p>Join thousands of players in our unique Minecraft experience with multiple gamemodes. From Survival to PvP, we have something for everyone!</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M22 12C22 6.48 17.52 2 12 2C6.48 2 2 6.48 2 12C2 16.84 5.44 20.87 10 21.8V15H8V12H10V9.5C10 7.57 11.57 6 13.5 6H16V9H14C13.45 9 13 9.45 13 10V12H16V15H13V21.95C18.05 21.45 22 17.19 22 12Z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M22.46 6C21.69 6.35 20.86 6.58 20 6.69C20.88 6.16 21.56 5.32 21.88 4.31C21.05 4.81 20.13 5.16 19.16 5.36C18.37 4.5 17.26 4 16 4C13.65 4 11.73 5.92 11.73 8.29C11.73 8.63 11.77 8.96 11.84 9.27C8.28 9.09 5.11 7.38 3 4.79C2.63 5.42 2.42 6.16 2.42 6.94C2.42 8.43 3.17 9.75 4.33 10.5C3.62 10.5 2.96 10.3 2.38 10V10.03C2.38 12.11 3.86 13.85 5.82 14.24C5.19 14.41 4.53 14.44 3.89 14.31C4.16 15.18 4.69 15.97 5.42 16.53C6.15 17.09 7.04 17.4 7.97 17.41C6.24 18.81 4.07 19.57 1.81 19.56C1.45 19.56 1.1 19.54 0.75 19.5C2.98 20.97 5.57 21.75 8.22 21.75C16 21.75 20.33 15.31 20.33 9.79C20.33 9.6 20.33 9.42 20.32 9.23C21.16 8.63 21.88 7.87 22.46 7V6Z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7.8 2H16.2C19.4 2 22 4.6 22 7.8V16.2C22 19.4 19.4 22 16.2 22H7.8C4.6 22 2 19.4 2 16.2V7.8C2 4.6 4.6 2 7.8 2ZM7.6 4C5.61 4 4 5.61 4 7.6V16.4C4 18.39 5.61 20 7.6 20H16.4C18.39 20 20 18.39 20 16.4V7.6C20 5.61 18.39 4 16.4 4H7.6ZM17.25 5
