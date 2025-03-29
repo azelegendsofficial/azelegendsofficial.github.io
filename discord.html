@@ -3,279 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joining IvoniaSmp Discord - Please Wait</title>
+    <title>IvoniaNetwork - Discord</title>
     <style>
         body {
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-            background-color: #0a0a0a;
-            color: #ffffff;
+            background-color: #171822;
+            color: white;
+        }
+
+        .navbar {
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            height: 100vh;
-            overflow: hidden;
+            padding: 20px 50px;
+            background-color: #171822;
         }
-        
-        .container {
-            text-align: center;
-            max-width: 500px;
-            padding: 20px;
-        }
-        
-        .logo-container {
-            position: relative;
-            width: 150px;
-            height: 150px;
-            margin: 0 auto 30px;
-            perspective: 1000px;
-        }
-        
+
         .logo {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            transform-style: preserve-3d;
-            animation: rotate 8s infinite linear;
-        }
-        
-        .logo-face {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #191919;
-            border: 2px solid #3498db;
             font-size: 24px;
-            color: #3498db;
-        }
-        
-        .logo-face.front {
-            transform: translateZ(75px);
-        }
-        
-        .logo-face.back {
-            transform: rotateY(180deg) translateZ(75px);
-        }
-        
-        .logo-face.right {
-            transform: rotateY(90deg) translateZ(75px);
-        }
-        
-        .logo-face.left {
-            transform: rotateY(-90deg) translateZ(75px);
-        }
-        
-        .logo-face.top {
-            transform: rotateX(90deg) translateZ(75px);
-        }
-        
-        .logo-face.bottom {
-            transform: rotateX(-90deg) translateZ(75px);
-        }
-        
-        @keyframes rotate {
-            0% {
-                transform: rotateX(0) rotateY(0);
-            }
-            100% {
-                transform: rotateX(360deg) rotateY(360deg);
-            }
-        }
-        
-        .loading-bar-container {
-            width: 100%;
-            height: 20px;
-            background-color: #1f1f1f;
-            border-radius: 10px;
-            overflow: hidden;
-            margin: 20px 0;
-            position: relative;
-        }
-        
-        .loading-bar {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, #3498db, #8e44ad);
-            border-radius: 10px;
-            transition: width 0.3s ease;
-        }
-        
-        .loading-text {
-            font-size: 18px;
-            color: #aaa;
-            margin: 20px 0;
-        }
-        
-        .percentage {
-            font-size: 24px;
-            color: #3498db;
             font-weight: bold;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            color: white;
+            text-decoration: none;
         }
-        
-        .discord-info {
-            margin-top: 40px;
+
+        .logo span {
+            color: #8957FF;
         }
-        
-        .discord-info h2 {
-            color: #3498db;
-            margin-bottom: 10px;
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
         }
-        
-        .discord-info p {
-            color: #aaa;
-            line-height: 1.5;
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
         }
-        
-        .particles {
-            position: absolute;
+
+        .shop-btn {
+            background-color: #8957FF;
+            padding: 10px 20px;
+            border-radius: 20px;
+        }
+
+        .loading-popup {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            overflow: hidden;
-            z-index: -1;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
         }
-        
-        .particle {
-            position: absolute;
-            background-color: #3498db;
+
+        .loading-text {
+            color: white;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
             border-radius: 50%;
-            opacity: 0.3;
-            animation: particle-fall linear infinite;
+            border-top-color: #8957FF;
+            animation: spin 1s ease-in-out infinite;
         }
-        
-        @keyframes particle-fall {
-            0% {
-                transform: translateY(-10px);
-                opacity: 0;
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
             }
-            10% {
-                opacity: 0.3;
-            }
-            90% {
-                opacity: 0.3;
-            }
-            100% {
-                transform: translateY(100vh);
-                opacity: 0;
-            }
+        }
+
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 80vh;
+        }
+
+        h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        h1 span {
+            color: #8957FF;
+        }
+
+        p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            text-align: center;
+            max-width: 800px;
         }
     </style>
 </head>
 <body>
-    <div class="particles" id="particles"></div>
-    
-    <div class="container">
-        <div class="logo-container">
-            <div class="logo">
-                <div class="logo-face front">I</div>
-                <div class="logo-face back">S</div>
-                <div class="logo-face right">M</div>
-                <div class="logo-face left">P</div>
-                <div class="logo-face top">⛏️</div>
-                <div class="logo-face bottom">🌍</div>
-            </div>
-        </div>
-        
-        <h1>Joining IvoniaSmp Discord</h1>
-        
-        <div class="loading-bar-container">
-            <div class="loading-bar" id="loading-bar"></div>
-            <div class="percentage" id="percentage">0%</div>
-        </div>
-        
-        <div class="loading-text" id="loading-text">Establishing connection...</div>
-        
-        <div class="discord-info">
-            <h2>IvoniaSmp Community</h2>
-            <p>You are being redirected to our Discord server where you can join our community, get support, and stay updated with the latest server events.</p>
+    <div class="loading-popup" id="loadingPopup">
+        <div class="loading-text">Sedang Memuat Url Discord</div>
+        <div class="spinner"></div>
+    </div>
+
+    <div class="navbar">
+        <a href="#" class="logo">Ivonia<span>Network</span></a>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">Announcements</a>
+            <a href="#">Discord</a>
+            <a href="#">Contact</a>
+            <a href="#" class="shop-btn">Shop</a>
         </div>
     </div>
-    
+
+    <div class="main-content">
+        <h1>Welcome to <span>Ivonia Network</span></h1>
+        <p>Join thousands of players in our unique Minecraft experience with multiple gamemodes. From Survival to PvP, we have something for everyone!</p>
+    </div>
+
     <script>
-        // Create particles
-        const particlesContainer = document.getElementById('particles');
-        const particleCount = 30;
-        
-        for (let i = 0; i < particleCount; i++) {
-            const particle = document.createElement('div');
-            particle.classList.add('particle');
-            
-            // Random size between 2px and 5px
-            const size = Math.random() * 3 + 2;
-            particle.style.width = `${size}px`;
-            particle.style.height = `${size}px`;
-            
-            // Random position
-            particle.style.left = `${Math.random() * 100}%`;
-            
-            // Random animation duration between 10s and 20s
-            particle.style.animationDuration = `${Math.random() * 10 + 10}s`;
-            
-            // Random animation delay
-            particle.style.animationDelay = `${Math.random() * 5}s`;
-            
-            particlesContainer.appendChild(particle);
-        }
-        
-        // Loading progress
-        const loadingBar = document.getElementById('loading-bar');
-        const percentageText = document.getElementById('percentage');
-        const loadingText = document.getElementById('loading-text');
-        const loadingMessages = [
-            "Establishing connection...",
-            "Connecting to Discord...",
-            "Preparing server invitation...",
-            "Almost there...",
-            "Redirecting to Discord..."
-        ];
-        
-        let progress = 0;
-        
-        // Function to simulate loading
-        function simulateLoading() {
-            const interval = setInterval(() => {
-                // Increment progress
-                if (progress < 100) {
-                    // Increment by a random amount between 1 and 5
-                    const increment = progress < 90 ? Math.floor(Math.random() * 5) + 1 : 1;
-                    progress = Math.min(progress + increment, 100);
-                    
-                    // Update loading bar and text
-                    loadingBar.style.width = `${progress}%`;
-                    percentageText.textContent = `${progress}%`;
-                    
-                    // Update loading message based on progress
-                    const messageIndex = Math.floor(progress / 25);
-                    if (messageIndex < loadingMessages.length) {
-                        loadingText.textContent = loadingMessages[messageIndex];
-                    }
-                    
-                    // Redirect when progress reaches 100%
-                    if (progress === 100) {
-                        loadingText.textContent = "Redirecting...";
-                        clearInterval(interval);
-                        
-                        // Wait a moment before redirecting
-                        setTimeout(() => {
-                            window.location.href = "https://dc.gg/ivoniasmp";
-                        }, 1000);
-                    }
-                }
-            }, 100);
-        }
-        
-        // Start loading simulation when page loads
-        window.onload = simulateLoading;
+        // Set timeout for redirect (5 seconds)
+        setTimeout(function() {
+            // Replace this URL with your actual Discord server invite URL
+            window.location.href = "https://discord.gg/ivonianetwork";
+        }, 5000);
     </script>
 </body>
 </html>
