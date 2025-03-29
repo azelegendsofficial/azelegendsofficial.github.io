@@ -737,6 +737,29 @@
             display: inline-block;
             margin-right: 10px;
         }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #8957FF;
+            cursor: pointer;
+            background: none;
+            border: none;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+
+        .close-btn:hover {
+            background-color: rgba(137, 87, 255, 0.2);
+        }
     </style>
 </head>
 <body>
@@ -746,6 +769,7 @@
     </div>
 
     <div class="server-info-popup" id="serverInfoPopup">
+        <button class="close-btn" id="closeButton">×</button>
         <div class="server-title">IP SERVER IVONIA NETWORK</div>
         <div class="server-detail"><strong>IP:</strong> Coming-soon</div>
         <div class="server-detail"><strong>Port:</strong> 19132</div>
@@ -826,6 +850,12 @@
                 console.error('Could not copy text: ', err);
                 alert('Failed to copy. Please try again.');
             });
+        });
+
+        // Close button functionality - redirect to home page
+        document.getElementById('closeButton').addEventListener('click', function() {
+            // Redirect to home page
+            window.location.href = "/"; // Change this to your actual home page URL
         });
     </script>
 </body>
