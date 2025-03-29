@@ -642,10 +642,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            flex-grow: 1;
-            padding: 20px;
             text-align: center;
+            padding: 100px 20px;  /* Added extra top padding to move content down */
         }
 
         .error-code {
@@ -663,7 +661,7 @@
 
         .error-message {
             font-size: 18px;
-            max-width: 600px;
+            max-width: 800px;
             margin-bottom: 40px;
             color: #b0b0b0;
         }
@@ -683,10 +681,6 @@
             transition: background-color 0.3s;
         }
 
-        .home-btn:hover {
-            background-color: #7042e1;
-        }
-
         .back-btn {
             background-color: transparent;
             color: white;
@@ -696,60 +690,6 @@
             font-weight: bold;
             border: 2px solid rgba(255, 255, 255, 0.2);
             transition: border-color 0.3s, background-color 0.3s;
-        }
-
-        .back-btn:hover {
-            border-color: rgba(255, 255, 255, 0.4);
-            background-color: rgba(255, 255, 255, 0.05);
-        }
-
-        .minecraft-block {
-            width: 80px;
-            height: 80px;
-            background-color: #8957FF;
-            margin-bottom: 30px;
-            position: relative;
-            transform: perspective(300px) rotateX(20deg) rotateY(45deg);
-            box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.2);
-        }
-
-        .minecraft-block::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%);
-        }
-
-        .minecraft-face {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 50%;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .minecraft-face::before, .minecraft-face::after {
-            content: '';
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            background-color: #171822;
-            border-radius: 50%;
-            top: 6px;
-        }
-
-        .minecraft-face::before {
-            left: 2px;
-        }
-
-        .minecraft-face::after {
-            right: 2px;
         }
 
         @media (max-width: 768px) {
@@ -792,12 +732,12 @@
         </div>
     </nav>
 
-    <div class="error-container">
+   <div class="error-container">
         <div class="error-code">404</div>
         <h1 class="error-title">Page Not Found</h1>
         <p class="error-message">Oops! It seems you've ventured into unexplored territory. The page you're looking for may have been moved, deleted, or perhaps never existed in the first place.</p>
         <div class="action-buttons">
-            <a href="/" class="home-btn">Back to Home</a>
+            <a href="index.html" class="home-btn">Back to Home</a>
             <a href="javascript:history.back()" class="back-btn">Go Back</a>
         </div>
     </div>
