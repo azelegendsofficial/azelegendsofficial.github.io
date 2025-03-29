@@ -760,6 +760,22 @@
         .close-btn:hover {
             background-color: rgba(137, 87, 255, 0.2);
         }
+
+        .btn-disabled {
+            position: relative;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        
+        .btn-disabled:hover::before {
+            content: "⛔";
+            position: absolute;
+            right: -10px;
+            top: -10px;
+            background-color: white;
+            border-radius: 50%;
+            font-size: 18px;
+        }
     </style>
 </head>
 <body>
@@ -803,8 +819,8 @@
             <h1>Welcome to <span style="color: var(--primary);">Ivonia Network</span></h1>
             <p>Join thousands of players in our unique Minecraft experience with multiple gamemodes. From Survival to PvP, we have something for everyone!</p>
             <div class="hero-btns">
-                <a href="#" class="btn btn-primary">Play Now ▶</a>
-                <a href="#games" class="btn btn-outline">Explore Games</a>
+                <a href="#" class="btn btn-primary btn-disabled">Play Now ▶</a>
+                <a href="#games" class="btn btn-outline btn-disabled">Explore Games</a>
             </div>
             <div class="server-stats">
                 <div class="stat">
