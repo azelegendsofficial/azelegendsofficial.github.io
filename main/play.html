@@ -3,324 +3,829 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minecraft Server List</title>
+    <title>IvoniaNetwork - Play</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            margin: 0;
-            padding: 0;
-        }
-        .navbar {
-            background-color: #fff;
-            padding: 10px 20px;
-            display: flex;
-            align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        .navbar a {
-            margin-right: 20px;
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
-        }
-        .auth-buttons {
-            margin-left: auto;
-        }
-        .auth-buttons a {
-            margin-left: 10px;
-        }
-        .filter-bar {
-            background-color: #f0ad4e;
-            padding: 10px 20px;
-            display: flex;
-        }
-        .filter-button {
-            padding: 10px 15px;
-            background-color: #e09a3c;
-            border: none;
-            color: #fff;
-            font-weight: bold;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-        }
-        .version-tabs {
-            display: flex;
-            margin-top: 10px;
-        }
-        .tab {
-            padding: 15px 30px;
-            text-align: center;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .tab.java {
-            background-color: #b08159;
-            color: white;
-        }
-        .tab.bedrock {
-            background-color: #8bc34a;
-            color: white;
-        }
-        .tab.crossplay {
-            background-color: #2196f3;
-            color: white;
-        }
-        .server-list {
-            margin: 20px;
-        }
-        .server-item {
-            display: flex;
-            background-color: #fff;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
-        .server-number {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 10px;
-            font-size: 24px;
-            font-weight: bold;
-        }
-        .featured-tag {
-            background-color: #f0ad4e;
-            color: white;
-            padding: 2px 5px;
-            font-size: 12px;
-            border-radius: 3px;
-        }
-        .server-banner {
-            width: 468px;
-            height: 60px;
-            background-image: url('https://ivoniasmp.vercel.app/img/standard%20(2).gif');
-            background-size: cover;
-            background-position: center;
-            border: 1px solid #eee;
-        }
-        .server-info {
-            flex-grow: 1;
-            padding: 10px 20px;
-        }
-        .server-name {
-            font-size: 22px;
-            margin: 0 0 5px 0;
-        }
-        .server-players {
-            color: #777;
-            margin: 0 0 10px 0;
-            display: flex;
-            align-items: center;
-        }
-        .server-tags {
-            display: flex;
-            flex-wrap: wrap;
-            margin-top: 10px;
-        }
-        .server-tag {
-            padding: 5px 15px;
-            border-radius: 15px;
-            margin-right: 10px;
-            font-size: 14px;
-            margin-bottom: 5px;
-        }
-        .tag-skyblock {
-            background-color: #e3f2fd;
-            color: #2196f3;
-        }
-        .tag-survival {
-            background-color: #dcedc8;
-            color: #689f38;
-        }
-        .tag-towny {
-            background-color: #ffe0b2;
-            color: #ff9800;
-        }
-        .tag-lifesteal {
-            background-color: #ffcdd2;
-            color: #e53935;
-        }
-        .tag-factions {
-            background-color: #e1bee7;
-            color: #8e24aa;
-        }
-        .version-icon {
-            margin-right: 5px;
-            display: inline-block;
-            width: 20px;
-            text-align: center;
-        }
-        .join-button {
-            padding: 15px 30px;
-            background-color: #4caf50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-weight: bold;
-            cursor: pointer;
-            margin: 35px 20px;
-            white-space: nowrap;
-        }
-        .server-url {
-            text-align: right;
-            padding: 10px 20px;
-            color: #4caf50;
-            font-weight: bold;
+        :root {
+            --primary: #8c43ff;
+            --primary-dark: #6a32c7;
+            --secondary: #ff5e7d;
+            --dark: #141721;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --success: #00e676;
         }
         
-        /* Modal */
-        .modal {
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navbar */
+        nav {
+            background-color: rgba(20, 23, 33, 0.8);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.6rem;
+            color: var(--light);
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 1rem;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links .shop-btn {
+            background-color: var(--primary);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-links .shop-btn:hover {
+            background-color: var(--primary-dark);
+            color: white;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(rgba(20, 23, 33, 0.7), rgba(20, 23, 33, 0.9)), url('/api/placeholder/1920/1080') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(140, 67, 255, 0.2) 0%, rgba(20, 23, 33, 0) 70%);
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #ccc;
+        }
+        
+        .hero-btns {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(106, 50, 199, 0.2);
+        }
+        
+        .btn-outline {
+            border: 2px solid var(--light);
+            color: var(--light);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--light);
+            color: var(--dark);
+            transform: translateY(-3px);
+        }
+        
+        .server-stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat h3 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat p {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin: 0;
+        }
+        
+        /* Games Section */
+        .games-section {
+            padding: 100px 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .section-header p {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .game-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .game-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .game-content {
+            padding: 25px;
+        }
+        
+        .game-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .game-content p {
+            color: #ccc;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+        
+        .players-online {
+            font-size: 0.9rem;
+            color: var(--success);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 15px;
+        }
+        
+        .players-online::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: var(--success);
+            border-radius: 50%;
+        }
+        
+        .play-now {
+            background-color: rgba(140, 67, 255, 0.1);
+            color: var(--primary);
+            padding: 8px 16px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+            display: inline-block;
+        }
+        
+        .play-now:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        /* Announcements Section */
+        .announcements-section {
+            padding: 100px 0;
+            background-color: rgba(20, 23, 33, 0.5);
+        }
+        
+        .announcements-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .announcement {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 25px;
+            transition: transform 0.3s;
+        }
+        
+        .announcement:hover {
+            transform: translateX(10px);
+        }
+        
+        .announcement-meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .announcement-cat {
+            background-color: rgba(140, 67, 255, 0.1);
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .announcement-date {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .announcement h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+        
+        .announcement p {
+            color: #ccc;
+        }
+        
+        .announcement-link {
+            color: var(--primary);
+            text-decoration: none;
+            margin-top: 10px;
+            display: inline-block;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .announcement-link:hover {
+            color: var(--secondary);
+        }
+        
+        /* Discord Section */
+        .discord-section {
+            padding: 100px 0;
+            background: linear-gradient(rgba(20, 23, 33, 0.9), rgba(20, 23, 33, 0.9)), url('/api/placeholder/1920/1080') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            text-align: center;
+        }
+        
+        .discord-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(114, 137, 218, 0.2) 0%, rgba(20, 23, 33, 0) 70%);
+        }
+        
+        .discord-content {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .discord-logo {
+            color: #7289da;
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+        
+        .discord-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .discord-content p {
+            color: #ccc;
+            margin-bottom: 30px;
+        }
+        
+        .discord-btn {
+            background-color: #7289da;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        
+        .discord-btn:hover {
+            background-color: #5b6eae;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(114, 137, 218, 0.2);
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            padding: 100px 0;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+        }
+        
+        .contact-info h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .contact-info p {
+            color: #ccc;
+            margin-bottom: 30px;
+        }
+        
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--light);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+        
+        .contact-link:hover {
+            color: var(--primary);
+        }
+        
+        .contact-form {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 20px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: var(--light);
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        
+        .submit-btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+        
+        /* Footer */
+        footer {
+            padding: 60px 0 20px;
+            background-color: #0d0f15;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-brand h3 {
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+        }
+        
+        .footer-brand h3 span {
+            color: var(--primary);
+        }
+        
+        .footer-brand p {
+            color: #ccc;
+            margin-bottom: 20px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            color: var(--light);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .social-link:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .footer-links h4 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-links h4::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 30px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .footer-bottom p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .server-stats {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+        
+        /* Mobile menu */
+        .mobile-menu-btn {
             display: none;
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+         .loading-popup {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.5);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-        }
-        .modal-content {
-            background-color: white;
-            padding: 30px;
-            border-radius: 5px;
-            width: 500px;
-            text-align: center;
-        }
-        .ip-copied {
-            color: #e53935;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-        .server-modal-name {
-            font-size: 24px;
-            margin: 5px 0 20px 0;
-        }
-        .join-message {
-            margin: 20px 0;
-            line-height: 1.5;
-        }
-        .address-field {
+            background-color: rgba(0, 0, 0, 0.8);
             display: flex;
             flex-direction: column;
-            margin: 15px 0;
-            text-align: left;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
         }
-        .address-field label {
+
+        .loading-text {
+            color: white;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #8957FF;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .server-info-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #232633;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            max-width: 400px;
+            width: 90%;
+            z-index: 1001;
+        }
+
+        .server-title {
+            font-size: 28px;
             font-weight: bold;
-            margin-bottom: 5px;
+            margin-bottom: 20px;
+            color: #8957FF;
+            text-align: center;
         }
-        .address-input {
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+
+        .server-detail {
             font-size: 16px;
+            margin-bottom: 8px;
+            width: 100%;
+            text-align: center;
         }
-        .address-group {
-            display: flex;
-        }
-        .address-group input:first-child {
-            flex-grow: 1;
-            margin-right: 10px;
-        }
-        .keep-browsing {
-            background-color: white;
-            border: 1px solid #ddd;
+
+        .copy-btn {
+            background-color: #8957FF;
+            color: white;
+            border: none;
             padding: 10px 20px;
-            border-radius: 5px;
-            font-weight: bold;
-            margin-top: 20px;
+            border-radius: 25px;
+            font-size: 16px;
             cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .copy-btn:hover {
+            background-color: #7042e1;
+        }
+
+        .copy-success {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+            z-index: 1002;
+        }
+
+        .checkmark {
+            display: inline-block;
+            margin-right: 10px;
         }
     </style>
 </head>
 <body>
-    <div class="navbar">
-        <a href="#">🔍 Minecraft Server List</a>
-        <a href="#">🎮 Discord</a>
-        <a href="#">📝 Blog</a>
-        <a href="#">🏆 Featured</a>
-        <div class="auth-buttons">
-            <a href="#">👤 Login</a>
-            <a href="#">📋 Create Account</a>
+    <div class="loading-popup" id="loadingPopup">
+        <div class="loading-text">Sedang memuat minecraft server ip</div>
+        <div class="spinner"></div>
+    </div>
+
+    <div class="server-info-popup" id="serverInfoPopup">
+        <div class="server-title">IP SERVER IVONIA NETWORK</div>
+        <div class="server-detail"><strong>IP:</strong> Coming-soon</div>
+        <div class="server-detail"><strong>Port:</strong> 19132</div>
+        <div class="server-detail"><strong>Server Support:</strong> Java/Bedrock</div>
+        <button class="copy-btn" id="copyButton">Copy IP</button>
+    </div>
+
+    <div class="copy-success" id="copySuccess">
+        <span class="checkmark">✓</span> IP berhasil disalin!
+    </div>
+
+
+    <!-- Navbar -->
+    <nav>
+        <div class="container navbar">
+            <a href="#" class="logo">Ivonia<span>Network</span></a>
+            <div class="nav-links">
+                <a href="#">Home</a>
+                <a href="#announcements">Announcements</a>
+                <a href="#discord">Discord</a>
+                <a href="#contact">Contact</a>
+                <a href="#shop" class="shop-btn">Shop</a>
+            </div>
+            <button class="mobile-menu-btn">☰</button>
         </div>
-    </div>
+    </nav>
     
-    <div class="filter-bar">
-        <button class="filter-button">≡ Filter by Gamemode</button>
-    </div>
-    
-    <div class="server-list">
-        <div class="server-item">
-            <div class="server-number">
-                1.
-                <div class="featured-tag">FEATURED</div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Welcome to <span style="color: var(--primary);">Ivonia Network</span></h1>
+            <p>Join thousands of players in our unique Minecraft experience with multiple gamemodes. From Survival to PvP, we have something for everyone!</p>
+            <div class="hero-btns">
+                <a href="#" class="btn btn-primary">Play Now ▶</a>
+                <a href="#games" class="btn btn-outline">Explore Games</a>
             </div>
-            <div class="server-banner">
-                <!-- Banner image here -->
-            </div>
-            <div class="server-info">
-                <h2 class="server-name">IvoniaSmp</h2>
-                <p class="server-players">👥 0 players online</p>
-                <div>
-                    <span class="version-icon">⛏️</span> Java
-                    <span class="version-icon">🎮</span> Bedrock
+            <div class="server-stats">
+                <div class="stat">
+                    <h3>2,500+</h3>
+                    <p>ONLINE PLAYERS</p>
                 </div>
-                <div class="server-tags">
-                    <span class="server-tag tag-skyblock">Economy</span>
-                    <span class="server-tag tag-survival">Senjata Legends</span>
-                    <span class="server-tag tag-towny">Roleplay</span>
-                    <span class="server-tag tag-lifesteal">Ranks</span>
-                    <span class="server-tag tag-factions">And More</span>
+                <div class="stat">
+                    <h3>4</h3>
+                    <p>UNIQUE GAMEMODES</p>
                 </div>
-            </div>
-            <button class="join-button" id="joinButton">Join Now!</button>
-            <div class="server-url">coming-soon</div>
-        </div>
-    </div>
-    
-    <!-- Modal -->
-    <div class="modal" id="serverModal">
-        <div class="modal-content">
-            <div class="ip-copied">✓ IP Copied</div>
-            <h2 class="server-modal-name">IvoniaSmp</h2>
-            <p class="join-message">You're ready to join this server! If the IP isn't already in your clipboard, you can copy it below</p>
-            
-            <div class="address-field">
-                <label>Java Address</label>
-                <input type="text" class="address-input" value="coming-soon" readonly>
-            </div>
-            
-            <div class="address-field">
-                <label>Bedrock Address / Port</label>
-                <div class="address-group">
-                    <input type="text" class="address-input" value="coming-soon" readonly>
-                    <input type="text" class="address-input" value="19132" readonly style="width: 100px;">
+                <div class="stat">
+                    <h3>120K+</h3>
+                    <p>REGISTERED PLAYERS</p>
                 </div>
             </div>
-            
-            <button class="keep-browsing" id="keepBrowsing">Close</button>
         </div>
-    </div>
-    
+    </section>
     <script>
-        document.getElementById('joinButton').addEventListener('click', function() {
-            // Show the modal
-            document.getElementById('serverModal').style.display = 'flex';
+        // Set timeout for switching popups (5 seconds)
+        setTimeout(function() {
+            // Hide loading popup
+            document.getElementById('loadingPopup').style.display = 'none';
+            // Show server info popup
+            document.getElementById('serverInfoPopup').style.display = 'flex';
+        }, 5000);
+
+        // Copy button functionality
+        document.getElementById('copyButton').addEventListener('click', function() {
+            // Text to copy (IP and port)
+            const textToCopy = "Coming-soon:19132";
             
-            // Copy server address to clipboard
-            navigator.clipboard.writeText('coming soon').catch(err => {
+            // Copy to clipboard
+            navigator.clipboard.writeText(textToCopy).then(function() {
+                // Show success message
+                const successPopup = document.getElementById('copySuccess');
+                successPopup.style.display = 'block';
+                
+                // Hide success message after 3 seconds
+                setTimeout(function() {
+                    successPopup.style.display = 'none';
+                }, 3000);
+            }).catch(function(err) {
                 console.error('Could not copy text: ', err);
+                alert('Failed to copy. Please try again.');
             });
-        });
-        
-        document.getElementById('keepBrowsing').addEventListener('click', function() {
-            document.getElementById('serverModal').style.display = 'none';
         });
     </script>
 </body>
