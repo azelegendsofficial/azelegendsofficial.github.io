@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop | Ivonia Network</title>
+    <title>Shop Coming Soon | Ivonia Network</title>
     <style>
         :root {
             --primary: #8c43ff;
@@ -13,11 +13,6 @@
             --light: #f8f9fa;
             --gray: #6c757d;
             --success: #00e676;
-            --vip: #55FF55;
-            --vip-plus: #55FFAA;
-            --mvp: #55AAFF;
-            --mvp-plus: #55FFFF;
-            --dominator: #FF5555;
         }
         
         * {
@@ -103,17 +98,21 @@
             color: white;
         }
         
-        /* Shop Header */
-        .shop-header {
-            padding-top: 150px;
-            padding-bottom: 80px;
+        /* Coming Soon Section */
+        .coming-soon {
+            padding-top: 160px;
+            padding-bottom: 120px;
             text-align: center;
             background: linear-gradient(rgba(20, 23, 33, 0.7), rgba(20, 23, 33, 0.9)), url('/api/placeholder/1920/1080') no-repeat center center;
             background-size: cover;
             position: relative;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
-        .shop-header::before {
+        .coming-soon::before {
             content: '';
             position: absolute;
             width: 100%;
@@ -123,32 +122,130 @@
             background: radial-gradient(circle, rgba(140, 67, 255, 0.2) 0%, rgba(20, 23, 33, 0) 70%);
         }
         
-        .shop-header-content {
+        .coming-soon-content {
             position: relative;
             z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
         }
         
-        .shop-header h1 {
+        .coming-soon h1 {
             font-size: 3.5rem;
             font-weight: 800;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
         
-        .shop-header p {
+        .coming-soon p {
             font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto 2rem;
+            margin-bottom: 2.5rem;
             color: #ccc;
         }
         
-        /* Ranks Section */
-        .ranks-section {
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .countdown-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            min-width: 100px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .countdown-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .countdown-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gray);
+        }
+        
+        .notify-form {
+            max-width: 500px;
+            margin: 0 auto 2rem;
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .notify-form input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s;
+        }
+        
+        .notify-form input:focus {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .notify-form input::placeholder {
+            color: var(--gray);
+        }
+        
+        .notify-btn {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            border: none;
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .notify-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--light);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        /* Preview Section */
+        .preview-section {
             padding: 80px 0;
+            text-align: center;
         }
         
         .section-header {
-            text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 50px;
         }
         
         .section-header h2 {
@@ -162,185 +259,45 @@
             margin: 0 auto;
         }
         
-        .ranks-grid {
+        .preview-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
         }
         
-        .rank-card {
+        .preview-card {
             background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s;
+            border-radius: 15px;
+            padding: 30px;
             text-align: center;
+            transition: transform 0.3s;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        .rank-card:hover {
+        .preview-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
         }
         
-        .rank-header {
-            padding: 30px 20px;
-            color: white;
-        }
-        
-        .vip-header {
-            background: linear-gradient(135deg, var(--vip) 0%, rgba(85, 255, 85, 0.2) 100%);
-        }
-        
-        .vip-plus-header {
-            background: linear-gradient(135deg, var(--vip-plus) 0%, rgba(85, 255, 170, 0.2) 100%);
-        }
-        
-        .mvp-header {
-            background: linear-gradient(135deg, var(--mvp) 0%, rgba(85, 170, 255, 0.2) 100%);
-        }
-        
-        .mvp-plus-header {
-            background: linear-gradient(135deg, var(--mvp-plus) 0%, rgba(85, 255, 255, 0.2) 100%);
-        }
-        
-        .dominator-header {
-            background: linear-gradient(135deg, var(--dominator) 0%, rgba(255, 85, 85, 0.2) 100%);
-        }
-        
-        .rank-name {
+        .preview-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(140, 67, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--primary);
             font-size: 2rem;
-            font-weight: 800;
-            margin-bottom: 5px;
         }
         
-        .rank-price {
-            font-size: 1.8rem;
-            font-weight: 700;
+        .preview-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
         }
         
-        .rank-duration {
-            font-size: 1rem;
-            opacity: 0.8;
-        }
-        
-        .rank-content {
-            padding: 30px;
-        }
-        
-        .rank-features {
-            list-style: none;
-            margin-bottom: 30px;
-            text-align: left;
-        }
-        
-        .rank-features li {
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-        }
-        
-        .rank-features li::before {
-            content: '✓';
-            margin-right: 10px;
-            color: var(--success);
-            font-weight: bold;
-        }
-        
-        .buy-btn {
-            display: inline-block;
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1rem;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-        
-        .vip-btn {
-            background-color: var(--vip);
-            color: #333;
-        }
-        
-        .vip-btn:hover {
-            background-color: rgba(85, 255, 85, 0.8);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(85, 255, 85, 0.2);
-        }
-        
-        .vip-plus-btn {
-            background-color: var(--vip-plus);
-            color: #333;
-        }
-        
-        .vip-plus-btn:hover {
-            background-color: rgba(85, 255, 170, 0.8);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(85, 255, 170, 0.2);
-        }
-        
-        .mvp-btn {
-            background-color: var(--mvp);
-            color: #333;
-        }
-        
-        .mvp-btn:hover {
-            background-color: rgba(85, 170, 255, 0.8);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(85, 170, 255, 0.2);
-        }
-        
-        .mvp-plus-btn {
-            background-color: var(--mvp-plus);
-            color: #333;
-        }
-        
-        .mvp-plus-btn:hover {
-            background-color: rgba(85, 255, 255, 0.8);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(85, 255, 255, 0.2);
-        }
-        
-        .dominator-btn {
-            background-color: var(--dominator);
-            color: white;
-        }
-        
-        .dominator-btn:hover {
-            background-color: rgba(255, 85, 85, 0.8);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(255, 85, 85, 0.2);
-        }
-        
-        /* Payment Section */
-        .payment-section {
-            padding: 80px 0;
-            background-color: rgba(20, 23, 33, 0.5);
-        }
-        
-        .payment-methods {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            margin-top: 40px;
-        }
-        
-        .payment-method {
-            background-color: rgba(255, 255, 255, 0.05);
-            padding: 20px;
-            border-radius: 10px;
-            width: 120px;
-            height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.3s;
-        }
-        
-        .payment-method:hover {
-            transform: translateY(-5px);
+        .preview-card p {
+            color: #ccc;
         }
         
         /* Footer */
@@ -371,12 +328,12 @@
             margin-bottom: 20px;
         }
         
-        .social-links {
+        .footer-social-links {
             display: flex;
             gap: 15px;
         }
         
-        .social-link {
+        .footer-social-link {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -389,7 +346,7 @@
             transition: all 0.3s;
         }
         
-        .social-link:hover {
+        .footer-social-link:hover {
             background-color: var(--primary);
             transform: translateY(-3px);
         }
@@ -440,46 +397,28 @@
             font-size: 0.9rem;
         }
         
-        /* FAQ Section */
-        .faq-section {
-            padding: 80px 0;
-        }
-        
-        .faq-list {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .faq-item {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            margin-bottom: 20px;
-            overflow: hidden;
-        }
-        
-        .faq-question {
-            padding: 20px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .faq-question:hover {
-            color: var(--primary);
-        }
-        
-        .faq-answer {
-            padding: 0 20px 20px;
-            color: #ccc;
-        }
-        
         /* Responsive */
         @media (max-width: 768px) {
-            .shop-header h1 {
+            .coming-soon h1 {
                 font-size: 2.5rem;
+            }
+            
+            .countdown {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+            
+            .countdown-item {
+                min-width: 80px;
+                padding: 1rem;
+            }
+            
+            .countdown-number {
+                font-size: 2rem;
+            }
+            
+            .notify-form {
+                flex-direction: column;
             }
             
             .nav-links {
@@ -500,25 +439,6 @@
             font-size: 1.5rem;
             cursor: pointer;
         }
-
-        /* Add shadow to rank cards for better visibility */
-        .rank-card {
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Badge for recommended and best value */
-        .rank-badge {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background-color: var(--secondary);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            z-index: 1;
-        }
     </style>
 </head>
 <body>
@@ -531,223 +451,99 @@
                 <a href="/#announcements">Announcements</a>
                 <a href="/discord.html">Discord</a>
                 <a href="/#contact">Contact</a>
-                <a href="/shop.html" class="shop-btn">Shop</a>
+                <a href="/shop-coming-soon.html" class="shop-btn">Shop</a>
             </div>
             <button class="mobile-menu-btn">☰</button>
         </div>
     </nav>
     
-    <!-- Shop Header -->
-    <header class="shop-header">
-        <div class="container shop-header-content">
-            <h1>Ivonia Network <span style="color: var(--primary);">Shop</span></h1>
-            <p>Support the server and enhance your gameplay experience with our range of ranks, each offering unique perks and benefits!</p>
-        </div>
-    </header>
-    
-    <!-- Ranks Section -->
-    <section class="ranks-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Premium <span style="color: var(--primary);">Ranks</span></h2>
-                <p>Choose a rank that fits your style and elevate your gaming experience with exclusive perks and features</p>
+    <!-- Coming Soon Section -->
+    <section class="coming-soon">
+        <div class="container coming-soon-content">
+            <h1>Shop <span style="color: var(--primary);">Coming Soon</span></h1>
+            <p>We're working hard to bring you an amazing shop experience. Get ready for premium ranks, unique perks, and exclusive content to enhance your gameplay!</p>
+            
+            <div class="countdown">
+                <div class="countdown-item">
+                    <div class="countdown-number" id="days">14</div>
+                    <div class="countdown-label">Days</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="hours">23</div>
+                    <div class="countdown-label">Hours</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="minutes">59</div>
+                    <div class="countdown-label">Minutes</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="seconds">42</div>
+                    <div class="countdown-label">Seconds</div>
+                </div>
             </div>
             
-            <div class="ranks-grid">
-                <!-- VIP Rank -->
-                <div class="rank-card">
-                    <div class="rank-header vip-header">
-                        <div class="rank-name" style="color: var(--vip);">VIP</div>
-                        <div class="rank-price">Rp 23.000</div>
-                        <div class="rank-duration">30 days</div>
-                    </div>
-                    <div class="rank-content">
-                        <ul class="rank-features">
-                            <li>Premium chat prefix</li>
-                            <li>5 extra homes</li>
-                            <li>Access to /fly in lobby</li>
-                            <li>Exclusive VIP cosmetics</li>
-                            <li>Join full servers</li>
-                            <li>10% shop discount</li>
-                        </ul>
-                        <a href="#" class="buy-btn vip-btn">Purchase VIP</a>
-                    </div>
-                </div>
-                
-                <!-- VIP+ Rank -->
-                <div class="rank-card">
-                    <div class="rank-header vip-plus-header">
-                        <div class="rank-name" style="color: var(--vip-plus);">VIP+</div>
-                        <div class="rank-price">Rp 27.000</div>
-                        <div class="rank-duration">30 days</div>
-                    </div>
-                    <div class="rank-content">
-                        <ul class="rank-features">
-                            <li>All VIP perks included</li>
-                            <li>Premium+ chat prefix</li>
-                            <li>10 extra homes</li>
-                            <li>Access to /fly in Survival</li>
-                            <li>Exclusive VIP+ cosmetics</li>
-                            <li>15% shop discount</li>
-                            <li>Priority server queue</li>
-                        </ul>
-                        <a href="#" class="buy-btn vip-plus-btn">Purchase VIP+</a>
-                    </div>
-                </div>
-                
-                <!-- MVP Rank -->
-                <div class="rank-card">
-                    <div class="rank-badge">POPULAR</div>
-                    <div class="rank-header mvp-header">
-                        <div class="rank-name" style="color: var(--mvp);">MVP</div>
-                        <div class="rank-price">Rp 59.200</div>
-                        <div class="rank-duration">30 days</div>
-                    </div>
-                    <div class="rank-content">
-                        <ul class="rank-features">
-                            <li>All VIP+ perks included</li>
-                            <li>MVP chat prefix</li>
-                            <li>15 extra homes</li>
-                            <li>/nick command access</li>
-                            <li>Access to particle effects</li>
-                            <li>Exclusive MVP cosmetics</li>
-                            <li>20% shop discount</li>
-                            <li>Access to private islands</li>
-                        </ul>
-                        <a href="#" class="buy-btn mvp-btn">Purchase MVP</a>
-                    </div>
-                </div>
-                
-                <!-- MVP+ Rank -->
-                <div class="rank-card">
-                    <div class="rank-badge">BEST VALUE</div>
-                    <div class="rank-header mvp-plus-header">
-                        <div class="rank-name" style="color: var(--mvp-plus);">MVP+</div>
-                        <div class="rank-price">Rp 67.888</div>
-                        <div class="rank-duration">30 days</div>
-                    </div>
-                    <div class="rank-content">
-                        <ul class="rank-features">
-                            <li>All MVP perks included</li>
-                            <li>MVP+ chat prefix</li>
-                            <li>20 extra homes</li>
-                            <li>Access to all cosmetics</li>
-                            <li>Custom nickname colors</li>
-                            <li>25% shop discount</li>
-                            <li>Access to /disguise</li>
-                            <li>Ability to create clans</li>
-                            <li>Access to exclusive events</li>
-                        </ul>
-                        <a href="#" class="buy-btn mvp-plus-btn">Purchase MVP+</a>
-                    </div>
-                </div>
-                
-                <!-- Dominator Rank -->
-                <div class="rank-card">
-                    <div class="rank-header dominator-header">
-                        <div class="rank-name" style="color: var(--dominator);">Dominator</div>
-                        <div class="rank-price">Rp 120.000</div>
-                        <div class="rank-duration">30 days</div>
-                    </div>
-                    <div class="rank-content">
-                        <ul class="rank-features">
-                            <li>All MVP+ perks included</li>
-                            <li>Dominator chat prefix</li>
-                            <li>Unlimited homes</li>
-                            <li>Custom join messages</li>
-                            <li>Access to all future cosmetics</li>
-                            <li>35% shop discount</li>
-                            <li>Special Discord role</li>
-                            <li>One-on-one support</li>
-                            <li>Create custom events</li>
-                            <li>Private game server access</li>
-                        </ul>
-                        <a href="#" class="buy-btn dominator-btn">Purchase Dominator</a>
-                    </div>
-                </div>
+            <form class="notify-form">
+                <input type="email" placeholder="Enter your email address">
+                <button type="submit" class="notify-btn">Notify Me</button>
+            </form>
+            
+            <p>Be the first to know when our shop launches!</p>
+            
+            <div class="social-links">
+                <a href="#" class="social-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22 12C22 6.48 17.52 2 12 2C6.48 2 2 6.48 2 12C2 16.84 5.44 20.87 10 21.8V15H8V12H10V9.5C10 7.57 11.57 6 13.5 6H16V9H14C13.45 9 13 9.45 13 10V12H16V15H13V21.95C18.05 21.45 22 17.19 22 12Z"/>
+                    </svg>
+                </a>
+                <a href="#" class="social-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22.46 6C21.69 6.35 20.86 6.58 20 6.69C20.88 6.16 21.56 5.32 21.88 4.31C21.05 4.81 20.13 5.16 19.16 5.36C18.37 4.5 17.26 4 16 4C13.65 4 11.73 5.92 11.73 8.29C11.73 8.63 11.77 8.96 11.84 9.27C8.28 9.09 5.11 7.38 3 4.79C2.63 5.42 2.42 6.16 2.42 6.94C2.42 8.43 3.17 9.75 4.33 10.5C3.62 10.5 2.96 10.3 2.38 10V10.03C2.38 12.11 3.86 13.85 5.82 14.24C5.19 14.41 4.53 14.44 3.89 14.31C4.16 15.18 4.69 15.97 5.42 16.53C6.15 17.09 7.04 17.4 7.97 17.41C6.24 18.81 4.07 19.57 1.81 19.56C1.45 19.56 1.1 19.54 0.75 19.5C2.98 20.97 5.57 21.75 8.22 21.75C16 21.75 20.33 15.31 20.33 9.79C20.33 9.6 20.33 9.42 20.32 9.23C21.16 8.63 21.88 7.87 22.46 7V6Z"/>
+                    </svg>
+                </a>
+                <a href="#" class="social-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+                    </svg>
+                </a>
+                <a href="#" class="social-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+                    </svg>
+                </a>
+                <a href="#" class="social-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7.8 2H16.2C19.4 2 22 4.6 22 7.8V16.2C22 19.4 19.4 22 16.2 22H7.8C4.6 22 2 19.4 2 16.2V7.8C2 4.6 4.6 2 7.8 2ZM7.6 4C5.61 4 4 5.61 4 7.6V16.4C4 18.39 5.61 20 7.6 20H16.4C18.39 20 20 18.39 20 16.4V7.6C20 5.61 18.39 4 16.4 4H7.6ZM17.25 5.5C17.25 6.05 16.8 6.5 16.25 6.5C15.7 6.5 15.25 6.05 15.25 5.5C15.25 4.95 15.7 4.5 16.25 4.5C16.8 4.5 17.25 4.95 17.25 5.5ZM12 7C9.24 7 7 9.24 7 12C7 14.76 9.24 17 12 17C14.76 17 17 14.76 17 12C17 9.24 14.76 7 12 7ZM12 9C13.65 9 15 10.35 15 12C15 13.65 13.65 15 12 15C10.35 15 9 13.65 9 12C9 10.35 10.35 9 12 9Z"/>
+                    </svg>
+                </a>
             </div>
         </div>
     </section>
     
-    <!-- Payment Section -->
-    <section class="payment-section">
+    <!-- Preview Section -->
+    <section class="preview-section">
         <div class="container">
             <div class="section-header">
-                <h2>Payment <span style="color: var(--primary);">Methods</span></h2>
-                <p>We accept a wide range of payment methods for your convenience</p>
+                <h2>What to <span style="color: var(--primary);">Expect</span></h2>
+                <p>Here's a sneak peek at what's coming to our shop!</p>
             </div>
-            <div class="payment-methods">
-                <div class="payment-method">
-                    <img src="data:image/jpeg;base64,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" alt="PayPal">
+            
+            <div class="preview-grid">
+                <div class="preview-card">
+                    <div class="preview-icon">⭐</div>
+                    <h3>Premium Ranks</h3>
+                    <p>Choose from VIP, MVP, and more premium ranks with exclusive perks and benefits to enhance your gameplay experience.</p>
                 </div>
-                <div class="payment-method">
-                    <img src="data:image/jpeg;base64,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" alt="Dana">
+                
+                <div class="preview-card">
+                    <div class="preview-icon">🎮</div>
+                    <h3>Exclusive Perks</h3>
+                    <p>Unlock special commands, cosmetics, and gameplay features unavailable to regular players.</p>
                 </div>
-                <div class="payment-method">
-                    <img src="data:image/png;base64,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" alt="Ovo">
-                </div>
-                <div class="payment-method">
-                    <img src="data:image/png;base64,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" alt="Gopay">
-                </div>
-                <div class="payment-method">
-                    <img src="data:image/png;base64,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" alt="Bitcoin">
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- FAQ Section -->
-    <section class="faq-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Frequently Asked <span style="color: var(--primary);">Questions</span></h2>
-                <p>Find answers to common questions about purchases and ranks</p>
-            </div>
-            <div class="faq-list">
-                <div class="faq-item">
-                    <div class="faq-question">
-                        How long do ranks last?
-                        <span>+</span>
-                    </div>
-                    <div class="faq-answer">
-                        All ranks are valid for 30 days from the purchase date. You'll receive a notification in-game when your rank is about to expire, giving you the option to renew.
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        How do I activate my rank after purchase?
-                        <span>+</span>
-                    </div>
-                    <div class="faq-answer">
-                        Your rank will be automatically activated within 5 minutes of a successful purchase. If your rank isn't activated after 10 minutes, please contact our support team via Discord.
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        Can I upgrade my rank?
-                        <span>+</span>
-                    </div>
-                    <div class="faq-answer">
-                        Yes! You can upgrade your rank at any time. When upgrading, you'll only pay the difference between your current rank and the new rank, and your remaining time will transfer to the new rank.
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        Are refunds available?
-                        <span>+</span>
-                    </div>
-                    <div class="faq-answer">
-                        We do not offer refunds for rank purchases. Please make sure you read all the rank features carefully before making a purchase.
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        Do ranks work on all servers?
-                        <span>+</span>
-                    </div>
-                    <div class="faq-answer">
-                        Yes, your rank and its benefits apply across all Ivonia Network servers and game modes, though some specific perks may vary depending on the game mode.
-                    </div>
+                
+                <div class="preview-card">
+                    <div class="preview-icon">🎁</div>
+                    <h3>Special Offers</h3>
+                    <p>Take advantage of limited-time bundles, discounts, and seasonal offers for the best value.</p>
                 </div>
             </div>
         </div>
@@ -760,30 +556,30 @@
                 <div class="footer-brand">
                     <h3>Ivonia<span>Network</span></h3>
                     <p>Join thousands of players in our unique Minecraft experience with multiple gamemodes. From Survival to PvP, we have something for everyone!</p>
-                    <div class="social-links">
-                        <a href="#" class="social-link">
+                    <div class="footer-social-links">
+                        <a href="#" class="footer-social-link">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M22 12C22 6.48 17.52 2 12 2C6.48 2 2 6.48 2 12C2 16.84 5.44 20.87 10 21.8V15H8V12H10V9.5C10 7.57 11.57 6 13.5 6H16V9H14C13.45 9 13 9.45 13 10V12H16V15H13V21.95C18.05 21.45 22 17.19 22 12Z"/>
                             </svg>
                         </a>
-                        <a href="#" class="social-link">
+                        <a href="#" class="footer-social-link">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M22.46 6C21.69 6.35 20.86 6.58 20 6.69C20.88 6.16 21.56 5.32 21.88 4.31C21.05 4.81 20.13 5.16 19.16 5.36C18.37 4.5 17.26 4 16 4C13.65 4 11.73 5.92 11.73 8.29C11.73 8.63 11.77 8.96 11.84 9.27C8.28 9.09 5.11 7.38 3 4.79C2.63 5.42 2.42 6.16 2.42 6.94C2.42 8.43 3.17 9.75 4.33 10.5C3.62 10.5 2.96 10.3 2.38 10V10.03C2.38 12.11 3.86 13.85 5.82 14.24C5.19 14.41 4.53 14.44 3.89 14.31C4.16 15.18 4.69 15.97 5.42 16.53C6.15 17.09 7.04 17.4 7.97 17.41C6.24 18.81 4.07 19.57 1.81 19.56C1.45 19.56 1.1 19.54 0.75 19.5C2.98 20.97 5.57 21.75 8.22 21.75C16 21.75 20.33 15.31 20.33 9.79C20.33 9.6 20.33 9.42 20.32 9.23C21.16 8.63 21.88 7.87 22.46 7V6Z"/>
                             </svg>
                         </a>
-                        <a href="#" class="social-link">
+                        <a href="#" class="footer-social-link">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M7.8 2H16.2C19.4 2 22 4.6 22 7.8V16.2C22 19.4 19.4 22 16.2 22H7.8C4.6 22 2 19.4 2 16.2V7.8C2 4.6 4.6 2 7.8 2ZM7.6 4C5.61 4 4 5.61 4 7.6V16.4C4 18.39 5.61 20 7.6 20H16.4C18.39 20 20 18.39 20 16.4V7.6C20 5.61 18.39 4 16.4 4H7.6ZM17.25 5.5C17.25 6.05 16.8 6.5 16.25 6.5C15.7 6.5 15.25 6.05 15.25 5.5C15.25 4.95 15.7 4.5 16.25 4.5C16.8 4.5 17.25 4.95 17.25 5.5ZM12 7C9.24 7 7 9.24 7 12C7 14.76 9.24 17 12 17C14.76 17 17 14.76 17 12C17 9.24 14.76 7 12 7ZM12 9C13.65 9 15 10.35 15 12C15 13.65 13.65 15 12 15C10.35 15 9 13.65 9 12C9 10.35 10.35 9 12 9Z"/>
                             </svg>
                         </a>
-                        <a href="#" class="social-link">
+                        <a href="#" class="footer-social-link">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
                             </svg>
                         </a>
-                        <a href="#" class="social-link">
+                        <a href="#" class="footer-social-link">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M19.54 0c1.356 0 2.46 1.104 2.46 2.472v19.056c0 1.368-1.104 2.472-2.46 2.472h-15.080c-1.356 0-2.46-1.104-2.46-2.472v-19.056c0-1.368 1.104-2.472 2.46-2.472h15.080zm-5.8 7.692v-1.372c0-.152-.054-.284-.18-.394-.138-.132-.33-.198-.57-.198h-1.99c-.228 0-.418.066-.558.198-.126.11-.18.242-.18.394v1.372c0 .16.054.282.18.396.14.132.33.198.558.198h1.99c.24 0 .432-.066.57-.198.126-.114.18-.236.18-.396zm-5.76 1.188h7.992v2.574c0 .684-.462 1.14-1.152 1.14h-5.688c-.69 0-1.152-.456-1.152-1.14v-2.574zm9.888 3.964v7.68c0 .684-.462 1.14-1.152 1.14h-9.36c-.69 0-1.152-.456-1.152-1.14v-7.682c0-.684.462-1.14 1.152-1.14h9.36c.69 0 1.152.456 1.152 1.14zm-2.94 3.298c0-.762-.602-1.368-1.368-1.368-.762 0-1.368.606-1.368 1.368 0 .756.606 1.368 1.368 1.368.766 0 1.368-.612 1.368-1.368zm-4.56 0c0-.762-.602-1.368-1.368-1.368-.762 0-1.368.606-1.368 1.368 0 .756.606 1.368 1.368 1.368.766 0 1.368-.612 1.368-1.368z"/>
+                                <path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
                             </svg>
                         </a>
                     </div>
@@ -794,78 +590,91 @@
                     <ul>
                         <li><a href="/">Home</a></li>
                         <li><a href="/#announcements">Announcements</a></li>
-                        <li><a href="/shop.html">Shop</a></li>
                         <li><a href="/discord.html">Discord</a></li>
                         <li><a href="/#contact">Contact</a></li>
+                        <li><a href="/shop-coming-soon.html">Shop</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Server Info</h4>
+                    <ul>
                         <li><a href="/rules.html">Rules</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-links">
-                    <h4>Game Modes</h4>
-                    <ul>
-                        <li><a href="/survival.html">Survival</a></li>
-                        <li><a href="/skyblock.html">Skyblock</a></li>
-                        <li><a href="/factions.html">Factions</a></li>
-                        <li><a href="/minigames.html">Minigames</a></li>
-                        <li><a href="/creative.html">Creative</a></li>
-                        <li><a href="/events.html">Events</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-links">
-                    <h4>Support</h4>
-                    <ul>
-                        <li><a href="/help.html">Help Center</a></li>
+                        <li><a href="/gamemodes.html">Game Modes</a></li>
+                        <li><a href="/staff.html">Staff Team</a></li>
                         <li><a href="/faq.html">FAQ</a></li>
-                        <li><a href="/tickets.html">Create Ticket</a></li>
-                        <li><a href="/report.html">Report Player</a></li>
-                        <li><a href="/appeals.html">Ban Appeals</a></li>
-                        <li><a href="/status.html">Server Status</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Connect With Us</h4>
+                    <ul>
+                        <li><a href="#">Join Discord</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">YouTube</a></li>
+                        <li><a href="#">Instagram</a></li>
                     </ul>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2025 Ivonia Network. All rights reserved. Not affiliated with Mojang AB.</p>
+                <p>&copy; 2025 IvoniaNetwork. All rights reserved.</p>
             </div>
         </div>
     </footer>
     
     <script>
-        // Simple FAQ functionality
-        document.querySelectorAll('.faq-question').forEach(question => {
-            question.addEventListener('click', () => {
-                const answer = question.nextElementSibling;
-                const isOpen = answer.style.display === 'block';
-                
-                // Close all answers
-                document.querySelectorAll('.faq-answer').forEach(item => {
-                    item.style.display = 'none';
-                });
-                
-                document.querySelectorAll('.faq-question span').forEach(span => {
-                    span.textContent = '+';
-                });
-                
-                // Open clicked answer if it was closed
-                if (!isOpen) {
-                    answer.style.display = 'block';
-                    question.querySelector('span').textContent = '-';
-                }
-            });
-        });
+        // Countdown Timer
+        function updateCountdown() {
+            const launchDate = new Date('May 1, 2025 12:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = launchDate - now;
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').innerText = days;
+            document.getElementById('hours').innerText = hours;
+            document.getElementById('minutes').innerText = minutes;
+            document.getElementById('seconds').innerText = seconds;
+            
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById('days').innerText = '0';
+                document.getElementById('hours').innerText = '0';
+                document.getElementById('minutes').innerText = '0';
+                document.getElementById('seconds').innerText = '0';
+            }
+        }
         
-        // Mobile menu toggle
+        updateCountdown();
+        const countdownInterval = setInterval(updateCountdown, 1000);
+        
+        // Mobile Menu Toggle
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
         const navLinks = document.querySelector('.nav-links');
         
         mobileMenuBtn.addEventListener('click', () => {
-            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            navLinks.classList.toggle('active');
         });
         
-        // Initialize with first FAQ item open
-        document.querySelector('.faq-question').click();
+        // Form Submission
+        const notifyForm = document.querySelector('.notify-form');
+        
+        notifyForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = notifyForm.querySelector('input').value;
+            
+            if (email) {
+                // Here you would typically send the email to your server
+                alert('Thank you for subscribing! We\'ll notify you when our shop launches.');
+                notifyForm.reset();
+            } else {
+                alert('Please enter a valid email address.');
+            }
+        });
     </script>
 </body>
 </html>
