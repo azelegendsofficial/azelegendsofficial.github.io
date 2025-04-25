@@ -23,7 +23,7 @@
         }
         
         body {
-            background-color: var(--dark);
+            background-color: #121420;
             color: var(--light);
             line-height: 1.6;
             overflow: hidden;
@@ -42,7 +42,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: var(--dark);
+            background-color: #121420;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -63,7 +63,7 @@
             color: var(--light);
         }
         
-        .chest-container {
+        .claim-container {
             width: 100%;
             height: 100%;
             display: flex;
@@ -71,90 +71,19 @@
             justify-content: center;
             align-items: center;
             position: relative;
-        }
-        
-        .chest {
-            width: 150px;
-            height: 150px;
-            background-image: url('https://cdnjs.cloudflare.com/ajax/libs/minecraft-images/1.0/chest.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            position: absolute;
-            top: -300px;
-            transform: translateY(0);
-            transition: transform 2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-        }
-        
-        .chest.fall {
-            transform: translateY(300px);
-        }
-        
-        .chest.open {
-            background-image: url('https://cdnjs.cloudflare.com/ajax/libs/minecraft-images/1.0/chest_open.png');
+            text-align: center;
+            gap: 20px;
         }
         
         .light-beam {
-            width: 200px;
-            height: 0;
-            background: radial-gradient(ellipse at center, rgba(255, 255, 0, 0.8) 0%, rgba(255, 255, 0, 0) 70%);
             position: absolute;
-            bottom: 50%;
+            width: 120px;
+            height: 300px;
+            background: radial-gradient(ellipse at center, rgba(255, 255, 0, 0.2) 0%, rgba(255, 255, 0, 0) 70%);
+            top: 50%;
             left: 50%;
-            transform: translate(-50%, 50%);
-            opacity: 0;
-            transition: height 2s, opacity 2s;
-        }
-        
-        .light-beam.active {
-            height: 400px;
-            opacity: 1;
-        }
-        
-        .weapon {
-            width: 80px;
-            height: 80px;
-            background-image: url('https://cdnjs.cloudflare.com/ajax/libs/minecraft-images/1.0/diamond_sword.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            position: absolute;
-            bottom: 50%;
-            left: 50%;
-            transform: translate(-50%, 50%);
-            opacity: 0;
-            transition: opacity 1s, transform 1s;
-        }
-        
-        .weapon.active {
-            opacity: 1;
-            transform: translate(-50%, 0);
-        }
-        
-        .weapon-name {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--primary);
-            text-shadow: 0 0 10px rgba(140, 67, 255, 0.5);
-            position: absolute;
-            bottom: 35%;
-            left: 50%;
-            transform: translateX(-50%);
-            opacity: 0;
-            transition: opacity 1s;
-            white-space: nowrap;
-        }
-        
-        .weapon-name.active {
-            opacity: 1;
-        }
-        
-        .username-form {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-            margin-top: 30px;
+            transform: translate(-50%, -50%);
+            z-index: 1;
         }
         
         .username-input {
@@ -166,6 +95,8 @@
             background-color: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
             color: var(--light);
+            text-align: center;
+            z-index: 3;
         }
         
         .username-input:focus {
@@ -173,8 +104,8 @@
             border-color: var(--primary);
         }
         
-        .submit-btn {
-            padding: 12px 30px;
+        .claim-btn {
+            padding: 10px 30px;
             font-size: 1rem;
             font-weight: 600;
             background-color: var(--primary);
@@ -183,21 +114,22 @@
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s;
+            z-index: 3;
         }
         
-        .submit-btn:hover {
+        .claim-btn:hover {
             background-color: var(--primary-dark);
             transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(140, 67, 255, 0.4);
         }
         
-        .player-skin {
-            width: 100px;
-            height: 100px;
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            margin-bottom: 20px;
-            display: none;
+        .weapon-name {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #8c43ff;
+            text-shadow: 0 0 15px rgba(140, 67, 255, 0.7);
+            z-index: 3;
+            margin-top: 20px;
         }
         
         .notification {
@@ -297,141 +229,31 @@
             border-radius: 5px;
             margin-bottom: 40px;
         }
-
-        /* New animations for claim effect */
+        
         @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
+            0% { box-shadow: 0 0 0 0 rgba(140, 67, 255, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(140, 67, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(140, 67, 255, 0); }
         }
         
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        .claim-btn {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes glow {
+            0% { filter: drop-shadow(0 0 5px rgba(255, 255, 0, 0.5)); }
+            50% { filter: drop-shadow(0 0 15px rgba(255, 255, 0, 0.7)); }
+            100% { filter: drop-shadow(0 0 5px rgba(255, 255, 0, 0.5)); }
+        }
+        
+        .weapon-name {
+            animation: glow 3s infinite ease-in-out;
         }
         
         @keyframes float {
             0% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+            50% { transform: translateY(-10px); }
             100% { transform: translateY(0); }
-        }
-        
-        @keyframes glow {
-            0% { filter: drop-shadow(0 0 5px var(--primary)); }
-            50% { filter: drop-shadow(0 0 20px var(--primary)); }
-            100% { filter: drop-shadow(0 0 5px var(--primary)); }
-        }
-        
-        @keyframes sparkle {
-            0%, 100% { opacity: 0; }
-            50% { opacity: 1; }
-        }
-        
-        .particle {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background-color: var(--primary);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-        
-        .claim-effect {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 999;
-            opacity: 0;
-        }
-        
-        .claim-effect.active {
-            opacity: 1;
-        }
-        
-        .claim-effect-circle {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 200px;
-            height: 200px;
-            border: 4px solid var(--primary);
-            border-radius: 50%;
-            opacity: 0;
-        }
-        
-        .claim-effect-circle.active {
-            animation: pulse 2s infinite, glow 3s infinite;
-            opacity: 0.7;
-        }
-        
-        .sparkle {
-            position: absolute;
-            background-color: white;
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            opacity: 0;
-        }
-        
-        .weapon.claimed {
-            animation: float 3s infinite ease-in-out, glow 2s infinite;
-        }
-        
-        .shine-effect {
-            position: absolute;
-            width: 100%;
-            height: 20px;
-            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.8), transparent);
-            transform: skewX(-45deg);
-            opacity: 0;
-            transition: opacity 0.5s;
-            pointer-events: none;
-        }
-        
-        .shine-effect.active {
-            animation: shine 1.5s infinite;
-            opacity: 1;
-        }
-        
-        @keyframes shine {
-            0% { top: 0; left: -100%; }
-            100% { top: 0; left: 200%; }
-        }
-        
-        .confetti {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            opacity: 0;
-            pointer-events: none;
-        }
-        
-        .big-flash {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: white;
-            opacity: 0;
-            pointer-events: none;
-            z-index: 1500;
-            transition: opacity 0.5s;
-        }
-        
-        .big-flash.active {
-            opacity: 1;
-            animation: flash 0.8s forwards;
-        }
-        
-        @keyframes flash {
-            0% { opacity: 0; }
-            10% { opacity: 0.8; }
-            100% { opacity: 0; }
         }
     </style>
 </head>
@@ -441,24 +263,11 @@
         <div class="timer">20:00</div>
     </div>
     
-    <div class="chest-container">
-        <div class="chest"></div>
+    <div class="claim-container">
         <div class="light-beam"></div>
-        <div class="weapon"></div>
+        <input type="text" class="username-input" placeholder="BRIAN_OFFICIAL" value="BRIAN_OFFICIAL">
+        <button class="claim-btn">Claim Now</button>
         <div class="weapon-name">Excalibur Legends</div>
-        
-        <div class="claim-effect">
-            <div class="claim-effect-circle"></div>
-        </div>
-        
-        <div class="big-flash"></div>
-        <div class="shine-effect"></div>
-        
-        <div class="username-form">
-            <div class="player-skin"></div>
-            <input type="text" class="username-input" placeholder="Enter your Minecraft username">
-            <button class="submit-btn">Claim Now</button>
-        </div>
     </div>
     
     <div class="notification">
@@ -488,183 +297,32 @@
         let timerInterval;
         let isLocked = true;
         
-        // Function to create particles
-        function createParticles(x, y, count, colors) {
-            for (let i = 0; i < count; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                
-                // Random position around the center
-                const angle = Math.random() * Math.PI * 2;
-                const distance = Math.random() * 100;
-                
-                particle.style.left = `${x + Math.cos(angle) * distance}px`;
-                particle.style.top = `${y + Math.sin(angle) * distance}px`;
-                
-                // Random size
-                const size = Math.random() * 6 + 4;
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                
-                // Add to DOM
-                document.body.appendChild(particle);
-                
-                // Animate
-                const duration = Math.random() * 1500 + 1000;
-                const endX = x + Math.cos(angle) * (distance + Math.random() * 200);
-                const endY = y + Math.sin(angle) * (distance + Math.random() * 200);
-                
-                particle.animate([
-                    { transform: `translate(0, 0) scale(1)`, opacity: 1 },
-                    { transform: `translate(${endX - particle.offsetLeft}px, ${endY - particle.offsetTop}px) scale(0)`, opacity: 0 }
-                ], {
-                    duration,
-                    easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
-                }).onfinish = () => {
-                    particle.remove();
-                };
-            }
-        }
-        
-        // Function to create sparkles
-        function createSparkles() {
-            const weapon = document.querySelector('.weapon');
-            const weaponRect = weapon.getBoundingClientRect();
-            
-            for (let i = 0; i < 20; i++) {
-                const sparkle = document.createElement('div');
-                sparkle.className = 'sparkle';
-                
-                // Position around weapon
-                const angle = Math.random() * Math.PI * 2;
-                const distance = (Math.random() * 50) + 30;
-                const x = weaponRect.left + weaponRect.width/2 + Math.cos(angle) * distance;
-                const y = weaponRect.top + weaponRect.height/2 + Math.sin(angle) * distance;
-                
-                sparkle.style.left = `${x}px`;
-                sparkle.style.top = `${y}px`;
-                
-                // Random size and color
-                const size = Math.random() * 5 + 2;
-                sparkle.style.width = `${size}px`;
-                sparkle.style.height = `${size}px`;
-                sparkle.style.backgroundColor = Math.random() > 0.5 ? '#FFFFFF' : '#FFD700';
-                
-                document.body.appendChild(sparkle);
-                
-                // Animate
-                sparkle.animate([
-                    { transform: 'scale(0)', opacity: 0 },
-                    { transform: 'scale(1)', opacity: 1 },
-                    { transform: 'scale(0)', opacity: 0 }
-                ], {
-                    duration: Math.random() * 1500 + 500,
-                    delay: Math.random() * 1000,
-                    iterations: 1,
-                    easing: 'ease-in-out'
-                }).onfinish = () => {
-                    sparkle.remove();
-                };
-            }
-        }
-        
-        // Function to create confetti
-        function createConfetti() {
-            const colors = ['#8c43ff', '#ff5e7d', '#00e676', '#FFD700', '#FF4500', '#1E90FF'];
-            
-            for (let i = 0; i < 100; i++) {
-                const confetti = document.createElement('div');
-                confetti.className = 'confetti';
-                
-                // Random shape
-                const shapes = ['circle', 'square', 'triangle'];
-                const shape = shapes[Math.floor(Math.random() * shapes.length)];
-                
-                if (shape === 'circle') {
-                    confetti.style.borderRadius = '50%';
-                } else if (shape === 'triangle') {
-                    confetti.style.width = '0';
-                    confetti.style.height = '0';
-                    confetti.style.borderLeft = '5px solid transparent';
-                    confetti.style.borderRight = '5px solid transparent';
-                    confetti.style.borderBottom = `10px solid ${colors[Math.floor(Math.random() * colors.length)]}`;
-                    confetti.style.backgroundColor = 'transparent';
-                } else {
-                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                }
-                
-                // Position at top of screen
-                confetti.style.left = `${Math.random() * window.innerWidth}px`;
-                confetti.style.top = '-10px';
-                confetti.style.opacity = '1';
-                
-                document.body.appendChild(confetti);
-                
-                // Animate
-                const duration = Math.random() * 3000 + 2000;
-                const endX = Math.random() * window.innerWidth;
-                const endY = window.innerHeight + 100;
-                const rotation = Math.random() * 720 - 360;
-                
-                confetti.animate([
-                    { transform: 'rotate(0deg)', top: '-10px', left: confetti.style.left, opacity: 1 },
-                    { transform: `rotate(${rotation}deg)`, top: `${endY}px`, left: `${endX}px`, opacity: 0 }
-                ], {
-                    duration,
-                    easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
-                }).onfinish = () => {
-                    confetti.remove();
-                };
-            }
-        }
-        
-        // Function to play claim animation
-        function playClaimAnimation() {
-            // Flash effect
-            const flash = document.querySelector('.big-flash');
-            flash.classList.add('active');
+        // Flash effect when claimed
+        function flashEffect() {
+            const flash = document.createElement('div');
+            flash.style.position = 'fixed';
+            flash.style.top = '0';
+            flash.style.left = '0';
+            flash.style.width = '100%';
+            flash.style.height = '100%';
+            flash.style.backgroundColor = 'white';
+            flash.style.opacity = '0';
+            flash.style.zIndex = '1500';
+            flash.style.transition = 'opacity 0.5s';
+            document.body.appendChild(flash);
             
             setTimeout(() => {
-                flash.classList.remove('active');
-                
-                // Weapon special effects
-                const weapon = document.querySelector('.weapon');
-                weapon.classList.add('claimed');
-                
-                // Circular effect
-                const circle = document.querySelector('.claim-effect-circle');
-                circle.classList.add('active');
-                
-                // Create particles
-                const weaponRect = weapon.getBoundingClientRect();
-                const x = weaponRect.left + weaponRect.width/2;
-                const y = weaponRect.top + weaponRect.height/2;
-                createParticles(x, y, 50, ['#8c43ff', '#ff5e7d', '#00e676', '#FFD700']);
-                
-                // Sparkle effect
-                const sparkleInterval = setInterval(createSparkles, 800);
-                
-                // Shine effect
-                const shine = document.querySelector('.shine-effect');
-                shine.classList.add('active');
-                
-                // Confetti
-                createConfetti();
-                
-                // Play success sound
-                const levelUpSound = new Audio('https://cdnjs.cloudflare.com/ajax/libs/minecraft-sounds/1.0/entity.player.levelup.ogg');
-                levelUpSound.volume = 0.7;
-                levelUpSound.play();
-                
-                // Clean up intervals
+                flash.style.opacity = '0.8';
                 setTimeout(() => {
-                    clearInterval(sparkleInterval);
-                }, 5000);
-            }, 800);
+                    flash.style.opacity = '0';
+                    setTimeout(() => {
+                        flash.remove();
+                    }, 500);
+                }, 100);
+            }, 10);
         }
         
-        // Start the chest animation after page load
+        // Start timer and show content when page loads
         window.addEventListener('DOMContentLoaded', () => {
             // Update timer every second
             timerInterval = setInterval(() => {
@@ -677,46 +335,15 @@
                 }
             }, 1000);
             
-            // Start chest animation sequence
+            // Remove loading overlay
             setTimeout(() => {
-                const chest = document.querySelector('.chest');
-                chest.classList.add('fall');
-                
-                // Play chest falling sound
-                const fallSound = new Audio('https://cdnjs.cloudflare.com/ajax/libs/minecraft-sounds/1.0/block.stone.hit.ogg');
-                fallSound.play();
-                
-                // Open chest after it lands
-                setTimeout(() => {
-                    chest.classList.add('open');
-                    
-                    // Play chest open sound
-                    const openSound = new Audio('https://cdnjs.cloudflare.com/ajax/libs/minecraft-sounds/1.0/block.chest.open.ogg');
-                    openSound.play();
-                    
-                    // Show light beam
-                    setTimeout(() => {
-                        document.querySelector('.light-beam').classList.add('active');
-                        
-                        // Show weapon and name
-                        setTimeout(() => {
-                            document.querySelector('.weapon').classList.add('active');
-                            document.querySelector('.weapon-name').classList.add('active');
-                            
-                            // After animations complete, show username form
-                            setTimeout(() => {
-                                document.querySelector('.loading-overlay').style.display = 'none';
-                                document.querySelector('.username-form').style.display = 'flex';
-                                isLocked = false;
-                            }, 3000);
-                        }, 1000);
-                    }, 1000);
-                }, 2500);
-            }, 1000);
+                document.querySelector('.loading-overlay').style.display = 'none';
+                isLocked = false;
+            }, 2000);
         });
         
-        // Username form submission
-        document.querySelector('.submit-btn').addEventListener('click', () => {
+        // Claim button click
+        document.querySelector('.claim-btn').addEventListener('click', () => {
             if (isLocked) return;
             
             username = document.querySelector('.username-input').value.trim();
@@ -725,18 +352,13 @@
                 return;
             }
             
-            // Play claim animation
-            playClaimAnimation();
+            // Visual flash effect
+            flashEffect();
             
-            // Display user's Minecraft skin
-            const playerSkin = document.querySelector('.player-skin');
-            playerSkin.style.backgroundImage = `url(https://minotar.net/avatar/${username}/100.png)`;
-            playerSkin.style.display = 'block';
-            
-            // Delay showing success notification
+            // Show success notification
             setTimeout(() => {
                 document.querySelector('.notification').style.display = 'flex';
-            }, 3000);
+            }, 500);
         });
         
         // Close notification button
